@@ -1,0 +1,16 @@
+<view class='container'>
+  <view class='title'>2018年1月18号</view>
+  <view class='body'>
+    <image src='../../images/icon07.png'/>
+    <image src='../../images/icon07.png'/>
+    <image src='../../images/icon07.png'/>
+  </view>
+  <view class='title'>2018年1月18号</view>
+  <view class='body'>
+    <image src='../../images/icon07.png'/>
+    <image src='../../images/icon07.png'/>
+    <image src='../../images/icon07.png'/>
+     <image src='../../images/icon07.png'/>
+    <image src='../../images/icon07.png'/>
+  </view>
+</view>

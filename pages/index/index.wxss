@@ -1,21 +1,64 @@
-/**index.wxss**/
-.userinfo {
+.slide-image{
+  width: 750rpx;
+  height: 380rpx;
+}
+.nav{
+  margin-top: 24rpx;
+  padding: 0 48rpx;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  color: #000000;
+  flex-wrap:wrap;
+  justify-content:space-between;
 }
-
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
+.nav01,.nav02{
+  height: 348rpx;
+  box-sizing: border-box;
+  width: 322rpx;
+  text-align: center;
+  margin-bottom: 64rpx;
+  padding-top: 196rpx;
+  position: relative;
 }
-
-.userinfo-nickname {
-  color: #aaa;
+.nav01 view,.nav02 view{
+    border: 4rpx solid #F5A623;
+    border-radius: 8rpx;
+    height: 152rpx;
+    text-align: center;
+    padding-top: 80rpx;
+    box-sizing: border-box;
+     font-size: 32rpx;
 }
-
-.usermotto {
-  margin-top: 200px;
+.nav03,.nav04,.nav05{
+  height: 244rpx;
+  box-sizing: border-box;
+  width: 214rpx;
+  text-align: center;
+  padding-top: 144rpx;
+  position: relative;
+}
+.nav03 view,.nav04 view,.nav05 view{
+    border: 4rpx solid #F5A623;
+    border-radius: 8rpx;
+    height: 100rpx;
+    text-align: center;
+    padding-top: 40rpx;
+    box-sizing: border-box;
+     font-size: 28rpx;
+}
+.img01,.img02,.img03,.img04,.img05{
+  position: absolute;
+  left: 50%;
+  top: 0;
+}
+.img01,.img02{
+  width: 288rpx;
+  height: 288rpx;
+  margin-left: -144rpx;
+}
+.img03,.img04,.img05{
+  width: 180rpx;
+  height: 180rpx;
+  margin-left: -90rpx;
 }

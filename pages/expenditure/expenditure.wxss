@@ -1,0 +1,6 @@
+/* pages/expenditure/expenditure.wxss */
+.title{
+  font-size: 28rpx;
+  color: #666666;
+  padding: 60rpx 40rpx;
+}

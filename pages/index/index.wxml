@@ -1,13 +1,29 @@
-<!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
+<swiper autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+  <block wx:for="{{imgUrls}}" wx:key="{{index}}">
+    <swiper-item>
+      <image src="{{item}}" class="slide-image"/>
+    </swiper-item>
+  </block>
+</swiper>
+<view class='nav'>
+  <view class='navBtn nav01'>
+    <image src='../../images/icon07.png' class="img01"/>
+    <view>上传报告</view> 
   </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
+  <view class='navBtn nav02'>
+    <image src='../../images/icon08.png' class="img02"/>
+    <view>体温检测</view>  
+  </view>
+  <view class='navBtn nav03'>
+    <image src='../../images/icon09.png' class="img03"/>
+    <view>用药记录</view>  
+  </view>
+  <view class='navBtn nav04'>
+    <image src='../../images/icon10.png' class="img04"/>
+    <view>体检报告</view>   
+  </view>
+  <view class='navBtn nav05'>
+    <image src='../../images/icon11.png' class="img05"/>
+    <view> 疫苗记录</view>  
   </view>
 </view>

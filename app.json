@@ -1,29 +1,57 @@
 {
   "pages":[
-    "pages/index/index",
     "pages/logs/logs",
-    "pages/me/me"
+    "pages/index/index",
+    
+    "pages/me/me",
+    "pages/hospital/hospital",
+    "pages/department/department",
+    "pages/drugs/drugs",
+    "pages/temperature/temperature",
+    "pages/vaccine/vaccine",
+    "pages/physical/physical",
+    "pages/expenditure/expenditure",
+    "pages/hy/hy",
+    "pages/hc/hc",
+    "pages/yc/yc",
+    "pages/cc/cc",
+    "pages/bc/bc"
   ],
   "window":{
     "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#F39800",
     "navigationBarTitleText": "旺旺健康",
     "navigationBarTextStyle":"black"
   },
   "tabBar": {
+    "color": "#000",
+    "selectedColor": "#F39800",
+    "backgroundColor":"#fff",
+    "borderStyle":"#DFDFDF",  
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "首页"
+        "text": "首页",
+        "iconPath":"images/icon02.png",
+        "selectedIconPath":"images/icon01.png"
       },
       {
         "pagePath": "pages/logs/logs",
-        "text": "健康档案"
+        "text": "健康档案",
+        "iconPath": "images/icon04.png",
+        "selectedIconPath": "images/icon03.png"
       },
       {
         "pagePath": "pages/me/me",
-        "text": "我的"
+        "text": "我的",
+        "iconPath": "images/icon06.png",
+        "selectedIconPath": "images/icon05.png"
       }
     ]
-  }
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  },
+  "debug": true
 }
