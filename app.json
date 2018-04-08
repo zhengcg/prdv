@@ -1,8 +1,8 @@
 {
   "pages":[
-    "pages/logs/logs",
+    "pages/login/login",
     "pages/index/index",
-    
+    "pages/logs/logs",
     "pages/me/me",
     "pages/hospital/hospital",
     "pages/department/department",
@@ -53,5 +53,5 @@
     "request": 10000,
     "downloadFile": 10000
   },
-  "debug": true
+  "debug": false
 }

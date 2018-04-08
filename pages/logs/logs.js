@@ -1,4 +1,6 @@
-
+var app = getApp();
+var header = app.globalData.header;
+var api = app.globalData.api;
 Page({
 
   /**
@@ -14,15 +16,32 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    this.checkToken()
+
+
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+
+
+
+
   },
+  checkToken: function () {
+    if (wx.getStorageSync('token')) {
+      console.log("有token")
+
+    } else {
+      wx.navigateTo({
+        url: '../login/login'
+      })
+
+    }
+  },
+
 
   /**
    * 生命周期函数--监听页面显示

@@ -1,3 +1,6 @@
+var app = getApp();
+var header = app.globalData.header;
+var api = app.globalData.api;
 Page({
 
   /**
@@ -18,6 +21,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.checkToken()
+
     
   },
 
@@ -26,12 +31,70 @@ Page({
    */
   onReady: function () {
     
+    
+    
+    
+  },
+  checkToken:function(){
+    if ( wx.getStorageSync('token')) {
+       this.getBanner()
+
+    } else {
+      wx.navigateTo({
+        url: '../login/login'
+      })
+
+    }
+  },
+  getBanner:function(){
+    var _this=this;
+    try {
+      wx.showLoading()
+    }
+    catch (err) {
+      console.log("当前微信版本不支持")
+    }
+    wx.request({
+      url: api + "Advert/getAll",
+      method: 'GET',
+      header: header,
+      data: { session_3rd: wx.getStorageSync('token')},
+      success: function (res) {
+        try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+        if (res.data.code == 200) {
+
+          _this.setData({
+            imgUrls:res.data.data
+          })
+
+
+        } else {
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'fail',
+            duration: 2000
+          })
+
+        }
+      },
+      fail: function () {
+        try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+        wx.showToast({
+          title: '接口调用失败！',
+          icon: 'fail',
+          duration: 2000
+        })
+      }
+    })
+    
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    
     
   },
 
