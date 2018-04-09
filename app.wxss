@@ -32,3 +32,18 @@ color: #111111;
 .flex-cell{
   flex: 1;
 }
+.pickers{
+  position: absolute;
+  z-index: 1000;
+  opacity: 0.5;
+  width: 280rpx;
+  height: 250rpx;
+  left: 50%;
+  margin-left: -140rpx;
+  top: 50rpx;
+  overflow: hidden;
+}
+.pickers view{
+   width: 280rpx;
+  height: 250rpx;
+}

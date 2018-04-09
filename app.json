@@ -1,5 +1,7 @@
 {
   "pages":[
+    "pages/jzks/jzks",
+    "pages/uploadReport/uploadReport",
     "pages/login/login",
     "pages/index/index",
     "pages/logs/logs",
@@ -15,7 +17,9 @@
     "pages/hc/hc",
     "pages/yc/yc",
     "pages/cc/cc",
-    "pages/bc/bc"
+    "pages/bc/bc",
+    "pages/jzyy/jzyy"
+    
   ],
   "window":{
     "backgroundTextStyle":"light",

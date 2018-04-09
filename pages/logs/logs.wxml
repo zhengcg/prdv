@@ -1,9 +1,9 @@
 <view class='head'>
   <view class='headImg'>
-    <image src='../../images/icon07.png'/>
+    <image src='{{showMember.img}}'/>
   </view>
   <view class='nickBox'>
-    小涵
+    {{showMember.name}}
   </view>
 </view>
 <view class='tabNav'>
@@ -21,14 +21,14 @@
   </view>
 </view>
 <view class='logBox' hidden='{{tabCur!=="1"}}'>
-  <view class='time'>2017年12月小糯米一共</view>
-  <navigator url="/pages/hospital/hospital">去过2次医院</navigator>
-  <navigator url="/pages/department/department">到过1个科室</navigator>
-  <navigator url="/pages/drugs/drugs">使用过3种药品</navigator>
-  <navigator url="/pages/temperature/temperature">测过0次体温</navigator>
-  <navigator url="/pages/vaccine/vaccine">打过1次疫苗</navigator>
-  <navigator url="/pages/physical/physical">有过0次体检</navigator>
-  <navigator url="/pages/expenditure/expenditure">医疗支出共 ¥288.5</navigator>
+  <view class='time'>2017年12月{{showMember.name}}一共</view>
+  <navigator url="/pages/hospital/hospital">去过{{list[0].num}}次医院</navigator>
+  <navigator url="/pages/department/department">到过{{list[1].num}}个科室</navigator>
+  <navigator url="/pages/drugs/drugs">使用过{{list[2].num}}种药品</navigator>
+  <navigator url="/pages/temperature/temperature">测过{{list[3].num}}次体温</navigator>
+  <navigator url="/pages/vaccine/vaccine">打过{{list[5].num}}次疫苗</navigator>
+  <navigator url="/pages/physical/physical">有过{{list[4].num}}次体检</navigator>
+  <navigator url="/pages/expenditure/expenditure">医疗支出共 ¥{{list[6].jz_yy_fy}}</navigator>
 </view>
 <view class='dataBox' hidden='{{tabCur!=="2"}}'>
   <scroll-view scroll-x="true" class='btnBox'>

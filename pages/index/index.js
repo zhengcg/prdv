@@ -7,11 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    imgUrls: [
-      'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-      'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
-    ],
+    imgUrls: [],
     autoplay: true,
     interval: 5000,
     duration: 1000
@@ -36,14 +32,19 @@ Page({
     
   },
   checkToken:function(){
-    if ( wx.getStorageSync('token')) {
+    if (wx.getStorageSync('token')) {
        this.getBanner()
-
     } else {
-      wx.navigateTo({
-        url: '../login/login'
-      })
-
+      wx.showModal({
+        title: '提示',
+        content: '登录过期了，请重新登录！',
+        showCancel:false,
+        success: function (res) {         
+            wx.navigateTo({
+              url: '../login/login'
+            })         
+        }
+      })      
     }
   },
   getBanner:function(){
