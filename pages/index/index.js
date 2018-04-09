@@ -7,7 +7,19 @@ Page({
    * 页面的初始数据
    */
   data: {
-    imgUrls: [],
+    imgUrls: [
+      {"ad_id":"1",
+        "img_url":'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'},
+      {
+        "ad_id": "2",
+        "img_url": 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg'
+      },
+      {
+        "ad_id": "3",
+        "img_url": 'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
+      }
+
+    ],
     autoplay: true,
     interval: 5000,
     duration: 1000
@@ -64,9 +76,9 @@ Page({
         try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
         if (res.data.code == 200) {
 
-          _this.setData({
-            imgUrls:res.data.data
-          })
+          // _this.setData({
+          //   imgUrls:res.data.data
+          // })
 
 
         } else {

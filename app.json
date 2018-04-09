@@ -1,9 +1,8 @@
 {
   "pages":[
-    "pages/jzks/jzks",
-    "pages/uploadReport/uploadReport",
-    "pages/login/login",
     "pages/index/index",
+    "pages/uploadReport/uploadReport",
+    "pages/login/login", 
     "pages/logs/logs",
     "pages/me/me",
     "pages/hospital/hospital",
@@ -18,7 +17,8 @@
     "pages/yc/yc",
     "pages/cc/cc",
     "pages/bc/bc",
-    "pages/jzyy/jzyy"
+    "pages/jzyy/jzyy",
+    "pages/jzks/jzks"
     
   ],
   "window":{
