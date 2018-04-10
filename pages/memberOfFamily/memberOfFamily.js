@@ -7,8 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    "showMember": {},
-    "members": [],
+    list:[]
   
   },
 
@@ -19,17 +18,9 @@ Page({
     this.checkToken()
   
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
   checkToken: function () {
     if (wx.getStorageSync('token')) {
-      this.getMembers()
-
+      this.getList()
 
     } else {
       wx.showModal({
@@ -44,8 +35,8 @@ Page({
       })
     }
   },
-  getMembers: function () {
-    var _this = this;
+  getList:function(){
+    var self=this;
     try {
       wx.showLoading()
     }
@@ -56,13 +47,12 @@ Page({
       url: api + "UserMp/getMembers",
       method: 'GET',
       header: header,
-      data: { session_3rd: wx.getStorageSync('token') },
+      data: { session_3rd: wx.getStorageSync('token'),},
       success: function (res) {
         try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
         if (res.data.code == 200) {
-          _this.setData({
-            members: res.data.data,
-            showMember: res.data.data[0]
+          self.setData({
+            list:res.data.data
           })
 
         } else {
@@ -83,6 +73,15 @@ Page({
         })
       }
     })
+
+
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+  
   },
 
   /**

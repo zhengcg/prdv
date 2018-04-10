@@ -1,5 +1,30 @@
-<view class="btn-area">
-  <navigator url="/page/navigate/navigate?title=navigate" hover-class="navigator-hover">跳转到新页面</navigator>
-  <navigator url="../../redirect/redirect/redirect?title=redirect" open-type="redirect" hover-class="other-navigator-hover">在当前页打开</navigator>
-  <navigator url="/page/index/index" open-type="switchTab" hover-class="other-navigator-hover">切换 Tab</navigator>
+<view class='head'>
+  <view class='imgBox'>
+    <image src='{{showMember.img}}'/>
+  </view>
+  <view class='nickBox'>
+    <view>{{showMember.name}}</view>
+    <text>100 汪汪币</text>
+  </view>
+  <button>签到</button>
+</view>
+<view class='navBox'>
+  <navigator url='/pages/logs/logs' open-type="switchTab">
+  <image src="../../images/icon12.png"/>
+  健康档案
+  </navigator>
+  <navigator url='/pages/personalData/personalData'>
+  <image src="../../images/icon13.png"/>
+  个人资料
+  </navigator>
+  <navigator url='/pages/memberOfFamily/memberOfFamily'>
+  <image src="../../images/icon14.png"/>
+  家庭成员
+  </navigator>
+</view>
+<view style='height:20rpx;background:#F6F8FC;'></view>
+<view class='list'>
+  <navigator url='/pages/help/help'>帮助与反馈</navigator>
+  <navigator>收货地址</navigator>
+  <navigator url='/pages/contactService/contactService'>联系客服</navigator>
 </view>

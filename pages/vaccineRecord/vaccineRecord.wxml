@@ -1,0 +1,19 @@
+<view class='head'>
+  <view class='headImg'>
+    <image src='{{showMember.img}}'/>
+  </view>
+  <view class='nickBox'>
+    {{showMember.name}}
+  </view>
+  <picker bindchange="bindPickerChange" value="{{index}}" range="{{membersArray}}" class='pickers'><view></view></picker>
+  <view class='addBtn' bindtap='gotoAdd'>+</view>
+  <view class='addBox' bindtap='gotoAdd'>   
+    <text>添加</text>
+  </view>
+</view>
+<view class='headTit'>
+  距离下次疫苗还有4天
+  <view class='n2'><text class='l1'></text><text>选打</text></view>
+  <view class='n1'><text class='l1'></text><text>必打</text></view>
+</view>
+<image class='test1' src='../../images/test/test1.png' style='width:100%;margin-left:-3rpx;'/>

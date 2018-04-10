@@ -1,0 +1,7 @@
+<view class='content'>
+  <view class='n1'>常见问题</view>
+  <view class='n2'> <navigator>如何登入汪汪健康</navigator></view>
+  <view class='n2'> <navigator>汪汪币有什么作用</navigator></view>
+  <view class='n2'><navigator>如何获得汪汪币</navigator></view>
+  <view class='n2'><navigator>如何兑换商品</navigator></view>
+</view>

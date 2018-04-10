@@ -1,0 +1,18 @@
+.title{
+  background: #EAF090;
+  font-size: 28rpx;
+  color: #111111;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+}
+.content{
+  padding: 0 38rpx;
+  line-height: 80rpx;
+  font-size: 32rpx;
+  color: #111111;
+}
+.content view:first-of-type{
+  font-size: 28rpx;
+  color: #666666;
+}

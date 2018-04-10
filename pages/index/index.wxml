@@ -10,19 +10,19 @@
     <image src='../../images/icon07.png' class="img01"/>
     <view>上传报告</view> 
   </navigator>
-  <navigator class='navBtn nav02'>
+  <navigator class='navBtn nav02' url='/pages/temperatureDetection/temperatureDetection'>
     <image src='../../images/icon08.png' class="img02"/>
     <view>体温检测</view>  
   </navigator>
-  <navigator class='navBtn nav03'>
+  <navigator class='navBtn nav03' url='/pages/medicationRecord/medicationRecord'>
     <image src='../../images/icon09.png' class="img03"/>
     <view>用药记录</view>  
   </navigator>
-  <navigator class='navBtn nav04'>
+  <navigator class='navBtn nav04' url='/pages/physicaRecords/physicaRecords'>
     <image src='../../images/icon10.png' class="img04"/>
     <view>体检报告</view>   
   </navigator>
-  <navigator class='navBtn nav05'>
+  <navigator class='navBtn nav05' url='/pages/vaccineRecord/vaccineRecord'>
     <image src='../../images/icon11.png' class="img05"/>
     <view> 疫苗记录</view>  
   </navigator>

@@ -1,0 +1,53 @@
+<view class='head'>
+  <view class='headImg'>
+    <image src='{{showMember.img}}'/>
+  </view>
+  <view class='nickBox'>
+    {{showMember.name}}
+  </view>
+  <picker bindchange="bindPickerChange" value="{{index}}" range="{{membersArray}}" class='pickers'><view></view></picker>
+  <view class='addBtn' bindtap='gotoAdd'>+</view>
+  <view class='addBox' bindtap='gotoAdd'>   
+    <text>添加</text>
+  </view>
+</view>
+<view class='title'>
+  基本信息
+</view>
+<view class='listBox'>
+  <view>
+    <text>就诊时间</text>{{date}}
+    <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+    <view></view>
+    </picker>
+  </view>
+  <view>
+  <text>购药地点</text>
+  
+  </view>
+  <view>
+  <text>药品信息</text>
+  </view>
+ 
+</view>
+
+<view style='padding:40rpx;'>
+  <view id="panel" class="flex-column">
+    <view class="flex-row flex-cell">
+      <text class="flex-cell flex-row">阿斯匹林</text>
+      <text class="flex-cell flex-row">75mg</text>
+      <text class="flex-cell flex-row">金额200元</text>
+    </view>
+   <view class="flex-row flex-cell">
+      <text class="flex-cell flex-row">阿斯匹林</text>
+      <text class="flex-cell flex-row">75mg</text>
+      <text class="flex-cell flex-row">金额200元</text>
+    </view>
+
+  </view>
+</view>
+
+<view style='height:222rpx;'></view>
+<view class='footer'>
+  <button>提交保存</button>
+</view>

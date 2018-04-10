@@ -1,0 +1,10 @@
+<navigator class='addBtn' url='/pages/addMembers/addMembers'>
+  <button><text>+</text> 添加</button>
+</navigator>
+<view class='listBox'>
+  <navigator wx:for="{{list}}" wx:key="{{item.id}}">
+    <image src='{{item.img}}'/> 
+    <view>{{item.name}}</view>
+    <text></text>
+  </navigator>
+</view>

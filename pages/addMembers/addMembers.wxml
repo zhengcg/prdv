@@ -1,0 +1,30 @@
+<view class='headBox'>
+  <view bindtap='chooseImg'>
+    <image src='{{img}}'/>
+  </view>
+</view>
+ <view class='title'>基本信息</view>
+<view class='listBox'>
+ 
+  <view>
+    <text>关系</text>
+    <picker bindchange="bindPickerChange" value="{{index}}" range="{{membersArray}}" >
+    <view>{{membersArray[index]}}<text style='display:inline-block;width:30rpx;'></text></view>
+    </picker>
+  </view>
+  <view>
+    <text>昵称</text>
+    <input placeholder='请输入' value='{{name}}' bindinput="changeName"/>
+  </view>
+  <view>
+    <text>生日</text>{{date}}
+    <picker mode="date" value="{{date}}" bindchange="bindDateChange">
+    <view></view>
+    </picker>
+  </view>
+</view>
+
+<view style='height:222rpx;'></view>
+<view class='footer'>
+  <button bindtap='submitBtn'>保存</button>
+</view>

@@ -85,7 +85,7 @@ Page({
             success: function () {
               wx.setStorageSync('token', "16a4971c0ad8147b0d7f994b529daa46");
               if (wx.getStorageSync('token')){
-                console.log("11111"+wx.getStorageSync('token'))
+                console.log(res.data.data)
                 wx.switchTab({
                   url: _this.data.path
                 })

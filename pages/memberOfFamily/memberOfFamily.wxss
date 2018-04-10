@@ -1,0 +1,45 @@
+/* pages/memberOfFamily/memberOfFamily.wxss */
+.addBtn{
+  background: #F6F8FC;
+  padding: 40rpx;
+}
+.addBtn button{
+  background: #FFFFFF;
+  height: 108rpx;
+  line-height: 108rpx;
+  font-size: 32rpx;
+  color: #3C3C3E;
+}
+.addBtn button text{
+  color: #F39800;
+  font-size: 50rpx;
+}
+.addBtn button::after{
+  border: 0
+}
+.listBox navigator{
+  display: flex;
+  padding: 0 52rpx;
+  height: 204rpx;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1rpx solid #E9E9ED;
+  font-size: 32rpx;
+  color: #222222;
+}
+.listBox navigator image{
+  width: 128rpx;
+  height: 128rpx;
+  border-radius: 50%;
+
+}
+.listBox navigator text{
+  display: block;
+  width: 24rpx;
+  height: 24rpx;
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAgZJREFUSA3dlD1II0EUx92NbqPiIV5rayXigViIcMnlqzkbERTxUBAUBeGushBE4Qq54qpTsBHvrhDBwspsFhMI4YorhSD2KRXsAonZ+HsxURnCzrpYOfB2Pt57v/+8md1ta3vzLZVKfcGSQQs1dYmGYUwQc2rb9mddbCu/VoCkEczCTqhkshXEa00rQAUCva7Vah2Mj6hk2guo+gx1odU8k8kMVCqVNCL9+F1sIZlM/m4Vq65pK5CESCRyZVnWGBVcMpWcg3Q6vSg+XfMlIJBwOFwMhULjiPxnalLNPse18moCAopGozdU8gkRBwED+4XIVy8RX3egAgqFglUsFv8iMNXwrXMnO2qczAMJSCJwk3vYpV+SOW0Tke2H4dPT9x08pTyMOCY3kUgs0/9o+Lb4Tr6rcYEFBMT5d1KBfIj1hthtc9zsAwtks9ku4GeAPgoM+DcqalYjS/UWSCCfz3eXy2UbwrhQgK8B/1knKo8XX7LjOD2u69rsfhRwDd4q8D2F+zh9UQUcy7tqtSrfQB1Ov+QFFxXfFfCG9BLvYB8w+R8t8loe0Hu2kKe34WTnfRzLOdNhzDVNc56dH/rJ1R5RLpd7z4VmOI4hgFVsLh6P//EDl5h2XWCpVNoAPsiF3rHz2VgsdqzLee7XChB8AbyCyAzwk+fJfsZaAXb9D9AU8FM/QDXmHhH9tYWgKjxgAAAAAElFTkSuQmCC") no-repeat right center;
+  background-size: 24rpx 24rpx;
+}
+.listBox navigator view{
+  width: 460rpx;
+}

@@ -1,0 +1,49 @@
+<view class='content'>
+  <view class='title'>基本信息</view>
+  <view class='list'>
+    <text>昵称</text>
+    <input placeholder='请输入' value='{{name}}' bindinput='changeName'/>
+  </view>
+  <view class='list'>
+    <text>性别</text>
+    <picker bindchange="changeSex" value="{{sexIndex}}" range="{{sex}}" >
+    <view>{{sex[sexIndex]}}<text style='display:inline-block;width:30rpx;'></text></view>
+    </picker>
+  </view>
+  <view class='list'>
+    <text>生日</text>{{date}}
+    <picker mode="date" value="{{date}}" bindchange="bindDateChange">
+    <view></view>
+    </picker>
+  </view>
+  <view class='list'>
+    <text>血型</text>
+    <picker bindchange="changeBlood" value="{{bloodIndex}}" range="{{blood}}" >
+    <view>{{blood[bloodIndex]}}<text style='display:inline-block;width:30rpx;'></text></view>
+    </picker>
+  </view>
+  <view class='list'>
+    <text>身高</text>
+    <input placeholder='请输入' value='{{height}}' bindinput='changeHeight'/>
+  </view>
+  <view class='list'>
+    <text>体重</text>
+    <input placeholder='请输入' value='{{weight}}' bindinput='changeWeight'/>
+  </view>
+  <view class='list'>
+    <text>职业</text>
+    <picker bindchange="changeOccupation" value="{{occupationIndex}}" range="{{occupation}}" >
+    <view>{{occupation[occupationIndex]}}<text style='display:inline-block;width:30rpx;'></text></view>
+    </picker>
+  </view>
+  <view class='list'>
+    <text>所在地</text>
+    <picker mode="region" value="{{area}}" bindchange="changeArea">
+    <view>{{area[0]}} {{area[1]}} {{area[2]}}<text style='display:inline-block;width:30rpx;'></text></view>
+     </picker>
+  </view>
+</view>
+<view style='height:222rpx;'></view>
+<view class='footer'>
+  <button bindtap='submitData'>保存</button>
+</view>

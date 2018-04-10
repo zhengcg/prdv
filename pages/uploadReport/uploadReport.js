@@ -251,5 +251,10 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+  gotoAdd:function(){
+    wx.navigateTo({
+      url: '../addMembers/addMembers'
+    })
   }
 })

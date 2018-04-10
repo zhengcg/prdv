@@ -6,8 +6,8 @@
     {{showMember.name}}
   </view>
   <picker bindchange="bindPickerChange" value="{{index}}" range="{{membersArray}}" class='pickers'><view></view></picker>
-  <view class='addBtn'>+</view>
-  <view class='addBox'>   
+  <view class='addBtn' bindtap='gotoAdd'>+</view>
+  <view class='addBox' bindtap='gotoAdd'>   
     <text>添加</text>
   </view>
 </view>

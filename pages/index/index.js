@@ -8,8 +8,6 @@ Page({
    */
   data: {
     imgUrls: [
-      {"ad_id":"1",
-        "img_url":'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'},
       {
         "ad_id": "2",
         "img_url": 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg'

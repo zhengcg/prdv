@@ -1,8 +1,12 @@
 {
   "pages":[
+   
+    "pages/login/login",
+    "pages/personalData/personalData",
+    "pages/addMembers/addMembers",
     "pages/index/index",
     "pages/uploadReport/uploadReport",
-    "pages/login/login", 
+    "pages/memberOfFamily/memberOfFamily",
     "pages/logs/logs",
     "pages/me/me",
     "pages/hospital/hospital",
@@ -18,13 +22,20 @@
     "pages/cc/cc",
     "pages/bc/bc",
     "pages/jzyy/jzyy",
-    "pages/jzks/jzks"
+    "pages/jzks/jzks",
+    "pages/medicationRecord/medicationRecord",
+    "pages/contactService/contactService",
+    "pages/help/help",
+    "pages/temperatureDetection/temperatureDetection",
+    "pages/physicaRecords/physicaRecords",
+    "pages/vaccineRecord/vaccineRecord"
+    
     
   ],
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#F39800",
-    "navigationBarTitleText": "旺旺健康",
+    "navigationBarTitleText": "汪汪健康",
     "navigationBarTextStyle":"black"
   },
   "tabBar": {
