@@ -9,7 +9,7 @@
               <view class='city_list_box'>
                 <block wx:for='{{citylist}}' wx:key='this' wx:for-item='letterItem' wx:for-index='letterIndex'>
                   <view class='city_first_letter' id='{{letterItem.letter}}'>{{letterItem.letter}}</view>
-                  <text class='city_name' wx:for='{{letterItem.data}}' wx:key='this' data-types='list'  data-index='{{index}}' data-val='{{item}}'>{{item.cityName}}</text>
+                  <text class='city_name' wx:for='{{letterItem.data}}' wx:key='this' data-types='list'  data-index='{{index}}' data-val='{{item}}'>{{item.title}}</text>
                 </block>
               </view>
           </scroll-view>

@@ -76,30 +76,27 @@ Page({
       data: obj,
       success: function (res) {
         try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
-        if (res.data.code!==200) {
-          
+        if (res.data.code==200) {
+          wx.setStorageSync('token', res.data.data.session_3rd);
           wx.showToast({
             title: '登录成功',
             icon: 'success',
             duration: 2000,
-            success: function () {
-              wx.setStorageSync('token', "16a4971c0ad8147b0d7f994b529daa46");
+            success: function () { 
               if (wx.getStorageSync('token')){
-                console.log(res.data.data)
                 wx.switchTab({
                   url: _this.data.path
-                })
-              }
-              
+                })   
+              }                        
+                          
+            }      
 
-            }
           })
 
 
         } else {
           wx.showToast({
-            title: res.data.msg,
-            icon: 'fail',
+            title: "登陆失败",
             duration: 2000
           })
 
