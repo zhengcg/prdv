@@ -7,11 +7,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    tabCur:"1",
+    "tabCur":"1",
     "jkTab":"1",
-    "showMember":{},
     "members":[],
-    "list":[]
+    "list":[],
+    "showMember":""
     
   },
 
@@ -125,6 +125,12 @@ Page({
           duration: 2000
         })
       }
+    })
+  },
+  changeJs:function(e){
+    this.getDoc(this.data.members[parseInt(e.detail.current)].id);
+    this.setData({
+      showMember: this.data.members[parseInt(e.detail.current)]
     })
   },
 

@@ -1,0 +1,11 @@
+<view class='imgBox'>
+  <view wx:for="{{imgs}}" wx:key="{{index}}">
+    <image src='{{item}}'/>
+    <text class='closeBtn' bindtap='removeImg' data-index="{{index}}"></text>
+  </view>
+  <view class='uploadBtn' bindtap='chooseImg'></view>
+</view>
+<view style='height:222rpx;'></view>
+<view class='footer'>
+  <button bindtap='submitBtn'>保存</button>
+</view>

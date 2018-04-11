@@ -1,3 +1,4 @@
+
 .head{
   background: #EAF090;
   height: 228rpx;
@@ -40,7 +41,7 @@ box-sizing: border-box;
 z-index: 10;
 }
 .tabNav{
-  margin-top: 84rpx;
+  margin-top: 4rpx;
   height: 84rpx;
   line-height: 84rpx;
   display: flex;
@@ -86,10 +87,11 @@ z-index: 10;
 .btnBox{
   white-space: nowrap; 
   padding: 42rpx 32rpx;
+  height: 80rpx;
 }
 .btnBox text{
   display: inline-block;
-  width: 160rpx;
+  width: 150rpx;
   height: 80rpx;
   line-height: 80rpx;
   margin: 0 16rpx;

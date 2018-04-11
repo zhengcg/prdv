@@ -1,4 +1,4 @@
-<navigator class='addBtn' url='/pages/addMembers/addMembers'>
+<navigator class='addBtn' url='/pages/addMembers/addMembers?path=memberOfFamily'>
   <button><text>+</text> 添加</button>
 </navigator>
 <view class='listBox'>

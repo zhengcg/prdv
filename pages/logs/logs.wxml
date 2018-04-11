@@ -1,11 +1,17 @@
-<view class='head'>
-  <view class='headImg'>
-    <image src='{{showMember.img}}'/>
-  </view>
-  <view class='nickBox'>
-    {{showMember.name}}
-  </view>
-</view>
+ <swiper style='height:310rpx;' bindchange="changeJs">
+  <block wx:for="{{members}}" wx:key="{{item.id}}"  >
+    <swiper-item id="{{item.id}}">
+      <view class='head'>
+        <view class='headImg'>
+          <image src='{{item.img}}'/>
+        </view>
+        <view class='nickBox'>
+          {{item.name}}
+        </view>
+      </view>
+    </swiper-item>
+  </block>
+</swiper> 
 <view class='tabNav'>
   <view class='{{tabCur=="1"?"cur":"default"}}' bindtap='changeTab' data-index="1">
     健康档案
@@ -37,19 +43,19 @@
     <text class='{{jkTab=="3"?"cur":"default"}}' bindtap='changeJk' data-index="3">处方单</text>
     <text class='{{jkTab=="4"?"cur":"default"}}' bindtap='changeJk' data-index="4">病历记录</text>
   </scroll-view>
-  <view class='dataList'  hidden='{{jkTab!=="1"}}'>
-    <navigator url='/pages/hy/hy'><text>原始数据</text></navigator>
-    <navigator url='/pages/hc/hc'><text>白细胞</text>三次异常</navigator>
+   <view class='dataList'  hidden='{{jkTab!=="1"}}'>
+    <navigator url='/pages/hy/hy?mid={{showMember.id}}'><text>原始数据</text></navigator>
+    <navigator url='/pages/hc/hc?mid={{showMember.id}}'><text>白细胞</text>三次异常</navigator>
   </view>
   <view class='dataList'  hidden='{{jkTab!=="2"}}'>
-    <navigator url='/pages/yc/yc'><text>原始数据</text></navigator>
+    <navigator url='/pages/yc/yc?mid={{showMember.id}}'><text>原始数据</text></navigator>
   </view>
   <view class='dataList'  hidden='{{jkTab!=="3"}}'>
-    <navigator url='/pages/cc/cc'><text>原始数据</text></navigator>
+    <navigator url='/pages/cc/cc?mid={{showMember.id}}'><text>原始数据</text></navigator>
   </view>
   <view class='dataList'  hidden='{{jkTab!=="4"}}'>
-    <navigator url='/pages/bc/bc'><text>原始数据</text></navigator>
-  </view>
+    <navigator url='/pages/bc/bc?mid={{showMember.id}}'><text>原始数据</text></navigator>
+  </view> 
 </view>
 <view class='commentBox' hidden='{{tabCur!=="3"}}'>
 根据您上传的报告及资料每半年对您的健康给予评估及建议，敬请期待！

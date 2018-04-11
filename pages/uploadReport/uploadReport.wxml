@@ -1,4 +1,4 @@
-<view class='head'>
+<!-- <view class='head'>
   <view class='headImg'>
     <image src='{{showMember.img}}'/>
   </view>
@@ -10,7 +10,26 @@
   <view class='addBox' bindtap='gotoAdd'>   
     <text>添加</text>
   </view>
-</view>
+</view> -->
+
+<swiper style='height:310rpx;' bindchange="changeJs" current='{{index}}'>
+  <block wx:for="{{members}}" wx:key="{{item.id}}"  >
+    <swiper-item id="{{item.id}}">
+      <view class='head'>
+        <view class='headImg'>
+          <image src='{{item.img}}'/>
+        </view>
+        <view class='nickBox'>
+          {{item.name}}
+        </view>
+        <view class='addBtn' bindtap='gotoAdd'>+</view>
+        <view class='addBox' bindtap='gotoAdd'>   
+          <text>添加</text>
+        </view>
+      </view>
+    </swiper-item>
+  </block>
+</swiper> 
 
 <view class='listBox'>
   <view>
@@ -19,14 +38,14 @@
     <view></view>
     </picker>
   </view>
-  <navigator url='/pages/jzyy/jzyy?jz_id={{jz_id}}&mid={{showMember.id}}'><text>就诊医院</text>{{jzyy.title}}</navigator>
-  <navigator url='/pages/jzks/jzks?jz_id={{jz_id}}&mid={{showMember.id}}'><text>就诊科室</text>{{jzks.title}}</navigator>
+  <navigator url='/pages/jzyy/jzyy?jz_id={{jz_id}}'><text>就诊医院</text>{{jzyy.yy_title}}</navigator>
+  <navigator url='/pages/jzks/jzks?jz_id={{jz_id}}'><text>就诊科室</text>{{jzks.ks_title}}</navigator>
 </view>
 <view class='imgBox'>
-  <view class='sm'>化验单<text>带参考值范围的</text></view>
-  <view class='sm'>影像报告<text>带影像的，如B超</text></view>
-  <view>处方单</view>
-  <view>病例记录</view>
+  <navigator url='/pages/uploadHYD/uploadHYD?jz_id={{jz_id}}' class='sm'>化验单<text>带参考值范围的</text></navigator>
+  <navigator url='/pages/uploadYXBG/uploadYXBG?jz_id={{jz_id}}' class='sm'>影像报告<text>带影像的，如B超</text></navigator>
+  <navigator url='/pages/uploadCFD/uploadCFD?jz_id={{jz_id}}'>处方单</navigator>
+  <navigator url='/pages/uploadBLJL/uploadBLJL?jz_id={{jz_id}}'>病例记录</navigator>
   <view>用药记录</view>
   <view>医疗费用</view>
 </view>

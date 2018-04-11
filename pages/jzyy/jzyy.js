@@ -11,8 +11,7 @@ Page({
     cityListId: '',
     //下面是城市列表信息，这里只是模拟数据
     citylist: [],
-    keyWord: '',
-    mid:'',
+    keywords: '',
     jz_id:''
 
   },
@@ -21,18 +20,38 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      mid: options.mid,
-      jz_id:options.jz_id
-    })
+      this.setData({
+        jz_id: options.jz_id
+      })
+    
+    this.checkToken()
 
+  },
+  checkToken: function () {
+    if (wx.getStorageSync('token')) {
+      this.getList()
+
+
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '登录过期了，请重新登录！',
+        showCancel: false,
+        success: function (res) {
+          wx.navigateTo({
+            url: '../login/login'
+          })
+        }
+      })
+    }
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    this.getList()
+
+   
 
   },
 
@@ -81,9 +100,8 @@ Page({
   sendMsg: function (e) {
     if (e.detail.value) {
       this.setData({
-        keyWord: e.detail.value,
-        page: 1,
-        list: []
+        keywords: e.detail.value
+        
       })
       this.getList()
     } else {
@@ -108,6 +126,7 @@ Page({
       url: api + 'Coreout/getHospital', //仅为示例，并非真实的接口地址
       data: {
         session_3rd: wx.getStorageSync('token'),
+        keywords: self.data.keywords
       },
       method: 'GET',
       success: function (res) {
@@ -127,5 +146,45 @@ Page({
         }
       }
     })
+  },
+  selectHos:function(e){
+    var self=this;
+    try {
+      wx.showLoading()
+    }
+    catch (err) {
+      console.log("当前微信版本不支持")
+    }
+    wx.request({
+      url: api + "Corein/saveJz",
+      method: 'POST',
+      header: header,
+      data: { session_3rd: wx.getStorageSync('token'), jz_id: self.data.jz_id, h_id: e.currentTarget.dataset.id },
+      success: function (res) {
+        try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+        if (res.data.code == 200) {
+          wx.navigateTo({
+            url: '../uploadReport/uploadReport?jz_id=' + self.data.jz_id
+          })
+
+        } else {
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'fail',
+            duration: 2000
+          })
+
+        }
+      },
+      fail: function () {
+        try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+        wx.showToast({
+          title: '接口调用失败！',
+          icon: 'fail',
+          duration: 2000
+        })
+      }
+    })
+
   }
 })

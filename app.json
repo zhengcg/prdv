@@ -1,6 +1,6 @@
 {
   "pages":[
-   
+    
     "pages/login/login",
     "pages/personalData/personalData",
     "pages/addMembers/addMembers",
@@ -28,7 +28,11 @@
     "pages/help/help",
     "pages/temperatureDetection/temperatureDetection",
     "pages/physicaRecords/physicaRecords",
-    "pages/vaccineRecord/vaccineRecord"
+    "pages/vaccineRecord/vaccineRecord",
+    "pages/uploadBLJL/uploadBLJL",
+    "pages/uploadCFD/uploadCFD",
+    "pages/uploadHYD/uploadHYD",
+    "pages/uploadYXBG/uploadYXBG"
     
     
   ],

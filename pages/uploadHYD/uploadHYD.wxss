@@ -1,0 +1,41 @@
+.footer{
+  position: fixed;
+  height: 200rpx;
+  bottom: 22rpx;
+  width: 100%;
+  left: 0;
+  background: #fff;
+  box-shadow: 0 -2rpx 4rpx 0 rgba(0,0,0,0.12);
+}
+.footer button{
+  width: 600rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  background: #F39800;
+  border-radius: 44rpx;
+  font-size:30rpx;
+  color: #FFFFFF;
+  top: 56rpx;
+  position: absolute;
+  left: 75rpx;
+}
+.footer button::after{border: 0;}
+.imgBox{
+  display: flex;
+  flex-wrap:wrap;
+  padding: 60rpx 0 60rpx 40rpx;
+}
+.imgBox view{
+  width: 195rpx;
+  height: 195rpx;
+  border-radius: 8rpx;
+  margin-bottom: 40rpx;
+  margin-right: 40rpx;
+  position: relative;
+  overflow: hidden;
+}
+.imgBox view image{
+  display: block;
+  width: 195rpx;
+  height: 195rpx;
+}

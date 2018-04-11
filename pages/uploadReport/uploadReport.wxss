@@ -70,7 +70,7 @@ z-index: 10;
 }
 .listBox{
   padding: 0 40rpx;
-  margin-top: 130rpx;
+  margin-top: 0rpx;
 }
 .listBox>view,.listBox>navigator{
   border-bottom: 1rpx solid #E5E5E5;

@@ -8,13 +8,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    "img":"",
-    "date": "",
-    "index": 0,
-    "membersArray": ["本人","儿子","女儿","父亲","母亲", "配偶","其他"],
-    "name":"",
-    "path":""
-  
+    jz_id: '',
+    mid: '',
+    imgs: []
+
+
   },
 
   /**
@@ -22,66 +20,33 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      path:options.path
+      jz_id: options.jz_id
     })
     this.checkToken()
-  
+
   },
-  // 选择关系
-  bindPickerChange: function (e) {
+  checkToken: function () {
     var self = this;
-    this.setData({
-      index: e.detail.value
-    })
+    if (wx.getStorageSync('token')) {
+      this.getJz(self.data.jz_id);
+      // 添加就诊（一进来先掉一次，然后实际添加数据调用修改接口）
+
+
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '登录过期了，请重新登录！',
+        showCancel: false,
+        success: function (res) {
+          wx.navigateTo({
+            url: '../login/login'
+          })
+        }
+      })
+    }
   },
-  // 就诊时间
-  bindDateChange: function (e) {
+  getJz: function (id) {
     var _this = this;
-    this.setData({
-      date: e.detail.value
-    })
-  },
-  changeName:function(e){
-    this.setData({
-      name:e.detail.value
-    })
-  },
-  chooseImg: function () {
-    var self = this;
-    wx.chooseImage({
-      count: 1, // 默认9
-      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-      success: function (res) {
-        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-        var tempFilePaths = res.tempFilePaths;
-
-        wx.uploadFile({
-          url: api + 'Corein/coreUpload',
-          filePath: tempFilePaths[0],
-          name: 'imgs',
-          formData: {
-            session_3rd: wx.getStorageSync('token')
-          },
-          success: function (res) {
-            console.log(JSON.parse(res.data).data.img_url)
-              self.setData({
-                img: imgSrc+JSON.parse(res.data).data.img_url
-              })
-            
-            
-          }
-        })
-
-
-
-
-
-      }
-    })
-  },
-  submitBtn:function(){
-    var self = this;
     try {
       wx.showLoading()
     }
@@ -89,22 +54,16 @@ Page({
       console.log("当前微信版本不支持")
     }
     wx.request({
-      url: api + "UserMp/addMembers",
+      url: api + "Coreout/getJzDetail",
       method: 'POST',
       header: header,
-      data: { session_3rd: wx.getStorageSync('token'), name: self.data.name, img: self.data.img, birthday: self.data.date, relation:parseInt(self.data.index)+1 },
+      data: { session_3rd: wx.getStorageSync('token'), jz_id: parseInt(id) },
       success: function (res) {
         try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
         if (res.data.code == 200) {
-          wx.showToast({
-            title: "添加成功",
-            duration: 2000,
-            success:function(){
-              wx.navigateTo({
-                url: '../' + self.data.path + '/' + self.data.path
-              })
-            }
-          })     
+          _this.setData({
+            "mid": res.data.data.m_id
+          })
 
         } else {
           wx.showToast({
@@ -126,69 +85,143 @@ Page({
     })
 
   },
-  checkToken: function () {
-    if (wx.getStorageSync('token')) {
+  chooseImg: function () {
+    var self = this;
+    wx.chooseImage({
+      count: 1, // 默认9
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      success: function (res) {
+        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+        var tempFilePaths = res.tempFilePaths;
 
-    } else {
-      wx.showModal({
-        title: '提示',
-        content: '登录过期了，请重新登录！',
-        showCancel: false,
-        success: function (res) {
-          wx.navigateTo({
-            url: '../login/login'
-          })
-        }
-      })
+        wx.uploadFile({
+          url: api + 'Corein/coreUpload',
+          filePath: tempFilePaths[0],
+          name: 'imgs',
+          formData: {
+            session_3rd: wx.getStorageSync('token')
+          },
+          success: function (res) {
+            var array = [imgSrc + JSON.parse(res.data).data.img_url]
+            self.setData({
+              imgs: self.data.imgs.concat(array)
+            })
+          }
+        })
+
+
+
+
+
+      }
+    })
+  },
+  removeImg: function (e) {
+    var self = this;
+    self.data.imgs.splice(e.target.dataset.index, 1)
+    self.setData({
+      imgs: self.data.imgs
+    })
+
+  },
+  submitBtn: function () {
+    var _this = this;
+    try {
+      wx.showLoading()
     }
+    catch (err) {
+      console.log("当前微信版本不支持")
+    }
+    wx.request({
+      url: api + "Corein/saveJzYx",
+      method: 'POST',
+      header: header,
+      data: { session_3rd: wx.getStorageSync('token'), jz_id: parseInt(_this.data.jz_id), m_id: parseInt(_this.data.mid), imgs: (_this.data.imgs).toString() },
+      success: function (res) {
+        try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+        if (res.data.code == 200) {
+          wx.showToast({
+            title: '保存成功',
+            icon: 'success',
+            duration: 2000,
+            success: function () {
+              wx.navigateTo({
+                url: '../uploadReport/uploadReport?jz_id=' + _this.data.jz_id
+              })
+
+            }
+
+          })
+
+
+        } else {
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'fail',
+            duration: 2000
+          })
+
+        }
+      },
+      fail: function () {
+        try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+        wx.showToast({
+          title: '接口调用失败！',
+          icon: 'fail',
+          duration: 2000
+        })
+      }
+    })
+
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+
   }
 })

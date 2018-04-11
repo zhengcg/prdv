@@ -7,14 +7,16 @@ Page({
    * 页面的初始数据
    */
   data: {
-    "showMember": {},
     "members": [],
     "index": 0,
-    "membersArray":[],
     "date": "",
     "jz_id":"",
-    "jzyy":{},
-    "jzks":{}
+    "jzyy":{
+      h_id: "",
+      yy_title:""
+    },
+    "jzks":{},
+    "isAdd":true
   
   },
 
@@ -22,6 +24,13 @@ Page({
   * 生命周期函数--监听页面加载
   */
   onLoad: function (options) {
+    if(options.jz_id){
+      this.setData({
+        jz_id: options.jz_id,
+        isAdd:false
+      })
+    }
+    
     this.checkToken()
   },
 
@@ -33,14 +42,12 @@ Page({
 
   },
   // 切换家属
-  bindPickerChange: function (e) {
+  changeJs: function (e) {
     var self=this;
-    this.setData({
-      index: e.detail.value,
-      showMember: self.data.members[e.detail.value],
-      date:""
-    })
-    this.addJz(this.data.members[e.detail.value].id)
+    if(self.data.isAdd){
+      this.addJz(this.data.members[parseInt(e.detail.current)].id);
+    }
+    
   },
   // 就诊时间
   bindDateChange: function (e) {
@@ -59,7 +66,7 @@ Page({
       url: api + "Corein/saveJz",
       method: 'POST',
       header: header,
-      data: { session_3rd: wx.getStorageSync('token'), m_id: _this.data.showMember.id, jz_id: _this.data.jz_id, do_time: e.detail.value },
+      data: { session_3rd: wx.getStorageSync('token'), jz_id: _this.data.jz_id, do_time: e.detail.value },
       success: function (res) {
         try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
         if (res.data.code == 200) {
@@ -120,36 +127,17 @@ Page({
       success: function (res) {
         try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
         if (res.data.code == 200) {
-          var array=[]
-          for (var i = 0; i < res.data.data.length;i++){
-            if (res.data.data[i].relation==1){
-              array.push("本人")
-            } else if (res.data.data[i].relation == 2){
-              array.push("儿子")
-            } else if (res.data.data[i].relation == 3){
-              array.push("女儿")
-            } else if (res.data.data[i].relation == 4) {
-              array.push("父亲")
-            } else if (res.data.data[i].relation == 5) {
-              array.push("母亲")
-            } else if (res.data.data[i].relation == 6) {
-              array.push("配偶")
-            }else{
-              array.push("其他")
-            }
-
-          }
+          
           _this.setData({
-            members: res.data.data,           
-            membersArray:array
+            members: res.data.data   
           })
-          if (!_this.data.showMember.id){
-            _this.setData({
-              showMember: res.data.data[0]
-            })
 
+          if(_this.data.jz_id){
+            _this.getJz(_this.data.jz_id)
+          }else{
+            _this.addJz(_this.data.members[0].id)
           }
-          _this.addJz(_this.data.showMember.id)
+         
 
         } else {
           wx.showToast({
@@ -188,7 +176,17 @@ Page({
         try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
         if (res.data.code == 200) {
           _this.setData({
-            jz_id:res.data.data.jz_id
+            jz_id:res.data.data.jz_id,
+            "date": "",
+            "jzyy": {
+              h_id: "",
+              yy_title: ""
+            },
+            "jzks": {
+              h_son_id:"",
+              ks_title:""
+
+            }
           })
 
         } else {
@@ -210,6 +208,70 @@ Page({
       }
     })
   },
+  getJz:function(id){
+    var _this = this;
+    try {
+      wx.showLoading()
+    }
+    catch (err) {
+      console.log("当前微信版本不支持")
+    }
+    wx.request({
+      url: api + "Coreout/getJzDetail",
+      method: 'POST',
+      header: header,
+      data: { session_3rd: wx.getStorageSync('token'), jz_id: parseInt(id) },
+      success: function (res) {
+        try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+        if (res.data.code == 200) {
+          for (var i = 0; i < _this.data.members.length; i++) {
+            if (_this.data.members[i].id == res.data.data.m_id) {
+              _this.setData({
+                "index":i,
+                "date": (res.data.data.do_time).slice(0, 10),
+                "jzyy": {
+                  h_id: res.data.data.h_id ? res.data.data.h_id:"",
+                  yy_title: res.data.data.yy_title ? res.data.data.yy_title:""
+                  
+                },
+                "jzks":{
+                  h_son_id: res.data.data.h_son_id ? res.data.data.h_son_id:"",
+                  ks_title: res.data.data.ks_title ? res.data.data.ks_title:""
+                }
+                            
+              });
+
+            }
+          }
+          setTimeout(function(){
+            _this.setData({
+              "isAdd": true
+              
+            })
+          },600)
+        
+
+        } else {
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'fail',
+            duration: 2000
+          })
+
+        }
+      },
+      fail: function () {
+        try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+        wx.showToast({
+          title: '接口调用失败！',
+          icon: 'fail',
+          duration: 2000
+        })
+      }
+    })
+
+  },
+
 
   /**
    * 生命周期函数--监听页面显示
@@ -254,7 +316,7 @@ Page({
   },
   gotoAdd:function(){
     wx.navigateTo({
-      url: '../addMembers/addMembers'
+      url: '../addMembers/addMembers?path=uploadReport'
     })
   }
 })

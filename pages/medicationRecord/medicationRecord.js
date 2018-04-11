@@ -173,7 +173,7 @@ Page({
   },
   gotoAdd: function () {
     wx.navigateTo({
-      url: '../addMembers/addMembers'
+      url: '../addMembers/addMembers?path=medicationRecord'
     })
   }
 })

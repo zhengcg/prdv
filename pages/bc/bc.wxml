@@ -1,16 +1,12 @@
 <view class='container'>
-  <view class='title'>2018年1月18号</view>
-  <view class='body'>
-    <image src='../../images/icon07.png'/>
-    <image src='../../images/icon07.png'/>
-    <image src='../../images/icon07.png'/>
-  </view>
-  <view class='title'>2018年1月18号</view>
-  <view class='body'>
-    <image src='../../images/icon07.png'/>
-    <image src='../../images/icon07.png'/>
-    <image src='../../images/icon07.png'/>
-     <image src='../../images/icon07.png'/>
-    <image src='../../images/icon07.png'/>
-  </view>
+<scroll-view scroll-y="true">
+  <block wx:for="{{list}}" wx:key="{{item.id}}">
+    <view class='title'>{{item.do_time}}</view> 
+    <view class='body'>
+       <block wx:for="{{item.imgs}}" wx:key="{{index}}" wx:for-item="itemName">
+        <image src='{{itemName}}'/>
+      </block> 
+    </view>
+   </block>
+  </scroll-view>
 </view>
