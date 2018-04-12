@@ -1,2 +1,2 @@
-<view class='title'>2017年12月小糯米医疗支出明细</view>
+<view class='title'>2017年12月{{name}}医疗支出明细</view>
 <canvas canvas-id="pieCanvas" class="canvas" style="height:300px" ></canvas>

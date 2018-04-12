@@ -1,7 +1,5 @@
 {
-  "pages":[
-    
-    
+  "pages":[ 
     "pages/login/login", 
     "pages/addAddress/addAddress",
     "pages/receiveAd/receiveAd",

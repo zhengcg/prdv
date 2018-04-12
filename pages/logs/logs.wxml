@@ -34,7 +34,7 @@
   <navigator url="/pages/temperature/temperature">测过{{list[3].num}}次体温</navigator>
   <navigator url="/pages/vaccine/vaccine">打过{{list[5].num}}次疫苗</navigator>
   <navigator url="/pages/physical/physical">有过{{list[4].num}}次体检</navigator>
-  <navigator url="/pages/expenditure/expenditure">医疗支出共 ¥{{list[6].jz_yy_fy}}</navigator>
+  <navigator url="/pages/expenditure/expenditure?mid={{showMember.id}}&name={{showMember.name}}">医疗支出共 ¥{{list[6].jz_yy_fy}}</navigator>
 </view>
 <view class='dataBox' hidden='{{tabCur!=="2"}}'>
   <scroll-view scroll-x="true" class='btnBox'>

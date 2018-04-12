@@ -60,7 +60,7 @@ Page({
       console.log("当前微信版本不支持")
     }
     wx.request({
-      url: api + 'Coreout/getJzYy', //仅为示例，并非真实的接口地址
+      url: api + 'Coreout/getJzKs', //仅为示例，并非真实的接口地址
       data: {
         m_id: self.data.mid,
         number: self.data.number,
