@@ -21,3 +21,15 @@ padding: 0 48rpx;
   background-size: 24rpx 24rpx;
 
 }
+.footer{
+  position: fixed;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  height: 140rpx;
+  background: #F39800;
+  line-height: 140rpx;
+  font-size: 32rpx;
+  color: #FFFFFF;
+  text-align: center;
+}

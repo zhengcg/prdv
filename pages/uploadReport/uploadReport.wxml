@@ -1,17 +1,3 @@
-<!-- <view class='head'>
-  <view class='headImg'>
-    <image src='{{showMember.img}}'/>
-  </view>
-  <view class='nickBox'>
-    {{showMember.name}}
-  </view>
-  <picker bindchange="bindPickerChange" value="{{index}}" range="{{membersArray}}" class='pickers'><view></view></picker>
-  <view class='addBtn' bindtap='gotoAdd'>+</view>
-  <view class='addBox' bindtap='gotoAdd'>   
-    <text>添加</text>
-  </view>
-</view> -->
-
 <swiper style='height:310rpx;' bindchange="changeJs" current='{{index}}'>
   <block wx:for="{{members}}" wx:key="{{item.id}}"  >
     <swiper-item id="{{item.id}}">
@@ -39,7 +25,11 @@
     </picker>
   </view>
   <navigator url='/pages/jzyy/jzyy?jz_id={{jz_id}}'><text>就诊医院</text>{{jzyy.yy_title}}</navigator>
-  <navigator url='/pages/jzks/jzks?jz_id={{jz_id}}'><text>就诊科室</text>{{jzks.ks_title}}</navigator>
+  <view><text>就诊科室</text>
+    <picker value="{{ksIndex}}" range="{{ksList}}" range-key="{{'title'}}" bindchange="bindChangeKS">
+      <view>{{ksList[ksIndex].title}}<text style='margin-right:30rpx;'></text></view>
+    </picker>
+  </view>
 </view>
 <view class='imgBox'>
   <navigator url='/pages/uploadHYD/uploadHYD?jz_id={{jz_id}}' class='sm'>化验单<text>带参考值范围的</text></navigator>
@@ -49,4 +39,5 @@
   <view>用药记录</view>
   <view>医疗费用</view>
 </view>
+
 

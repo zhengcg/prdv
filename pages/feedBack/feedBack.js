@@ -7,10 +7,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    mid: '',
-    page: 1,
-    number: 15,
-    list: []
+    x:0,
+    phone:"",
+    content:""
 
   },
 
@@ -18,18 +17,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if (options.mid) {
-      this.setData({
-        mid: options.mid
-      })
-    }
 
     this.checkToken()
 
   },
   checkToken: function () {
     if (wx.getStorageSync('token')) {
-      this.getList()
+      
     } else {
       wx.showModal({
         title: '提示',
@@ -50,7 +44,20 @@ Page({
   onReady: function () {
 
   },
-  getList: function () {
+  changeIn:function(e){
+    this.setData({
+      phone:e.detail.value
+    })
+
+  },
+  changeTe: function (e) {
+    this.setData({
+      x: e.detail.value.length,
+      content: e.detail.value
+    })
+
+  },
+  submit: function () {
     var self = this;
     try {
       wx.showLoading({
@@ -60,30 +67,29 @@ Page({
       console.log("当前微信版本不支持")
     }
     wx.request({
-      url: api + 'Coreout/getJzYy', //仅为示例，并非真实的接口地址
+      url: api + 'help/addOp', //仅为示例，并非真实的接口地址
       data: {
-        m_id: self.data.mid,
-        number: self.data.number,
-        page: self.data.page,
+        phone: self.data.phone,
+        content: self.data.content,
         session_3rd: wx.getStorageSync('token')
       },
-      method: 'GET',
+      method: 'POST',
       success: function (res) {
         try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
         if (res.data.code == 200) {
-          if (res.data.data.length) {
-
-            self.setData({
-              page: self.data.page + 1,
-              list: self.data.list.concat(res.data.data)
+            wx.showModal({
+              title: '提示',
+              content: '提交成功！',
+              showCancel: false,
+              success: function (res) {
+                self.setData({
+                  phone: "",
+                  content: "",
+                  x:0
+                })
+              }
             })
-          } else {
-            wx.showToast({
-              title: '没有了！',
-              icon: 'fail',
-              duration: 2000
-            })
-          }
+          
         } else {
           wx.showToast({
             title: "报错了",
@@ -127,7 +133,6 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    this.getList()
 
   },
 

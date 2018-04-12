@@ -1,6 +1,6 @@
 <view class='content'>
   <view class='title'>基本信息</view>
-  <view class='list'>
+  <view class='list' style='background:none;padding-right:0'>
     <text>昵称</text>
     <input placeholder='请输入' value='{{name}}' bindinput='changeName'/>
   </view>

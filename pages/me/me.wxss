@@ -47,7 +47,7 @@
   background: #FFFFFF;
   border: 2rpx solid rgba(244,166,0,0.29);
   border-radius: 32rpx;
-  width: 132rpx;
+  width: 152rpx;
   height: 64rpx;
   line-height: 64rpx;
   top: 68rpx;
@@ -89,4 +89,65 @@
   background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAgZJREFUSA3dlD1II0EUx92NbqPiIV5rayXigViIcMnlqzkbERTxUBAUBeGushBE4Qq54qpTsBHvrhDBwspsFhMI4YorhSD2KRXsAonZ+HsxURnCzrpYOfB2Pt57v/+8md1ta3vzLZVKfcGSQQs1dYmGYUwQc2rb9mddbCu/VoCkEczCTqhkshXEa00rQAUCva7Vah2Mj6hk2guo+gx1odU8k8kMVCqVNCL9+F1sIZlM/m4Vq65pK5CESCRyZVnWGBVcMpWcg3Q6vSg+XfMlIJBwOFwMhULjiPxnalLNPse18moCAopGozdU8gkRBwED+4XIVy8RX3egAgqFglUsFv8iMNXwrXMnO2qczAMJSCJwk3vYpV+SOW0Tke2H4dPT9x08pTyMOCY3kUgs0/9o+Lb4Tr6rcYEFBMT5d1KBfIj1hthtc9zsAwtks9ku4GeAPgoM+DcqalYjS/UWSCCfz3eXy2UbwrhQgK8B/1knKo8XX7LjOD2u69rsfhRwDd4q8D2F+zh9UQUcy7tqtSrfQB1Ov+QFFxXfFfCG9BLvYB8w+R8t8loe0Hu2kKe34WTnfRzLOdNhzDVNc56dH/rJ1R5RLpd7z4VmOI4hgFVsLh6P//EDl5h2XWCpVNoAPsiF3rHz2VgsdqzLee7XChB8AbyCyAzwk+fJfsZaAXb9D9AU8FM/QDXmHhH9tYWgKjxgAAAAAElFTkSuQmCC") no-repeat right center;
   background-size: 24rpx 24rpx;
 
+}
+
+#triangle{
+    position: absolute;
+    display: inline-block;
+    right: 0;
+    width: 0rpx;
+    height: 0rpx;
+    border-width:10rpx;
+    border-style: solid;
+    border-color: transparent  transparent  transparent #000;
+    bottom: 3rpx;
+}
+.shadeBox{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
+  background: #000;
+  opacity: 0.3;
+  left: 0;
+  top: 0;bottom: 0;
+}
+.signBox{
+  position: absolute;
+  z-index: 100000;
+  width: 544rpx;
+  height: 700rpx;
+  background: #fff;
+  border-radius: 12px;
+  left: 50%;
+  margin-left: -272rpx;
+  top: 50%;
+  margin-top: -350rpx;
+  overflow: hidden;
+}
+.signHead{
+  height: 140rpx;
+  line-height: 140rpx;
+  background: #F39800;
+  text-align: center;
+  font-size: 32rpx;
+  color: #FFFFFF;
+}
+.signBody{
+  text-align: center;
+}
+.signBody image{
+  display: block;
+  width: 256rpx;
+  height: 256rpx;
+  margin: 60rpx auto;
+}
+.signBody view{
+  font-size: 36rpx;
+color: #F39800;
+margin-bottom: 38rpx;
+}
+.signBody text{
+  font-size: 32rpx;
+  color: #111111;
 }

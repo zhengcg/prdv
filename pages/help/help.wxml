@@ -1,7 +1,10 @@
 <view class='content'>
+<scroll-view scroll-y="true">
   <view class='n1'>常见问题</view>
-  <view class='n2'> <navigator>如何登入汪汪健康</navigator></view>
-  <view class='n2'> <navigator>汪汪币有什么作用</navigator></view>
-  <view class='n2'><navigator>如何获得汪汪币</navigator></view>
-  <view class='n2'><navigator>如何兑换商品</navigator></view>
+  <view class='n2' wx:for="{{list}}" wx:key="{{item.id}}"> <navigator url='/pages/helpQ/helpQ?id={{item.id}}'>{{item.title}}</navigator></view>
+  </scroll-view>
 </view>
+<view style='height:140rpx;'></view>
+<navigator url='/pages/feedBack/feedBack' class='footer'>
+  意见反馈
+</navigator>

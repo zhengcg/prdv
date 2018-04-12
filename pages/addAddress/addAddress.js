@@ -7,80 +7,62 @@ Page({
    * 页面的初始数据
    */
   data: {
-    "userId":"",
-    "sexIndex": 0,
-    "sex": ["男", "女"],
-    "bloodIndex":0,
-    "blood": ["A型","B型","AB型","O型","其他"],
-    "occupationIndex":0,
-    "occupation": ["教师", "医生", "工程师", "公务员", "学生", "市场销售人员", "企业高管", "设计师", "科研人员", "互联网从业者", "律师", "财务会计", "办公室文员", "个体经营者", "作家演员歌手等艺术职业","其他"],
-    "date":"",
-    "area":"",
-    "height":"",
-    "weight":"",
-    "name":""
+    "area": [],
+    "name": "",
+    "phone":"",
+    "address":"",
+    "isDefault":false,
+    "address_id":""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (options.address_id){
+      this.setData({
+        address_id: options.address_id
+      })
+    }
+
     this.checkToken()
-  
+
   },
-  // 选择性别
-  changeSex: function (e) {
-    var self = this;
-    this.setData({
-      sexIndex: e.detail.value
-    })
-  },
-  // 选择血型
-  changeBlood: function (e) {
-    var self = this;
-    this.setData({
-      bloodIndex: e.detail.value
-    })
-  },// 选择职业
-  changeOccupation: function (e) {
-    var self = this;
-    this.setData({
-      occupationIndex: e.detail.value
-    })
-  },
-  bindDateChange: function (e) {
-    var _this = this;
-    this.setData({
-      date: e.detail.value
-    })
-  },
+
   changeArea: function (e) {
     var _this = this;
     this.setData({
       area: e.detail.value
     })
   },
-  changeName:function(e){
+  changeName: function (e) {
     this.setData({
       name: e.detail.value
     })
 
   },
-  changeHeight: function (e) {
+  changePhone: function (e) {
     this.setData({
-      height: e.detail.value
+      phone: e.detail.value
     })
 
   },
-  changeWeight: function (e) {
+  changeAddress: function (e) {
     this.setData({
-      weight: e.detail.value
+      address: e.detail.value
     })
+    console.log(e.detail.value)
 
+  },
+  switchChange: function (e) {
+    console.log('switch2 发生 change 事件，携带值为', e.detail.value)
   },
   checkToken: function () {
     if (wx.getStorageSync('token')) {
-      this.getInfo()
+      if (this.data.address_id){
+        this.getAddress(this.data.address_id)
+      }
+     
 
     } else {
       wx.showModal({
@@ -95,7 +77,7 @@ Page({
       })
     }
   },
-  getInfo: function () {
+  getAddress: function (id) {
     var self = this;
     try {
       wx.showLoading()
@@ -104,24 +86,19 @@ Page({
       console.log("当前微信版本不支持")
     }
     wx.request({
-      url: api + "UserMp/getUserData",
+      url: api + "Address/getOne",
       method: 'GET',
       header: header,
-      data: { session_3rd: wx.getStorageSync('token'), },
+      data: { session_3rd: wx.getStorageSync('token'), address_id:id },
       success: function (res) {
         try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
         if (res.data.code == 200) {
           self.setData({
-            userId:res.data.data.user_id,
-            name:res.data.data.nickname,
-            sexIndex:res.data.data.gender-1,
-            date: self.timestampToTime(res.data.data.birthday),
-            height:res.data.data.height,
-            weight:res.data.data.weight,
-            bloodIndex:res.data.data.blood_type-1,
-            occupationIndex: res.data.data.occupation-1,
-            area:  res.data.data.area.split(",")
-
+            "area": [res.data.data.province_id, res.data.data.city_id, res.data.data.district_id],
+            "name": res.data.data.consignee,
+            "phone": res.data.data.phone,
+            "address": res.data.data.address,
+            "isDefault": res.data.data.is_default?true:false,
           })
 
         } else {
@@ -145,19 +122,8 @@ Page({
 
 
   },
-  timestampToTime:function(timestamp){
-    var date = new Date(timestamp * 1000);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
-    var Y = date.getFullYear() + '-';
-    var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
-    var D = date.getDate() +' ';
-    // h = date.getHours() + ':';
-    // m = date.getMinutes() + ':';
-    // s = date.getSeconds();
-    return Y + M + D ;
-
-  },
-  submitData:function(){
-    var self=this;
+  submitData: function () {
+    var self = this;
     try {
       wx.showLoading()
     }
@@ -165,16 +131,21 @@ Page({
       console.log("当前微信版本不支持")
     }
     wx.request({
-      url: api + "UserMp/saveUserData",
+      url: api + "Address/addAddress",
       method: 'POST',
       header: header,
-      data: { session_3rd: wx.getStorageSync('token'), gender: parseInt(self.data.sexIndex) + 1, nickname: self.data.name, birthday: self.data.date, blood_type: parseInt(self.data.bloodIndex) + 1, height: parseInt(self.data.height), weight: parseInt(self.data.weight), area: self.data.area.join(" "), occupation: parseInt(self.data.occupationIndex)+1 },
+      data: { session_3rd: wx.getStorageSync('token'), consignee: self.data.name, phone: self.data.phone, address: self.data.address, is_default: self.data.isDefault, address_id: self.data.address_id, province_id: self.data.area[0], city_id: self.data.area[1], district_id:self.data.area[2]},
       success: function (res) {
         try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
         if (res.data.code == 200) {
           wx.showToast({
-            title: "修改成功",
-            duration: 2000
+            title: "保存成功",
+            duration: 2000,
+            success:function(){
+              wx.navigateTo({
+                url: '../receiveAd/receiveAd'
+              })
+            }
           })
 
         } else {
@@ -201,48 +172,48 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+
   }
 })

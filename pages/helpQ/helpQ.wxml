@@ -1,0 +1,4 @@
+<view class='title'>{{content.title}}</view>
+<view class='body'>{{content.content}}</view>
+<view style='height:72rpx;'></view>
+<view class='footer'>回答不满意？试试 <navigator url='/pages/feedBack/feedBack'>意见反馈</navigator></view>

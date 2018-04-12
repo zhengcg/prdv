@@ -1,0 +1,41 @@
+.footer{
+  position: fixed;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  height: 140rpx;
+  background: #F39800;
+  line-height: 140rpx;
+  font-size: 32rpx;
+  color: #FFFFFF;
+  text-align: center;
+}
+.tit{
+  background: #F6F8FC;
+  padding: 28rpx 48rpx;
+  font-size: 32rpx;
+  color: #111111;
+}
+.content{
+  padding: 0 48rpx;
+}
+.content textarea{
+  width: 100%;
+  line-height: 50rpx;
+  font-size: 32rpx;
+  color: #111;
+}
+.content .r{
+  line-height: 60rpx;
+  text-align: right;
+  font-size: 32rpx;
+  color: #111111;
+}
+.content input{
+  border-bottom: 2rpx solid #F39800;
+  font-size: 28rpx;
+  color: #111;
+  height: 80rpx;
+  line-height: 80rpx;
+
+}

@@ -1,0 +1,14 @@
+<navigator class='addBtn' url='/pages/addAddress/addAddress'>
+  <button><text>+</text> 添加</button>
+</navigator>
+<view class='listBox'>
+  <view wx:for="{{list}}" wx:key="{{item.address_id}}">
+    <view class='con'>
+      <view class='top'>{{item.consignee}}<text>{{item.phone}}</text></view>
+      <view>{{item.province_id}} {{item.city_id}} {{item.district_id}} {{item.address}}</view>
+    </view>
+    <view class='cao'>
+      <navigator url='/pages/addAddress/addAddress?address_id={{item.address_id}}'>编辑</navigator>
+      <text bindtap='removeAdd' data-id="{{item.address_id}}">删除</text></view>   
+  </view>
+</view>

@@ -1,14 +1,17 @@
 {
   "pages":[
     
-    "pages/login/login",
+    
+    "pages/login/login", 
+    "pages/addAddress/addAddress",
+    "pages/receiveAd/receiveAd",
+    "pages/me/me",
     "pages/personalData/personalData",
     "pages/addMembers/addMembers",
     "pages/index/index",
     "pages/uploadReport/uploadReport",
     "pages/memberOfFamily/memberOfFamily",
-    "pages/logs/logs",
-    "pages/me/me",
+    "pages/logs/logs", 
     "pages/hospital/hospital",
     "pages/department/department",
     "pages/drugs/drugs",
@@ -26,15 +29,15 @@
     "pages/medicationRecord/medicationRecord",
     "pages/contactService/contactService",
     "pages/help/help",
+    "pages/helpQ/helpQ",
+    "pages/feedBack/feedBack",
     "pages/temperatureDetection/temperatureDetection",
     "pages/physicaRecords/physicaRecords",
     "pages/vaccineRecord/vaccineRecord",
     "pages/uploadBLJL/uploadBLJL",
     "pages/uploadCFD/uploadCFD",
     "pages/uploadHYD/uploadHYD",
-    "pages/uploadYXBG/uploadYXBG"
-    
-    
+    "pages/uploadYXBG/uploadYXBG"   
   ],
   "window":{
     "backgroundTextStyle":"light",

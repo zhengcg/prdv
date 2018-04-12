@@ -1,0 +1,28 @@
+.title{
+  padding: 28rpx 48rpx;
+  font-size: 32rpx;
+  color: #111111;
+  background: #F6F8FC;
+  line-height: 50rpx;
+}
+.body{
+  padding: 28rpx;
+  font-size: 32rpx;
+  color: #111111;
+  line-height: 48rpx;
+}
+.footer{
+  height: 72rpx;
+  line-height: 72rpx;
+  font-size: 32rpx;
+  color: #666666;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+.footer navigator{
+  color: #F39800;
+  display: inline;
+}

@@ -4,9 +4,10 @@
   </view>
   <view class='nickBox'>
     <view>{{showMember.name}}</view>
-    <text>100 汪汪币</text>
+    <text>{{main}} 汪汪币</text>
+    <view id="triangle"></view>
   </view>
-  <button>签到</button>
+  <button bindtap='sign'>{{isSign}}</button>
 </view>
 <view class='navBox'>
   <navigator url='/pages/logs/logs' open-type="switchTab">
@@ -25,6 +26,16 @@
 <view style='height:20rpx;background:#F6F8FC;'></view>
 <view class='list'>
   <navigator url='/pages/help/help'>帮助与反馈</navigator>
-  <navigator>收货地址</navigator>
+  <navigator url='/pages/receiveAd/receiveAd'>收货地址</navigator>
   <navigator url='/pages/contactService/contactService'>联系客服</navigator>
+</view>
+
+<view class='shadeBox' hidden='{{isShow}}' bindtap='hideShow'></view>
+<view class='signBox' hidden='{{isShow}}' bindtap='hideShow'>
+  <view class="signHead">签到成功</view>
+  <view class='signBody'>
+    <image src='../../images/icon15.png'/>
+    <view>您随机获得{{x}}个汪汪币</view>
+    <text>{{text}}</text>
+  </view>
 </view>

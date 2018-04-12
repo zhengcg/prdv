@@ -1,0 +1,16 @@
+<view class='tit'>感谢让我们进步，您的意见是</view>
+<view class='content'>
+  <view>
+    <textarea maxlength="150" bindinput='changeTe' value='{{content}}'/>
+  </view>
+  <view class='r'><text>{{x}}</text>/150</view>
+</view>
+<view class='tit'>请留下您的手机号</view>
+<view class='content'>
+<input type='number' placeholder='选填' bindinput='changeIn' value='{{phone}}'/>
+</view>
+
+<view style='height:140rpx;'></view>
+<view class='footer' bindtap='submit'>
+  意见反馈
+</view>

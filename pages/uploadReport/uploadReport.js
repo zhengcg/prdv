@@ -15,7 +15,12 @@ Page({
       h_id: "",
       yy_title:""
     },
-    "jzks":{},
+    "jzks":{
+      h_son_id: "",
+      ks_title: ""
+    },
+    "ksList":[],
+    "ksIndex":0,
     "isAdd":true
   
   },
@@ -90,6 +95,50 @@ Page({
         })
       }
     })
+  },
+  // 选择科室
+  bindChangeKS:function(e){
+   
+    var _this = this;
+    this.setData({
+      ksIndex: e.detail.value
+    })
+
+    try {
+      wx.showLoading()
+    }
+    catch (err) {
+      console.log("当前微信版本不支持")
+    }
+    wx.request({
+      url: api + "Corein/saveJz",
+      method: 'POST',
+      header: header,
+      data: { session_3rd: wx.getStorageSync('token'), jz_id: _this.data.jz_id, h_son_id: _this.data.ksList[_this.data.ksIndex].id },
+      success: function (res) {
+        try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+        if (res.data.code == 200) {
+          console.log("添加科室成功！")
+
+        } else {
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'fail',
+            duration: 2000
+          })
+
+        }
+      },
+      fail: function () {
+        try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+        wx.showToast({
+          title: '接口调用失败！',
+          icon: 'fail',
+          duration: 2000
+        })
+      }
+    })
+
   },
   checkToken: function () {
     if (wx.getStorageSync('token')) {
@@ -240,6 +289,10 @@ Page({
                 }
                             
               });
+              if (res.data.data.h_id){
+                _this.getKSList(res.data.data.h_id)
+              }
+              
 
             }
           }
@@ -250,6 +303,55 @@ Page({
             })
           },600)
         
+
+        } else {
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'fail',
+            duration: 2000
+          })
+
+        }
+      },
+      fail: function () {
+        try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+        wx.showToast({
+          title: '接口调用失败！',
+          icon: 'fail',
+          duration: 2000
+        })
+      }
+    })
+
+  },
+  getKSList:function(id){
+    var _this = this;
+    try {
+      wx.showLoading()
+    }
+    catch (err) {
+      console.log("当前微信版本不支持")
+    }
+    wx.request({
+      url: api + "Coreout/getDepartment",
+      method: 'GET',
+      header: header,
+      data: { session_3rd: wx.getStorageSync('token'), pid: parseInt(id) },
+      success: function (res) {
+        try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+        if (res.data.code == 200) {
+          _this.setData({
+            ksList:res.data.data
+          })
+          if (_this.data.jzks.h_son_id){
+            for (var i = 0; i < res.data.data.length;i++){
+              if (res.data.data[i].id == _this.data.jzks.h_son_id){
+                _this.setData({
+                  ksIndex: i
+                })
+              }
+            }
+          }
 
         } else {
           wx.showToast({

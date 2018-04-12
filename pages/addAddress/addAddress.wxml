@@ -1,0 +1,32 @@
+<view class='content'>
+  <view class='title'>基本信息</view>
+  <view class='list'>
+    <text>收货人</text>
+    <input placeholder='请输入' bindinput='changeName' value='{{name}}'/>
+  </view>
+  <view class='list'>
+    <text>联系方式</text>
+    <input placeholder='请输入' bindinput='changePhone' value='{{phone}}' type='number'/>
+  </view>
+  <view class='list right'>
+    <text>所在地区</text>
+    <picker mode="region" value="{{area}}" bindchange="changeArea">
+    <view>{{area[0]}} {{area[1]}} {{area[2]}}<text style='display:inline-block;width:30rpx;'></text></view>
+     </picker>
+  </view>
+  <view class='list au'>
+    <text>详细地址</text>
+    <textarea   bindinput='changeAddress' value='{{address}}'/>
+  </view>
+  <view class='list'>
+    <text>设为默认地址</text>
+    <switch bindchange="switchChange" checked="{{isDefault}}"/>
+  </view>
+  
+
+  
+</view>
+<view style='height:222rpx;'></view>
+<view class='footer'>
+  <button bindtap='submitData'>保存</button>
+</view>
