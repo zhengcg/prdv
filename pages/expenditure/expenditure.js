@@ -10,23 +10,43 @@ Page({
    */
   data: {
     mid: '',
-    name:''
-  
+    name: '',
+    list:[]
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var self=this;
     if (options.mid) {
       this.setData({
         mid: options.mid,
-        name:options.name
+        name: options.name
       })
+      var windowWidth = 320;
+      try {
+        var res = wx.getSystemInfoSync();
+        windowWidth = res.windowWidth;
+      } catch (e) {
+        console.error('getSystemInfoSync failed!');
+      }
+
+      var pieChart = new wxCharts({
+        animation: true,
+        canvasId: 'pieCanvas',
+        type: 'pie',
+        series: self.data.list,
+        width: windowWidth,
+        height: 300,
+        dataLabel: true
+      });
     }
 
+
     this.checkToken()
-    
+
   },
   checkToken: function () {
     if (wx.getStorageSync('token')) {
@@ -63,8 +83,10 @@ Page({
       success: function (res) {
         try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
         if (res.data.code == 200) {
-          self.drowPie(res.data.data)
-          
+          self.setData({
+            list:res.data.data
+          })
+
         } else {
           wx.showToast({
             title: "报错了",
@@ -75,78 +97,53 @@ Page({
       }
     })
   },
-  drowPie:function(obj){
-    var windowWidth = 320;
-    try {
-      var res = wx.getSystemInfoSync();
-      windowWidth = res.windowWidth;
-    } catch (e) {
-      console.error('getSystemInfoSync failed!');
-    }
-    for(var i=0;i<obj.length;i++){
-      if(!obj[i].data){
-        obj[i].data=0
-      }
-    }
-
-    pieChart = new wxCharts({
-      animation: true,
-      canvasId: 'pieCanvas',
-      type: 'pie',
-      series: obj,
-      width: windowWidth,
-      height: 300,
-      dataLabel: true
-    });
-
-  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+
   }
 })
