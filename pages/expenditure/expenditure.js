@@ -25,26 +25,9 @@ Page({
         mid: options.mid,
         name: options.name
       })
-      var windowWidth = 320;
-      try {
-        var res = wx.getSystemInfoSync();
-        windowWidth = res.windowWidth;
-      } catch (e) {
-        console.error('getSystemInfoSync failed!');
-      }
-
-      var pieChart = new wxCharts({
-        animation: true,
-        canvasId: 'pieCanvas',
-        type: 'pie',
-        series: self.data.list,
-        width: windowWidth,
-        height: 300,
-        dataLabel: true
-      });
     }
 
-
+    
     this.checkToken()
 
   },
@@ -86,6 +69,22 @@ Page({
           self.setData({
             list:res.data.data
           })
+          var windowWidth = 320;
+          try {
+            var res = wx.getSystemInfoSync();
+            windowWidth = res.windowWidth;
+          } catch (e) {
+            console.error('getSystemInfoSync failed!');
+          }
+          pieChart = new wxCharts({
+            animation: true,
+            canvasId: 'pieCanvas',
+            type: 'pie',
+            series: res.data.data,
+            width: windowWidth,
+            height: 300,
+            dataLabel: true,
+          });
 
         } else {
           wx.showToast({
