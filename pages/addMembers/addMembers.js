@@ -13,7 +13,9 @@ Page({
     "index": 0,
     "membersArray": ["本人","儿子","女儿","父亲","母亲", "配偶","其他"],
     "name":"",
-    "path":""
+    "path":"",
+    "id":"",
+    "isShowBtn":false
   
   },
 
@@ -21,9 +23,18 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      path:options.path
-    })
+    if (options.path){
+      this.setData({
+        path: options.path
+      })
+
+    }else{
+      this.setData({
+        id: options.id,
+        isShowBtn:true
+      })
+    }
+   
     this.checkToken()
   
   },
@@ -128,6 +139,9 @@ Page({
   },
   checkToken: function () {
     if (wx.getStorageSync('token')) {
+      if(this.data.id){
+        this.getInfo(this.data.id)
+      }
 
     } else {
       wx.showModal({
@@ -143,6 +157,61 @@ Page({
     }
   },
 
+  getInfo:function(id){
+    var self = this;
+    try {
+      wx.showLoading()
+    }
+    catch (err) {
+      console.log("当前微信版本不支持")
+    }
+    wx.request({
+      url: api + "UserMp/getMember",
+      method: 'GET',
+      header: header,
+      data: { session_3rd: wx.getStorageSync('token'), id:parseInt(id)},
+      success: function (res) {
+        try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+        if (res.data.code == 200) {
+          self.setData({
+            "img": res.data.data.img,
+            "date": self.timestampToTime(res.data.data.birthday),
+            "index": res.data.data.relation-1,
+            "name": res.data.data.name
+
+          })
+
+        } else {
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'fail',
+            duration: 2000
+          })
+
+        }
+      },
+      fail: function () {
+        try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+        wx.showToast({
+          title: '接口调用失败！',
+          icon: 'fail',
+          duration: 2000
+        })
+      }
+    })
+
+  },
+  timestampToTime: function (timestamp) {
+    var date = new Date(timestamp * 1000);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+    var Y = date.getFullYear() + '-';
+    var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+    var D = date.getDate() + ' ';
+    // h = date.getHours() + ':';
+    // m = date.getMinutes() + ':';
+    // s = date.getSeconds();
+    return Y + M + D;
+
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

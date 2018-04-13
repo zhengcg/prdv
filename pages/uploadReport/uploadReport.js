@@ -43,12 +43,14 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    var _this = this;
 
   },
   // 切换家属
   changeJs: function (e) {
     var self=this;
+    self.setData({
+      index: parseInt(e.detail.current)
+    })
     if(self.data.isAdd){
       this.addJz(this.data.members[parseInt(e.detail.current)].id);
     }

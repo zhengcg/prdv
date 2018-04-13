@@ -1,4 +1,4 @@
-<navigator class='addBtn' url='/pages/addAddress/addAddress'>
+<navigator class='addBtn' url='/pages/addAddress/addAddress?path=receiveAd'>
   <button><text>+</text> 添加</button>
 </navigator>
 <view class='listBox'>

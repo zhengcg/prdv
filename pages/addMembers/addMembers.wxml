@@ -25,6 +25,6 @@
 </view>
 
 <view style='height:222rpx;'></view>
-<view class='footer'>
+<view class='footer' hidden='{{isShowBtn}}'>
   <button bindtap='submitBtn'>保存</button>
 </view>

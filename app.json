@@ -1,6 +1,11 @@
 {
   "pages":[ 
+   
     "pages/login/login", 
+    "pages/goodsDetail/goodsDetail",
+    "pages/exchangeList/exchangeList",
+    "pages/getCoinList/getCoinList",
+    "pages/myCoin/myCoin",
     "pages/addAddress/addAddress",
     "pages/receiveAd/receiveAd",
     "pages/me/me",

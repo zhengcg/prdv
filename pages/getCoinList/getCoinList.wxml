@@ -1,0 +1,9 @@
+<scroll-view scroll-y="true">
+<view class='list' wx:for="{{list}}" wx:key="{{item.log_id}}">
+  <view class='name'>
+    <view class='tit'>{{item.remarks}}</view>
+    <view class='bod'><text hidden='{{item.score<0}}'>收获</text><text hidden='{{item.score>0}}'>消费</text>{{item.add_time}}</view>
+  </view>
+  <view class='num'>{{item.score}}</view>
+</view>
+</scroll-view>

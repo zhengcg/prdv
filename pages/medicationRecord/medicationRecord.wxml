@@ -1,28 +1,39 @@
-<view class='head'>
-  <view class='headImg'>
-    <image src='{{showMember.img}}'/>
-  </view>
-  <view class='nickBox'>
-    {{showMember.name}}
-  </view>
-  <picker bindchange="bindPickerChange" value="{{index}}" range="{{membersArray}}" class='pickers'><view></view></picker>
-  <view class='addBtn' bindtap='gotoAdd'>+</view>
-  <view class='addBox' bindtap='gotoAdd'>   
-    <text>添加</text>
-  </view>
-</view>
+<swiper style='height:310rpx;' bindchange="changeJs" current='{{index}}'>
+  <block wx:for="{{members}}" wx:key="{{item.id}}"  >
+    <swiper-item id="{{item.id}}">
+      <view class='head'>
+        <view class='headImg'>
+          <image src='{{item.img}}'/>
+        </view>
+        <view class='nickBox'>
+          {{item.name}}
+        </view>
+        <view class='addBtn' bindtap='gotoAdd'>+</view>
+        <view class='addBox' bindtap='gotoAdd'>   
+          <text>添加</text>
+        </view>
+      </view>
+    </swiper-item>
+  </block>
+</swiper> 
+
 <view class='title'>
   基本信息
 </view>
 <view class='listBox'>
   <view>
-    <text>就诊时间</text>{{date}}
-    <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+    <text>购药时间</text>{{date}}
+    <picker mode="date" value="{{date}}"  bindchange="bindDateChange">
     <view></view>
     </picker>
   </view>
   <view>
   <text>购药地点</text>
+  <radio-group class="radio-group" bindchange="radioChange">
+    <label class="radio" wx:for="{{items}}" wx:key="{{index}}">
+      <radio value="{{item.value}}" checked="{{item.checked}}"/>{{item.name}}
+    </label>
+  </radio-group>
   
   </view>
   <view>

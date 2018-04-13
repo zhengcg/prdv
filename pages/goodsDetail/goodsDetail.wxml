@@ -1,0 +1,48 @@
+<view class='imgBox'>
+  <image src='{{detail.img_url}}' mode="aspectFit"/>
+</view>
+<view class='intro'>
+  <view class='introTit'>{{detail.goods_name}}</view>
+  <view class='introCon'>{{detail.content}}</view>
+</view>
+<view class='numBox'>
+  <text>数量</text>
+  <view class='num'>
+    <view class='plus' bindtap='plusNum'>+</view>
+    <text>{{num}}</text>
+    <view class='minus' bindtap='minusNum'>-</view>
+  </view>
+</view>
+<view class='addAdr' hidden='{{isYDZ}}'><navigator url='/pages/addAddress/addAddress?path=goodsDetail'>添加收货地址</navigator></view>
+
+<view class='listBox'>
+  <view style='border-bottom:none'>
+    <view class='con'>
+      <view class='top'>{{isDefaultAdd.consignee}}<text>{{isDefaultAdd.phone}}</text></view>
+      <view>{{isDefaultAdd.province_id}} {{isDefaultAdd.city_id}} {{isDefaultAdd.district_id}} {{isDefaultAdd.address}}</view>
+    </view>
+    <view class='cao' bindtap='changeAdd'>
+      更改
+    </view>   
+  </view>
+</view>
+
+<view style='height:172rpx;'></view>
+<view class='footer'>
+  <view class='biNum'>
+    <view><image src='../../images/icon16.png'/><text>{{conNum}}</text></view>
+    <text>剩余汪汪币{{main}}</text>
+  </view>
+  <view class='duiBtn' bindtap='duiFn'>兑换</view>
+</view>
+<view class='shadeBox' hidden='{{isShow}}' bindtap='hideShow'></view>
+<view class='signBox' hidden='{{isShow}}' bindtap='hideShow'>
+  <view class='listBox'>
+    <view wx:for="{{list}}" wx:key="{{item.address_id}}">
+      <view class='con' style="width:auto"  data-index="{{index}}" bindtap="selectAdd" >
+        <view class='top'>{{item.consignee}}<text>{{item.phone}}</text></view>
+        <view>{{item.province_id}} {{item.city_id}} {{item.district_id}} {{item.address}}</view>
+      </view>
+      </view>
+  </view>
+</view>

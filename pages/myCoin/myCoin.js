@@ -7,13 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    "members": [],
-    "index": 0,
-    "date": "",
-    "items": [
-      { name: '药店', value: 1, checked: 'true' },
-      { name: '医院', value: 2}
-    ]
+    list:[],
+    main:0
   
   },
 
@@ -24,30 +19,24 @@ Page({
     this.checkToken()
   
   },
-  radioChange: function (e) {
-    console.log('radio发生change事件，携带value值为：', e.detail.value)
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+  
   },
-  // 切换家属
-  changeJs: function (e) {
-    var self = this;
-    self.setData({
-      index: parseInt(e.detail.current)
-    })
-    // this.addJz(this.data.members[parseInt(e.detail.current)].id);
-  },
-  // 购药时间
-  bindDateChange: function (e) {
-    var _this = this;
-    this.setData({
-      date: e.detail.value
-    })
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+  
   },
   checkToken: function () {
     if (wx.getStorageSync('token')) {
-      this.getMembers();
-      // 添加就诊（一进来先掉一次，然后实际添加数据调用修改接口）
-
-
+      this.getAllSet()
+      this.getMain()
     } else {
       wx.showModal({
         title: '提示',
@@ -61,8 +50,7 @@ Page({
       })
     }
   },
-  // 获取家属列表
-  getMembers: function () {
+  getMain: function () {
     var _this = this;
     try {
       wx.showLoading()
@@ -71,16 +59,15 @@ Page({
       console.log("当前微信版本不支持")
     }
     wx.request({
-      url: api + "UserMp/getMembers",
+      url: api + "UserMp/getMain",
       method: 'GET',
       header: header,
       data: { session_3rd: wx.getStorageSync('token') },
       success: function (res) {
         try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
         if (res.data.code == 200) {
-
           _this.setData({
-            members: res.data.data
+            main: res.data.data.score
           })
 
         } else {
@@ -101,20 +88,47 @@ Page({
         })
       }
     })
-  },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
   },
+  getAllSet:function(){
+    var _this = this;
+    try {
+      wx.showLoading()
+    }
+    catch (err) {
+      console.log("当前微信版本不支持")
+    }
+    wx.request({
+      url: api + "sign/getAllSet",
+      method: 'GET',
+      header: header,
+      data: { session_3rd: wx.getStorageSync('token') },
+      success: function (res) {
+        try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+        if (res.data.code == 200) {
+          _this.setData({
+            list: res.data.data
+          })
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
+        } else {
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'fail',
+            duration: 2000
+          })
+
+        }
+      },
+      fail: function () {
+        try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+        wx.showToast({
+          title: '接口调用失败！',
+          icon: 'fail',
+          duration: 2000
+        })
+      }
+    })
+
   },
 
   /**
@@ -150,10 +164,5 @@ Page({
    */
   onShareAppMessage: function () {
   
-  },
-  gotoAdd: function () {
-    wx.navigateTo({
-      url: '../addMembers/addMembers?path=medicationRecord'
-    })
   }
 })

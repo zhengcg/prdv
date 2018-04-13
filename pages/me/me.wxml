@@ -2,11 +2,11 @@
   <view class='imgBox'>
     <image src='{{showMember.img}}'/>
   </view>
-  <view class='nickBox'>
+  <navigator class='nickBox' url='/pages/myCoin/myCoin'>
     <view>{{showMember.name}}</view>
     <text>{{main}} 汪汪币</text>
     <view id="triangle"></view>
-  </view>
+  </navigator>
   <button bindtap='sign'>{{isSign}}</button>
 </view>
 <view class='navBox'>

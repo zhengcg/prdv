@@ -12,7 +12,8 @@ Page({
     "phone":"",
     "address":"",
     "isDefault":false,
-    "address_id":""
+    "address_id":"",
+    "path":""
   },
 
   /**
@@ -22,6 +23,10 @@ Page({
     if (options.address_id){
       this.setData({
         address_id: options.address_id
+      })
+    }else{
+      this.setData({
+        path: options.path
       })
     }
 
@@ -143,7 +148,7 @@ Page({
             duration: 2000,
             success:function(){
               wx.navigateTo({
-                url: '../receiveAd/receiveAd'
+                url: '../' + self.data.path + '/' + self.data.path
               })
             }
           })

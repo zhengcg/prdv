@@ -2,7 +2,7 @@
   <button><text>+</text> 添加</button>
 </navigator>
 <view class='listBox'>
-  <navigator wx:for="{{list}}" wx:key="{{item.id}}">
+  <navigator wx:for="{{list}}" wx:key="{{item.id}}" url="/pages/addMembers/addMembers?id={{item.id}}">
     <image src='{{item.img}}'/> 
     <view>{{item.name}}</view>
     <text></text>

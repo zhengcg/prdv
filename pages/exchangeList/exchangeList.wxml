@@ -1,0 +1,10 @@
+<view class="tit"><view>精美礼品</view></view>
+<scroll-view scroll-y="true">
+  <view class='listBox'>
+    <navigator class='list' wx:for="{{list}}" wx:key="{{item.goods_id}}" url='/pages/goodsDetail/goodsDetail?id={{item.goods_id}}'>
+      <view class='imgBox'><image src='{{item.head_img_url}}' mode="aspectFit"/></view>
+      <view class='t'>{{item.goods_name}}</view>
+      <view class='n'>{{item.score}}积分</view>
+    </navigator>
+  </view>
+ </scroll-view>

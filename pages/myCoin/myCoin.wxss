@@ -1,0 +1,88 @@
+.bg{
+  height: 90rpx;
+  opacity: 0.3;
+  background-image: linear-gradient(-180deg, #F3A000 0%, #F39E00 100%);
+}
+.head{
+  height: 150rpx;
+  text-align: center;
+  line-height: 150rpx;
+  background: #FFFFFF;
+  box-shadow: 0 0 2rpx 0 rgba(170,170,170,0.50);
+  font-size: 92rpx;
+  color: #111111;
+}
+.head text{
+  vertical-align: middle
+}
+.head image{
+  margin-right: 16rpx;
+  width: 60rpx;
+  height: 60rpx;
+  vertical-align: middle
+}
+.nav{
+  padding: 40rpx 0;
+  display: flex;
+  height: 52rpx;
+  line-height: 52rpx;
+}
+.nav navigator{
+  flex-grow: 1;
+  text-align: center;
+  box-sizing: border-box;
+  font-size: 28rpx;
+  color: #111;
+}
+.nav navigator image{
+  vertical-align:middle;
+  width: 40rpx;
+  height: 40rpx;
+
+}
+.nav navigator text{
+  vertical-align: middle;
+  padding-left: 20rpx;
+}
+.nav navigator:first-of-type{
+  border-right: 1rpx solid #E5E5E5;
+  
+}
+.taskList{
+  background: #F6F8FC;
+  padding: 0 40rpx;
+}
+.taskHead{
+  height: 116rpx;
+  line-height: 116rpx;
+  font-size:32rpx;
+  color: #111111;
+}
+.task{
+  height: 140rpx;
+  line-height: 140rpx;
+  background: #fff;
+  border: 1rpx solid #E5E5E5;
+  margin-bottom: 20rpx;
+  padding: 0 60rpx;
+  display: flex;
+  justify-content:space-between;
+  align-items:center
+}
+.task .text{
+  font-size: 32rpx;
+  color: #111111;
+}
+.task .coinNum{
+  width: 135rpx;
+}
+.task .coinNum text{
+  font-size: 28rpx;
+  color: #F6535C;
+}
+.task .coinNum image{
+  width: 48rpx;
+  height: 48rpx;
+  vertical-align: middle;
+  margin-right: 20rpx;
+}
