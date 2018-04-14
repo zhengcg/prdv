@@ -1,15 +1,22 @@
-<view class='head'>
-  <view class='headImg'>
-    <image src='{{showMember.img}}'/>
-  </view>
-  <view class='nickBox'>
-    {{showMember.name}}
-  </view>
-  <picker bindchange="bindPickerChange" value="{{index}}" range="{{membersArray}}" class='pickers'><view></view></picker>
- <view class='addBtn' bindtap='gotoAdd'>+</view>
-  <view class='addBox' bindtap='gotoAdd'>    
-    <text>添加</text>
-  </view>
-</view>
+<swiper style='height:310rpx;' bindchange="changeJs" current='{{index}}'>
+  <block wx:for="{{members}}" wx:key="{{item.id}}"  >
+    <swiper-item id="{{item.id}}">
+      <view class='head'>
+        <view class='headImg'>
+          <image src='{{item.img}}'/>
+        </view>
+        <view class='nickBox'>
+          {{item.name}}
+        </view>
+        <view class='addBtn' bindtap='gotoAdd'>+</view>
+        <view class='addBox' bindtap='gotoAdd'>   
+          <text>添加</text>
+        </view>
+      </view>
+    </swiper-item>
+  </block>
+</swiper> 
 
-<image src='../../images/test/test2.png' style='width:730rpx;margin-top:100rpx;margin-left:auto;margin-right:auto;display:block;height:1269rpx;'/>
+<view class='iconBox'><image src='../../images/icon20.png'/></view>
+<view class='wdj'>
+</view>

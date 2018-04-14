@@ -1,0 +1,45 @@
+.footer{
+  position: fixed;
+  height: 200rpx;
+  bottom: 22rpx;
+  width: 100%;
+  left: 0;
+  background: #fff;
+  box-shadow: 0 -2rpx 4rpx 0 rgba(0,0,0,0.12);
+}
+.footer button{
+  width: 600rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  background: #F39800;
+  border-radius: 44rpx;
+  font-size:30rpx;
+  color: #FFFFFF;
+  top: 56rpx;
+  position: absolute;
+  left: 75rpx;
+}
+.footer button::after{border: 0;}
+.listBox{
+  padding: 0 40rpx;
+  text-align: right;
+}
+.listBox view{
+  border-bottom: 1rpx solid #E5E5E5;
+  height: 90rpx;
+  line-height: 90rpx;
+}
+.listBox text{
+  float: left;
+  font-size: 28rpx;
+  color: #666666;
+}
+.listBox input{
+  height: 90rpx;
+  line-height: 90rpx;
+}
+.title{
+  font-size: 24rpx;
+  color: #AAAAAA;
+  padding: 40rpx;
+}

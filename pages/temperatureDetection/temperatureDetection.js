@@ -7,10 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    "showMember": {},
     "members": [],
-    "index": 0,
-    "membersArray": []
+    "index": 0
 
   },
 
@@ -22,12 +20,12 @@ Page({
 
   },
   // 切换家属
-  bindPickerChange: function (e) {
+  changeJs: function (e) {
     var self = this;
-    this.setData({
-      index: e.detail.value,
-      showMember: self.data.members[e.detail.value],
+    self.setData({
+      index: parseInt(e.detail.current)
     })
+    // this.addJz(this.data.members[parseInt(e.detail.current)].id);
   },
   checkToken: function () {
     if (wx.getStorageSync('token')) {
@@ -65,35 +63,10 @@ Page({
       success: function (res) {
         try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
         if (res.data.code == 200) {
-          var array = []
-          for (var i = 0; i < res.data.data.length; i++) {
-            if (res.data.data[i].relation == 1) {
-              array.push("本人")
-            } else if (res.data.data[i].relation == 2) {
-              array.push("儿子")
-            } else if (res.data.data[i].relation == 3) {
-              array.push("女儿")
-            } else if (res.data.data[i].relation == 4) {
-              array.push("父亲")
-            } else if (res.data.data[i].relation == 5) {
-              array.push("母亲")
-            } else if (res.data.data[i].relation == 6) {
-              array.push("配偶")
-            } else {
-              array.push("其他")
-            }
 
-          }
           _this.setData({
-            members: res.data.data,
-            membersArray: array
+            members: res.data.data
           })
-          if (!_this.data.showMember.id) {
-            _this.setData({
-              showMember: res.data.data[0]
-            })
-
-          }
 
         } else {
           wx.showToast({

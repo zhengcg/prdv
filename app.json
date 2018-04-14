@@ -1,6 +1,6 @@
 {
   "pages":[ 
-   
+ 
     "pages/login/login", 
     "pages/goodsDetail/goodsDetail",
     "pages/exchangeList/exchangeList",
@@ -29,17 +29,19 @@
     "pages/bc/bc",
     "pages/jzyy/jzyy",
     "pages/jzks/jzks",
-    "pages/medicationRecord/medicationRecord",
+    "pages/temperatureDetection/temperatureDetection",
     "pages/contactService/contactService",
+    "pages/physicaRecords/physicaRecords",
     "pages/help/help",
     "pages/helpQ/helpQ",
     "pages/feedBack/feedBack",
-    "pages/temperatureDetection/temperatureDetection",
-    "pages/physicaRecords/physicaRecords",
     "pages/vaccineRecord/vaccineRecord",
     "pages/uploadBLJL/uploadBLJL",
     "pages/uploadCFD/uploadCFD",
     "pages/uploadHYD/uploadHYD",
+    "pages/drugsInfo/drugsInfo",
+    "pages/medicationRecord/medicationRecord",
+    "pages/pay/pay",
     "pages/uploadYXBG/uploadYXBG"   
   ],
   "window":{

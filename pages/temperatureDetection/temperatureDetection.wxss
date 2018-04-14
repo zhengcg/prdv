@@ -68,4 +68,21 @@ z-index: 10;
   z-index: 100;
   font-size: 50rpx;
 }
-
+.iconBox{
+  width: 160rpx;
+  height: 160rpx;
+  margin: 54rpx auto 20rpx auto
+}
+.iconBox image{
+  display: block;
+  width: 160rpx;
+  height: 160rpx;
+  margin: 0 auto;
+}
+.wdj{
+  position: relative;
+  width: 620rpx;
+  height: 100rpx;
+  margin: 0 auto;
+  background: #eee;
+}

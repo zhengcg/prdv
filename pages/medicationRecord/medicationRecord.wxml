@@ -37,7 +37,8 @@
   
   </view>
   <view>
-  <text>药品信息</text>
+  <text>药品信息</text><text class='small'>扫描药盒条形码</text>
+  <image src='../../images/icon19.png' class='scan' bindtap='scanFn'/>
   </view>
  
 </view>

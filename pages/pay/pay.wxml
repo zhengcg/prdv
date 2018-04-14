@@ -1,0 +1,23 @@
+<view class='listBox'>
+  <view class='clearfix'>
+    <text>挂号费</text>
+    <input type='digit' bindinput='changeGHF' value='{{GHF}}'/>
+  </view>
+  <view class='clearfix'>
+    <text>检测费</text>
+    <input type='digit' bindinput='changeJCF' value='{{JCF}}'/>
+  </view>
+  <view class='clearfix'>
+    <text>住院费</text>
+    <input type='digit' bindinput='changeZYF' value='{{ZYF}}'/>
+  </view>
+  <view class='clearfix'>
+    <text>小记</text>
+    <input type='digit' value='{{total}}' disabled='true'/>
+  </view>
+</view>
+<view class='title'>*药品费请在“药品记录”里填写，最后的总医疗费用会在“健康档案”里自动生成图表</view>
+<view style='height:222rpx;'></view>
+<view class='footer'>
+  <button bindtap='submitBtn'>保存</button>
+</view>

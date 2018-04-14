@@ -1,16 +1,21 @@
-<view class='head'>
-  <view class='headImg'>
-    <image src='{{showMember.img}}'/>
-  </view>
-  <view class='nickBox'>
-    {{showMember.name}}
-  </view>
-  <picker bindchange="bindPickerChange" value="{{index}}" range="{{membersArray}}" class='pickers'><view></view></picker>
-  <view class='addBtn' bindtap='gotoAdd'>+</view>
-  <view class='addBox' bindtap='gotoAdd'>    
-    <text>添加</text>
-  </view>
-</view>
+<swiper style='height:310rpx;' bindchange="changeJs" current='{{index}}'>
+  <block wx:for="{{members}}" wx:key="{{item.id}}"  >
+    <swiper-item id="{{item.id}}">
+      <view class='head'>
+        <view class='headImg'>
+          <image src='{{item.img}}'/>
+        </view>
+        <view class='nickBox'>
+          {{item.name}}
+        </view>
+        <view class='addBtn' bindtap='gotoAdd'>+</view>
+        <view class='addBox' bindtap='gotoAdd'>   
+          <text>添加</text>
+        </view>
+      </view>
+    </swiper-item>
+  </block>
+</swiper> 
 <view class='title'>
   基本信息
 </view>
@@ -23,10 +28,18 @@
   </view>
   <view>
   <text>医院或体检中心</text>
-  安贞医院
+  <input type='text' placeholder='请输入' value='{{yy}}' bindinput='changeYY'/>
   </view>
  
 </view>
+<view class='imgBox'>
+  <view wx:for="{{imgs}}" wx:key="{{index}}">
+    <image src='{{item}}'/>
+    <text class='closeBtn' bindtap='removeImg' data-index="{{index}}"></text>
+  </view>
+  <view class='uploadBtn' bindtap='chooseImg'></view>
+</view>
+<view style='height:222rpx;'></view>
 <view class='footer'>
-  <button>提交保存</button>
+  <button bindtap='submit'>保存</button>
 </view>
