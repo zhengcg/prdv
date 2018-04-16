@@ -1,19 +1,53 @@
-<view class='head'>
-  <view class='headImg'>
-    <image src='{{showMember.img}}'/>
-  </view>
-  <view class='nickBox'>
-    {{showMember.name}}
-  </view>
-  <picker bindchange="bindPickerChange" value="{{index}}" range="{{membersArray}}" class='pickers'><view></view></picker>
-  <view class='addBtn' bindtap='gotoAdd'>+</view>
-  <view class='addBox' bindtap='gotoAdd'>   
-    <text>添加</text>
-  </view>
-</view>
+<swiper style='height:310rpx;' bindchange="changeJs" current='{{index}}'>
+  <block wx:for="{{members}}" wx:key="{{item.id}}"  >
+    <swiper-item id="{{item.id}}">
+      <view class='head'>
+        <view class='headImg'>
+          <image src='{{item.img}}'/>
+        </view>
+        <view class='nickBox'>
+          {{item.name}}
+        </view>
+        <view class='addBtn' bindtap='gotoAdd'>+</view>
+        <view class='addBox' bindtap='gotoAdd'>   
+          <text>添加</text>
+        </view>
+      </view>
+    </swiper-item>
+  </block>
+</swiper> 
 <view class='headTit'>
   距离下次疫苗还有4天
   <view class='n2'><text class='l1'></text><text>选打</text></view>
   <view class='n1'><text class='l1'></text><text>必打</text></view>
 </view>
-<image class='test1' src='../../images/test/test1.png' style='width:100%;margin-left:-3rpx;'/>
+
+<view class='listBox'>
+<scroll-view scroll-y="true">
+  <navigator class='list' wx:for="{{list}}" wx:key="{{index}}">
+    <view class='dateTime'><text>2017-05-03</text>出生当天</view>
+    <view class='rigBox'>
+     <scroll-view scroll-x>
+        <view>
+          <image src='../../images/icon21.png'/>
+          <text>卡介苗1</text>
+        </view>
+        <view>
+          <image src='../../images/icon21.png'/>
+          <text>卡介苗1</text>
+        </view>
+        <view>
+          <image src='../../images/icon21.png'/>
+          <text>卡介苗1</text>
+        </view>
+        <view>
+          <image src='../../images/icon21.png'/>
+          <text>卡介苗1</text>
+        </view>
+      </scroll-view>
+    </view>
+   
+  </navigator>
+
+  </scroll-view>
+</view>

@@ -12,7 +12,7 @@
   </navigator>
   <navigator class='navBtn nav02' url='/pages/temperatureDetection/temperatureDetection'>
     <image src='../../images/icon08.png' class="img02"/>
-    <view>体温检测</view>  
+    <view>体温监测</view>  
   </navigator>
   <navigator class='navBtn nav03' url='/pages/medicationRecord/medicationRecord'>
     <image src='../../images/icon09.png' class="img03"/>

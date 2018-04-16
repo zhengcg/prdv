@@ -32,7 +32,7 @@
   <navigator url="/pages/department/department?mid={{showMember.id}}">到过{{list[1].num}}个科室</navigator>
   <navigator url="/pages/drugs/drugs">使用过{{list[2].num}}种药品</navigator>
   <navigator url="/pages/temperature/temperature">测过{{list[3].num}}次体温</navigator>
-  <navigator url="/pages/vaccine/vaccine">打过{{list[5].num}}次疫苗</navigator>
+  <navigator url="/pages/vaccine/vaccine?mid={{showMember.id}}">打过{{list[5].num}}次疫苗</navigator>
   <navigator url="/pages/physical/physical?mid={{showMember.id}}">有过{{list[4].num}}次体检</navigator>
   <navigator url="/pages/expenditure/expenditure?mid={{showMember.id}}&name={{showMember.name}}">医疗支出共 ¥{{list[6].jz_yy_fy}}</navigator>
 </view>

@@ -75,7 +75,6 @@ z-index: 10;
   padding: 0 32rpx;
   font-size:28rpx;
   color: #111111;
-  margin-top: 100rpx;
 }
 .headTit view{
   float: right;
@@ -103,3 +102,51 @@ z-index: 10;
   vertical-align: middle;
   margin: 0 10rpx;
 }
+.list image{
+  width: 84rpx;
+  height: 84rpx;
+}
+.listBox{
+  border-top: 1rpx solid #EAEDF3;
+}
+.list{
+  border-bottom: 1rpx solid #EAEDF3;
+  display: flex;
+  align-items:center;
+  width: 100%;
+}
+.list .dateTime{
+  font-size: 28rpx;
+  color: #111111;
+  padding: 0 36rpx;
+  width: 240rpx;
+  box-sizing: border-box;
+  vertical-align: middle;
+}
+.list .dateTime text{
+  display: block;
+}
+.list .rigBox{
+  border-left: 1rpx solid #EAEDF3;
+   padding: 36rpx; 
+  font-size: 24rpx;
+  color: #111111;
+  width: 510rpx;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.list scroll-view{
+  width: auto;
+  white-space:nowrap;
+}
+
+.list scroll-view view{
+  display: inline-block;
+  width: 130rpx;
+  text-align: center;
+}
+.list scroll-view view image{
+  display: block;
+  margin: 0 auto;
+}
+

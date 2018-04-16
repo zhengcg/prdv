@@ -1,6 +1,7 @@
 {
   "pages":[ 
- 
+    "pages/addVaccine/addVaccine",
+    "pages/vaccineRecord/vaccineRecord",
     "pages/login/login", 
     "pages/goodsDetail/goodsDetail",
     "pages/exchangeList/exchangeList",
@@ -35,7 +36,7 @@
     "pages/help/help",
     "pages/helpQ/helpQ",
     "pages/feedBack/feedBack",
-    "pages/vaccineRecord/vaccineRecord",
+    
     "pages/uploadBLJL/uploadBLJL",
     "pages/uploadCFD/uploadCFD",
     "pages/uploadHYD/uploadHYD",
