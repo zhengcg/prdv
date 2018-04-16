@@ -7,7 +7,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    "date": ""
+    "date": "",
+    "mid":"",
+    "id":"",
+    "place":""
 
   },
 
@@ -15,7 +18,20 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    
+    if(options.id){
+      this.setData({
+        id: parseInt(options.id),
+        mid: parseInt(options.mid)
+      })
+    }
     this.checkToken()
+
+  },
+  changePlace:function(e){
+    this.setData({
+      place:e.detail.value
+    })
 
   },
 
@@ -42,6 +58,47 @@ Page({
         }
       })
     }
+  },
+  submit:function(){
+    var _this = this;
+    try {
+      wx.showLoading()
+    }
+    catch (err) {
+      console.log("当前微信版本不支持")
+    }
+    wx.request({
+      url: api + "Corein/addYm",
+      method: 'POST',
+      header: header,
+      data: { session_3rd: wx.getStorageSync('token'), place: _this.data.place, m_id: _this.data.mid, vaccine_id: _this.data.id, do_time:_this.data.date },
+      success: function (res) {
+        try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+        if (res.data.code == 200) {
+
+          wx.navigateTo({
+            url: '../vaccineRecord/vaccineRecord'
+          })
+
+        } else {
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'fail',
+            duration: 2000
+          })
+
+        }
+      },
+      fail: function () {
+        try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+        wx.showToast({
+          title: '接口调用失败！',
+          icon: 'fail',
+          duration: 2000
+        })
+      }
+    })
+
   },
 
   /**

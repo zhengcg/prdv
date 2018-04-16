@@ -1,7 +1,7 @@
 {
   "pages":[ 
-    "pages/addVaccine/addVaccine",
-    "pages/vaccineRecord/vaccineRecord",
+   
+    
     "pages/login/login", 
     "pages/goodsDetail/goodsDetail",
     "pages/exchangeList/exchangeList",
@@ -30,6 +30,8 @@
     "pages/bc/bc",
     "pages/jzyy/jzyy",
     "pages/jzks/jzks",
+    "pages/addVaccine/addVaccine",
+    "pages/vaccineRecord/vaccineRecord",
     "pages/temperatureDetection/temperatureDetection",
     "pages/contactService/contactService",
     "pages/physicaRecords/physicaRecords",

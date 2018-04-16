@@ -11,7 +11,8 @@ Page({
       index: 0,
       page: 1,
       number: 20,
-      list: []
+      list: [],
+      showMember: ""
 
   },
 
@@ -26,7 +27,8 @@ Page({
   bindPickerChange: function (e) {
     var self = this;
     self.setData({
-      index: parseInt(e.detail.current)
+      index: parseInt(e.detail.current),
+      showMember: self.data.members[parseInt(e.detail.current)]
     })
   },
   checkToken: function () {
@@ -67,7 +69,8 @@ Page({
         if (res.data.code == 200) {
 
           _this.setData({
-            members: res.data.data
+            members: res.data.data,
+            showMember: res.data.data[0]
           })
           _this.getList(res.data.data[0].id);
 
