@@ -10,7 +10,10 @@ Page({
     "date": "",
     "mid":"",
     "id":"",
-    "place":""
+    "place":"",
+    "detail":{
+      
+    }
 
   },
 
@@ -44,6 +47,7 @@ Page({
   },
   checkToken: function () {
     if (wx.getStorageSync('token')) {
+      this.getDetail()
 
 
     } else {
@@ -79,6 +83,48 @@ Page({
           wx.navigateTo({
             url: '../vaccineRecord/vaccineRecord'
           })
+
+        } else {
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'fail',
+            duration: 2000
+          })
+
+        }
+      },
+      fail: function () {
+        try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+        wx.showToast({
+          title: '接口调用失败！',
+          icon: 'fail',
+          duration: 2000
+        })
+      }
+    })
+
+  },
+  getDetail: function () {
+    var _this = this;
+    try {
+      wx.showLoading()
+    }
+    catch (err) {
+      console.log("当前微信版本不支持")
+    }
+    wx.request({
+      url: api + "coreOut/remindYmDetail",
+      method: 'GET',
+      header: header,
+      data: { session_3rd: wx.getStorageSync('token'), id:parseInt(_this.data.id)},
+      success: function (res) {
+        try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+        if (res.data.code == 200) {
+          _this.setData({
+            detail:res.data.data
+          })
+
+          
 
         } else {
           wx.showToast({

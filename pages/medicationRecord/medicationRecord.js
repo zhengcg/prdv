@@ -13,7 +13,9 @@ Page({
     "items": [
       { name: '药店', value: 1, checked: 'true' },
       { name: '医院', value: 2}
-    ]
+    ],
+    path:"",
+    jz_id:""
   
   },
 
@@ -21,6 +23,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if(options.jz_id){
+      this.setData({
+        path:options.path,
+        jz_id:options.jz_id
+
+      })
+    }else{
+      this.setData({
+        path: options.path
+
+      })
+
+    }
     this.checkToken()
   
   },
@@ -161,6 +176,20 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+  submit:function(){
+    var self=this;
+    if(this.data.path=="index"){
+      wx.switchTab({
+        url: '../index/index',
+      })
+
+    }else{
+      wx.navigateTo({
+        url: '../uploadReport/uploadReport?jz_id=' + self.data.jz_id
+      })
+    }
+
   },
   gotoAdd: function () {
     wx.navigateTo({

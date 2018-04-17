@@ -36,7 +36,7 @@
   <navigator url='/pages/uploadYXBG/uploadYXBG?jz_id={{jz_id}}' class='sm'>影像报告<text>带影像的，如B超</text></navigator>
   <navigator url='/pages/uploadCFD/uploadCFD?jz_id={{jz_id}}'>处方单</navigator>
   <navigator url='/pages/uploadBLJL/uploadBLJL?jz_id={{jz_id}}'>病例记录</navigator>
-  <view>用药记录</view>
+ <navigator url='/pages/medicationRecord/medicationRecord?jz_id={{jz_id}}&path=uploadReport'>用药记录</navigator>
   <navigator url='/pages/pay/pay?jz_id={{jz_id}}'>医疗费用</navigator>
 </view>
 

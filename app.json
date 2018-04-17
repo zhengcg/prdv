@@ -1,7 +1,5 @@
 {
   "pages":[ 
-   
-    
     "pages/login/login", 
     "pages/goodsDetail/goodsDetail",
     "pages/exchangeList/exchangeList",
@@ -38,7 +36,7 @@
     "pages/help/help",
     "pages/helpQ/helpQ",
     "pages/feedBack/feedBack",
-    
+    "pages/distinguish/distinguish",
     "pages/uploadBLJL/uploadBLJL",
     "pages/uploadCFD/uploadCFD",
     "pages/uploadHYD/uploadHYD",

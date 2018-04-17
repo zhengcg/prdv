@@ -22,6 +22,11 @@ Page({
     this.setData({
       jz_id: options.jz_id
     })
+    if(options.imgs){
+      this.setData({
+        imgs: options.imgs.split(",")
+      })
+    }
     this.checkToken()
 
   },
@@ -103,10 +108,12 @@ Page({
             session_3rd: wx.getStorageSync('token')
           },
           success: function (res) {
-            var array = [imgSrc + JSON.parse(res.data).data.img_url]
+            var array = [imgSrc + JSON.parse(res.data).data.img_url];
+            var img = imgSrc + JSON.parse(res.data).data.img_url
             self.setData({
               imgs: self.data.imgs.concat(array)
             })
+            self.sbHYD(img)
           }
         })
 
@@ -126,6 +133,59 @@ Page({
 
   },
   submitBtn: function () {
+    // var _this = this;
+    // try {
+    //   wx.showLoading()
+    // }
+    // catch (err) {
+    //   console.log("当前微信版本不支持")
+    // }
+    // wx.request({
+    //   url: api + "Corein/saveJzHy",
+    //   method: 'POST',
+    //   header: header,
+    //   data: { session_3rd: wx.getStorageSync('token'), jz_id: parseInt(_this.data.jz_id), m_id: parseInt(_this.data.mid), imgs: (_this.data.imgs).toString() },
+    //   success: function (res) {
+    //     try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+    //     if (res.data.code == 200) {
+    //       wx.showToast({
+    //         title: '保存成功',
+    //         icon: 'success',
+    //         duration: 2000,
+    //         success: function () {
+    //           wx.navigateTo({
+    //             url: '../uploadReport/uploadReport?jz_id=' + _this.data.jz_id
+    //           })
+
+    //         }
+
+    //       })
+
+
+    //     } else {
+    //       wx.showToast({
+    //         title: res.data.msg,
+    //         icon: 'fail',
+    //         duration: 2000
+    //       })
+
+    //     }
+    //   },
+    //   fail: function () {
+    //     try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+    //     wx.showToast({
+    //       title: '接口调用失败！',
+    //       icon: 'fail',
+    //       duration: 2000
+    //     })
+    //   }
+    // })
+    wx.navigateTo({
+      url: '../uploadReport/uploadReport?jz_id=' + this.data.jz_id
+    })
+
+  },
+  sbHYD: function (img) {
     var _this = this;
     try {
       wx.showLoading()
@@ -137,17 +197,17 @@ Page({
       url: api + "Corein/saveJzHy",
       method: 'POST',
       header: header,
-      data: { session_3rd: wx.getStorageSync('token'), jz_id: parseInt(_this.data.jz_id), m_id: parseInt(_this.data.mid), imgs: (_this.data.imgs).toString() },
+      data: { session_3rd: wx.getStorageSync('token'), jz_id: parseInt(_this.data.jz_id), m_id: parseInt(_this.data.mid), imgs: img },
       success: function (res) {
         try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
         if (res.data.code == 200) {
           wx.showToast({
-            title: '保存成功',
+            title: '识别成功',
             icon: 'success',
             duration: 2000,
             success: function () {
               wx.navigateTo({
-                url: '../uploadReport/uploadReport?jz_id=' + _this.data.jz_id
+                url: '../distinguish/distinguish?id=' + res.data.data + '&imgs=' + (_this.data.imgs).toString() + '&jz_id='+_this.data.jz_id
               })
 
             }

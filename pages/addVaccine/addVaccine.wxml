@@ -13,6 +13,6 @@
 
 <button bindtap='submit'>保存</button>
 <view class='sm'>
-<view class='tit'>预防结核病</view>
-但是奋斗的股份会挥发共和国返回房价会鸡同鸭讲一天就服个软供热个人合议庭太阳镜一体机
+<view class='tit'>{{detail.title}}</view>
+{{detail.content}}
 </view>

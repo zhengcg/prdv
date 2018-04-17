@@ -7,10 +7,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    mid: '',
-    page: 1,
-    number: 15,
-    list: []
+    id:'',
+    info:{},
+    imgs:[],
+    jz_id:""
+
 
   },
 
@@ -18,18 +19,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if (options.mid) {
-      this.setData({
-        mid: options.mid
-      })
-    }
-
+    this.setData({
+      id: options.id,
+      imgs: options.imgs,
+      jz_id: options.jz_id
+    })
     this.checkToken()
 
   },
   checkToken: function () {
+    var self = this;
     if (wx.getStorageSync('token')) {
-      this.getList()
+      this.getInfo(self.data.id);
+      // 添加就诊（一进来先掉一次，然后实际添加数据调用修改接口）
+
+
     } else {
       wx.showModal({
         title: '提示',
@@ -43,56 +47,59 @@ Page({
       })
     }
   },
+  getInfo: function (id) {
+    var _this = this;
+    try {
+      wx.showLoading()
+    }
+    catch (err) {
+      console.log("当前微信版本不支持")
+    }
+    wx.request({
+      url: api + "coreOut/getJzHyYl",
+      method: 'POST',
+      header: header,
+      data: { session_3rd: wx.getStorageSync('token'), id: parseInt(id) },
+      success: function (res) {
+        try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+        if (res.data.code == 200) {
+          _this.setData({
+            "info": res.data.data
+          })
+
+        } else {
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'fail',
+            duration: 2000
+          })
+
+        }
+      },
+      fail: function () {
+        try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+        wx.showToast({
+          title: '接口调用失败！',
+          icon: 'fail',
+          duration: 2000
+        })
+      }
+    })
+
+  },
+  submit:function(){
+    wx.navigateTo({
+      url: '../uploadHYD/uploadHYD?imgs='+this.data.imgs+'&jz_id='+this.data.jz_id
+    })
+
+  },
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
 
-  },
-  getList: function () {
-    var self = this;
-    try {
-      wx.showLoading({
-        title: '加载中',
-      })
-    } catch (err) {
-      console.log("当前微信版本不支持")
-    }
-    wx.request({
-      url: api + 'Coreout/getYy', //仅为示例，并非真实的接口地址
-      data: {
-        m_id: self.data.mid,
-        number: self.data.number,
-        page: self.data.page,
-        session_3rd: wx.getStorageSync('token')
-      },
-      method: 'GET',
-      success: function (res) {
-        try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
-        if (res.data.code == 200) {
-          if (res.data.data.length) {
-
-            self.setData({
-              page: self.data.page + 1,
-              list: self.data.list.concat(res.data.data)
-            })
-          } else {
-            wx.showToast({
-              title: '没有了！',
-              icon: 'fail',
-              duration: 2000
-            })
-          }
-        } else {
-          wx.showToast({
-            title: "报错了",
-            icon: 'fail',
-            duration: 2000
-          })
-        }
-      }
-    })
   },
 
   /**
@@ -127,7 +134,6 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    this.getList()
 
   },
 

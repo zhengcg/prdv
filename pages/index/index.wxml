@@ -14,7 +14,7 @@
     <image src='../../images/icon08.png' class="img02"/>
     <view>体温监测</view>  
   </navigator>
-  <navigator class='navBtn nav03' url='/pages/medicationRecord/medicationRecord'>
+  <navigator class='navBtn nav03' url='/pages/medicationRecord/medicationRecord?path=index'>
     <image src='../../images/icon09.png' class="img03"/>
     <view>用药记录</view>  
   </navigator>
