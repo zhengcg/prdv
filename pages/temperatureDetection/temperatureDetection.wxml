@@ -19,4 +19,16 @@
 
 <view class='iconBox'><image src='../../images/icon20.png'/></view>
 <view class='wdj'>
+  <image src='../../images/icon23.png'></image>
+  <view class='slider'>
+    <slider block-size="12" backgroundColor="#fff" activeColor="#fc7b7b" bindchange="changeTem"  min='330' max='420' step='1' value='{{temNum*10}}' />
+  </view>
 </view>
+<view class='curTem'>
+  <text>当前体温：{{temNum}}℃</text>
+  <button bindtap='submit'>确认</button>
+</view>
+<scroll-view style='margin-top:100rpx;width: auto;white-space:nowrap;' scroll-x>
+<canvas canvas-id="lineCanvas" class="canvas" style="height:300px;margin:0 auto" ></canvas>
+</scroll-view>
+

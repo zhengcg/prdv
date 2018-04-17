@@ -1,6 +1,8 @@
 var app = getApp();
 var header = app.globalData.header;
 var api = app.globalData.api;
+var wxCharts = require('../../utils/wxcharts.js');
+var lineChart = null;
 Page({
 
   /**
@@ -8,7 +10,8 @@ Page({
    */
   data: {
     "members": [],
-    "index": 0
+    "index": 0,
+    "temNum":33
 
   },
 
@@ -23,7 +26,8 @@ Page({
   changeJs: function (e) {
     var self = this;
     self.setData({
-      index: parseInt(e.detail.current)
+      index: parseInt(e.detail.current),
+      temNum:33
     })
     // this.addJz(this.data.members[parseInt(e.detail.current)].id);
   },
@@ -86,6 +90,93 @@ Page({
         })
       }
     })
+  },
+  changeTem:function(e){
+    this.setData({
+      temNum:parseInt(e.detail.value)/10
+    })
+
+  },
+  submit:function(){
+    this.drawLine()
+
+  },
+  touchHandler: function (e) {
+    console.log(lineChart.getCurrentDataIndex(e));
+    lineChart.showToolTip(e, {
+      // background: '#7cb5ec',
+      format: function (item, category) {
+        return category + ' ' + item.name + ':' + item.data
+      }
+    });
+  },
+  createSimulationData: function () {
+    var categories = [];
+    var data = [];
+    for (var i = 0; i < 10; i++) {
+      categories.push('2016-' + (i + 1));
+      data.push(Math.random() * (20 - 10) + 10);
+    }
+    // data[4] = null;
+    return {
+      categories: categories,
+      data: data
+    }
+  },
+  updateData: function () {
+    var simulationData = this.createSimulationData();
+    var series = [{
+      name: '成交量1',
+      data: simulationData.data,
+      format: function (val, name) {
+        return val.toFixed(2) + '万';
+      }
+    }];
+    lineChart.updateData({
+      categories: simulationData.categories,
+      series: series
+    });
+  },
+  drawLine:function(){
+    var windowWidth = 320;
+    try {
+      var res = wx.getSystemInfoSync();
+      windowWidth = res.windowWidth;
+    } catch (e) {
+      console.error('getSystemInfoSync failed!');
+    }
+    lineChart = new wxCharts({
+      canvasId: 'lineCanvas',
+      type: 'line',
+      categories: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],
+      animation: true,
+      // background: '#f5f5f5',
+      series: [{
+        name: '体温',
+        data: [34.1, 34.5, 35.8, 40.5, 34.1, 34.5, 35.8, 40.5, 34.1, 34.5, 35.8, 40.5, 34.1, 34.5, 35.8],
+        format: function (val, name) {
+          return val.toFixed(1) + '℃';
+        }
+      }],
+      xAxis: {
+        disableGrid: true
+      },
+      yAxis: {
+        title: '体温',
+        format: function (val) {
+          return val.toFixed(1);
+        },
+        min: 33
+      },
+      width: windowWidth,
+      height: 200,
+      dataLabel: false,
+      dataPointShape: true,
+      extra: {
+        lineStyle: 'curve'
+      }
+    });
+
   },
 
   /**

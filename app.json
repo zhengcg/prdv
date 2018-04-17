@@ -1,5 +1,6 @@
 {
   "pages":[ 
+    
     "pages/login/login", 
     "pages/goodsDetail/goodsDetail",
     "pages/exchangeList/exchangeList",
@@ -8,6 +9,7 @@
     "pages/addAddress/addAddress",
     "pages/receiveAd/receiveAd",
     "pages/me/me",
+    "pages/temperatureDetection/temperatureDetection",
     "pages/personalData/personalData",
     "pages/addMembers/addMembers",
     "pages/index/index",
@@ -27,10 +29,9 @@
     "pages/cc/cc",
     "pages/bc/bc",
     "pages/jzyy/jzyy",
-    "pages/jzks/jzks",
     "pages/addVaccine/addVaccine",
     "pages/vaccineRecord/vaccineRecord",
-    "pages/temperatureDetection/temperatureDetection",
+    
     "pages/contactService/contactService",
     "pages/physicaRecords/physicaRecords",
     "pages/help/help",

@@ -81,8 +81,40 @@ z-index: 10;
 }
 .wdj{
   position: relative;
-  width: 620rpx;
-  height: 100rpx;
+  width: 622rpx;
+  height: 118rpx;
   margin: 0 auto;
-  background: #eee;
+}
+.wdj image{
+  display: block;
+  margin: 0 auto;
+  width: 622rpx;
+  height: 118rpx;
+
+}
+.wdj .slider{
+  position: absolute;
+  left: 60rpx;
+  top: 28rpx;
+  right:0rpx;
+}
+.curTem{
+  text-align: center;
+  width: 622rpx;
+  margin: 0 auto;
+  font-size: 28rpx;
+  position: relative
+}
+.curTem button{
+  width: 150rpx;
+  height: 56rpx;
+  line-height: 56rpx;
+  position: absolute;right: 0;
+  background: #FF5B5B;
+  border-radius: 8rpx;
+  color: #fff;
+  font-size: 28rpx;
+}
+.curTem button::after{
+  border: 0;
 }
