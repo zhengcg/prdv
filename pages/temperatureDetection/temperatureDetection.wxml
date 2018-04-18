@@ -26,9 +26,9 @@
 </view>
 <view class='curTem'>
   <text>当前体温：{{temNum}}℃</text>
-  <button bindtap='submit'>确认</button>
+  <button bindtap='submit' hidden='{{!isCan}}'>确认</button>
 </view>
-<scroll-view style='margin-top:100rpx;width: auto;white-space:nowrap;' scroll-x>
-<canvas canvas-id="lineCanvas" class="canvas" style="height:300px;margin:0 auto" ></canvas>
-</scroll-view>
+<view class='container' hidden='{{isCanvas}}'>
+<canvas canvas-id="lineCanvas" disable-scroll="true" class="canvas" bindtouchstart="touchHandler" bindtouchmove="moveHandler" bindtouchend="touchEndHandler"></canvas>
+</view>
 

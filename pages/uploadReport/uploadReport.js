@@ -420,7 +420,7 @@ Page({
   },
   gotoAdd:function(){
     wx.navigateTo({
-      url: '../addMembers/addMembers?path=uploadReport'
-    })
+      url: '../addMembers/addMembers?path=uploadReport',
+    }) 
   }
 })

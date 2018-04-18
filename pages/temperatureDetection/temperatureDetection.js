@@ -3,6 +3,7 @@ var header = app.globalData.header;
 var api = app.globalData.api;
 var wxCharts = require('../../utils/wxcharts.js');
 var lineChart = null;
+var startPos = null;
 Page({
 
   /**
@@ -11,7 +12,11 @@ Page({
   data: {
     "members": [],
     "index": 0,
-    "temNum":33
+    "temNum":33,
+    "isCan":false,
+    "arr":[],
+    "temArr":[],
+    "isCanvas":false
 
   },
 
@@ -27,7 +32,12 @@ Page({
     var self = this;
     self.setData({
       index: parseInt(e.detail.current),
-      temNum:33
+      temNum:33,
+      "isCan": false,
+      "arr": [],
+      "temArr": [],
+      "isCanvas":true
+
     })
     // this.addJz(this.data.members[parseInt(e.detail.current)].id);
   },
@@ -93,51 +103,73 @@ Page({
   },
   changeTem:function(e){
     this.setData({
-      temNum:parseInt(e.detail.value)/10
+      temNum:parseInt(e.detail.value)/10,
+      isCan:true
     })
 
   },
   submit:function(){
-    this.drawLine()
+    var _this = this;
+    try {
+      wx.showLoading()
+    }
+    catch (err) {
+      console.log("当前微信版本不支持")
+    }
+    wx.request({
+      url: api + "CoreIn/addTw",
+      method: 'POST',
+      header: header,
+      data: { session_3rd: wx.getStorageSync('token'), m_id: _this.data.members[_this.data.index].id, do_time: new Date(), temperature: _this.data.temNum },
+      success: function (res) {
+        try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+        if (res.data.code == 200) {
+
+          _this.setData({
+            isCan: false,
+            arr: _this.data.arr.concat(_this.data.arr.length+1),
+            temArr: _this.data.temArr.concat(_this.data.temNum),
+            isCanvas:false
+          })
+          _this.drawLine()
+
+        } else {
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'fail',
+            duration: 2000
+          })
+
+        }
+      },
+      fail: function () {
+        try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+        wx.showToast({
+          title: '接口调用失败！',
+          icon: 'fail',
+          duration: 2000
+        })
+      }
+    })
+    
 
   },
   touchHandler: function (e) {
-    console.log(lineChart.getCurrentDataIndex(e));
+    lineChart.scrollStart(e);
+  },
+  moveHandler: function (e) {
+    lineChart.scroll(e);
+  },
+  touchEndHandler: function (e) {
+    lineChart.scrollEnd(e);
     lineChart.showToolTip(e, {
-      // background: '#7cb5ec',
       format: function (item, category) {
         return category + ' ' + item.name + ':' + item.data
       }
     });
   },
-  createSimulationData: function () {
-    var categories = [];
-    var data = [];
-    for (var i = 0; i < 10; i++) {
-      categories.push('2016-' + (i + 1));
-      data.push(Math.random() * (20 - 10) + 10);
-    }
-    // data[4] = null;
-    return {
-      categories: categories,
-      data: data
-    }
-  },
-  updateData: function () {
-    var simulationData = this.createSimulationData();
-    var series = [{
-      name: '成交量1',
-      data: simulationData.data,
-      format: function (val, name) {
-        return val.toFixed(2) + '万';
-      }
-    }];
-    lineChart.updateData({
-      categories: simulationData.categories,
-      series: series
-    });
-  },
   drawLine:function(){
+    var self=this;
     var windowWidth = 320;
     try {
       var res = wx.getSystemInfoSync();
@@ -145,33 +177,34 @@ Page({
     } catch (e) {
       console.error('getSystemInfoSync failed!');
     }
+
     lineChart = new wxCharts({
       canvasId: 'lineCanvas',
       type: 'line',
-      categories: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],
-      animation: true,
-      // background: '#f5f5f5',
+      categories: self.data.arr,
+      animation: false,
       series: [{
         name: '体温',
-        data: [34.1, 34.5, 35.8, 40.5, 34.1, 34.5, 35.8, 40.5, 34.1, 34.5, 35.8, 40.5, 34.1, 34.5, 35.8],
+        data: self.data.temArr,
         format: function (val, name) {
-          return val.toFixed(1) + '℃';
+          return val + '℃';
         }
       }],
       xAxis: {
-        disableGrid: true
+        disableGrid: false
       },
       yAxis: {
-        title: '体温',
+        title: '体温 (℃)',
         format: function (val) {
-          return val.toFixed(1);
+          return val;
         },
         min: 33
       },
       width: windowWidth,
       height: 200,
-      dataLabel: false,
+      dataLabel: true,
       dataPointShape: true,
+      enableScroll: true,
       extra: {
         lineStyle: 'curve'
       }

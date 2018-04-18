@@ -28,7 +28,7 @@
     <view class='dateTime'><text>{{item.name}}</text></view>
     <view class='rigBox'>
      <scroll-view scroll-x>
-        <navigator wx:for="{{item.info}}" wx:for-item='jtem' url='/pages/addVaccine/addVaccine?id={{jtem.id}}&mid={{showMember.id}}'>
+        <navigator wx:for="{{item.info}}" wx:key="{{index}}" wx:for-item='jtem' url='/pages/addVaccine/addVaccine?id={{jtem.id}}&mid={{showMember.id}}'>
           <image src='../../images/icon21.png' wx-if='{{jtem.is_must==1}}'/>
           <image src='../../images/icon22.png' wx-if='{{jtem.is_must==2}}'/>
           <text>{{jtem.title}}{{jtem.is_must}}</text>
