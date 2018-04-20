@@ -137,7 +137,20 @@ Page({
               citylist: res.data.data
             })
         
-        } else{
+        } else if (res.data.code == 401) {
+          wx.clearStorageSync()
+          wx.showModal({
+            title: '提示',
+            content: '登录过期了，请重新登录！',
+            showCancel: false,
+            success: function (res) {
+              wx.redirectTo({
+                url: '../login/login'
+              })
+            }
+          })
+
+        }  else{
           wx.showToast({
             title: res.data.msg,
             icon: 'fail',
@@ -167,7 +180,20 @@ Page({
             url: '../uploadReport/uploadReport?jz_id=' + self.data.jz_id
           })
 
-        } else {
+        } else if (res.data.code == 401) {
+          wx.clearStorageSync()
+          wx.showModal({
+            title: '提示',
+            content: '登录过期了，请重新登录！',
+            showCancel: false,
+            success: function (res) {
+              wx.redirectTo({
+                url: '../login/login'
+              })
+            }
+          })
+
+        }  else {
           wx.showToast({
             title: res.data.msg,
             icon: 'fail',

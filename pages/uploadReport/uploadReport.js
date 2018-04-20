@@ -79,7 +79,20 @@ Page({
         if (res.data.code == 200) {
           console.log("添加时间成功！")
 
-        } else {
+        } else if (res.data.code == 401) {
+          wx.clearStorageSync()
+          wx.showModal({
+            title: '提示',
+            content: '登录过期了，请重新登录！',
+            showCancel: false,
+            success: function (res) {
+              wx.redirectTo({
+                url: '../login/login'
+              })
+            }
+          })
+
+        }  else {
           wx.showToast({
             title: res.data.msg,
             icon: 'fail',
@@ -122,7 +135,20 @@ Page({
         if (res.data.code == 200) {
           console.log("添加科室成功！")
 
-        } else {
+        } else if (res.data.code == 401) {
+          wx.clearStorageSync()
+          wx.showModal({
+            title: '提示',
+            content: '登录过期了，请重新登录！',
+            showCancel: false,
+            success: function (res) {
+              wx.redirectTo({
+                url: '../login/login'
+              })
+            }
+          })
+
+        }  else {
           wx.showToast({
             title: res.data.msg,
             icon: 'fail',
@@ -190,7 +216,20 @@ Page({
           }
          
 
-        } else {
+        } else if (res.data.code == 401) {
+          wx.clearStorageSync()
+          wx.showModal({
+            title: '提示',
+            content: '登录过期了，请重新登录！',
+            showCancel: false,
+            success: function (res) {
+              wx.redirectTo({
+                url: '../login/login'
+              })
+            }
+          })
+
+        }  else {
           wx.showToast({
             title: res.data.msg,
             icon: 'fail',
@@ -240,7 +279,20 @@ Page({
             }
           })
 
-        } else {
+        } else if (res.data.code == 401) {
+          wx.clearStorageSync()
+          wx.showModal({
+            title: '提示',
+            content: '登录过期了，请重新登录！',
+            showCancel: false,
+            success: function (res) {
+              wx.redirectTo({
+                url: '../login/login'
+              })
+            }
+          })
+
+        }  else {
           wx.showToast({
             title: res.data.msg,
             icon: 'fail',
@@ -306,7 +358,20 @@ Page({
           },600)
         
 
-        } else {
+        } else if (res.data.code == 401) {
+          wx.clearStorageSync()
+          wx.showModal({
+            title: '提示',
+            content: '登录过期了，请重新登录！',
+            showCancel: false,
+            success: function (res) {
+              wx.redirectTo({
+                url: '../login/login'
+              })
+            }
+          })
+
+        }  else {
           wx.showToast({
             title: res.data.msg,
             icon: 'fail',
@@ -355,7 +420,20 @@ Page({
             }
           }
 
-        } else {
+        } else if (res.data.code == 401) {
+          wx.clearStorageSync()
+          wx.showModal({
+            title: '提示',
+            content: '登录过期了，请重新登录！',
+            showCancel: false,
+            success: function (res) {
+              wx.redirectTo({
+                url: '../login/login'
+              })
+            }
+          })
+
+        }  else {
           wx.showToast({
             title: res.data.msg,
             icon: 'fail',
