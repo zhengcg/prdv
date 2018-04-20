@@ -1,14 +1,14 @@
  <swiper style='height:310rpx;' bindchange="changeJs">
   <block wx:for="{{members}}" wx:key="{{item.id}}"  >
     <swiper-item id="{{item.id}}">
-      <view class='head'>
+      <navigator class='head'  url="/pages/addMembers/addMembers?id={{item.id}}">
         <view class='headImg'>
           <image src='{{item.img}}'/>
         </view>
         <view class='nickBox'>
           {{item.name}}
         </view>
-      </view>
+      </navigator>
     </swiper-item>
   </block>
 </swiper> 

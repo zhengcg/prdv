@@ -1,21 +1,21 @@
 <swiper style='height:310rpx;' bindchange="changeJs" current='{{index}}'>
   <block wx:for="{{members}}" wx:key="{{item.id}}"  >
     <swiper-item id="{{item.id}}">
-      <view class='head'>
+      <navigator class='head'  url="/pages/addMembers/addMembers?id={{item.id}}">
         <view class='headImg'>
           <image src='{{item.img}}'/>
         </view>
         <view class='nickBox'>
           {{item.name}}
         </view>
-        <view class='addBtn' bindtap='gotoAdd'>+</view>
-        <view class='addBox' bindtap='gotoAdd'>   
+        <view class='addBtn' catchtap='gotoAdd' hidden='{{members.length>0}}'>+</view>
+        <view class='addBox' catchtap='gotoAdd' hidden='{{members.length>0}}'>   
           <text>添加</text>
         </view>
-      </view>
+      </navigator>
     </swiper-item>
   </block>
-</swiper> 
+</swiper>  
 <view class='title'>
   基本信息
 </view>
