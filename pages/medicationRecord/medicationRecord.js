@@ -46,7 +46,7 @@ Page({
     wx.scanCode({
       success: (res) => {
         console.log(res)
-        wx.navigateTo({
+        wx.redirectTo({
           url: '../drugsInfo/drugsInfo'
         })
       }
@@ -193,13 +193,32 @@ Page({
   submit:function(){
     var self=this;
     if(this.data.path=="index"){
-      wx.switchTab({
-        url: '../index/index',
+      wx.showToast({
+        title: '请到我的健康档案查询上传结果',
+        icon: 'success',
+        duration: 2000,
+        success: function () {
+          wx.switchTab({
+            url: '../index/index',
+          })
+
+        }
+
       })
+      
 
     }else{
-      wx.navigateTo({
-        url: '../uploadReport/uploadReport?jz_id=' + self.data.jz_id
+      wx.showToast({
+        title: '请到我的健康档案查询上传结果',
+        icon: 'success',
+        duration: 2000,
+        success: function () {
+          wx.redirectTo({
+            url: '../uploadReport/uploadReport?jz_id=' + self.data.jz_id
+          })
+
+        }
+
       })
     }
 

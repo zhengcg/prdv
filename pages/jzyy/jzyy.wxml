@@ -18,3 +18,9 @@
           <text class='letter_item' wx:for='{{letter}}' wx:key='this' catchtap='letterTap' data-item='{{item}}'>{{item}}</text>
       </view>
   </view>
+
+
+  <view class='addYY' hidden='{{isAddYY}}'>
+    <view class='top'>没查询到您输入的医院，是否添加该医院？</view>
+    <view class='bot'><text bindtap='addYY'>是</text><text bindtap='cancelAdd'>否</text></view>
+  </view>

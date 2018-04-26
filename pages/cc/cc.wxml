@@ -4,7 +4,7 @@
     <view class='title'>{{item.do_time}}</view> 
     <view class='body'>
        <block wx:for="{{item.imgs}}" wx:key="{{index}}" wx:for-item="itemName">
-        <image src='{{itemName}}'/>
+        <image src='{{itemName}}'  bindtap='previewImg' data-url='{{itemName}}'/>
       </block> 
     </view>
    </block>

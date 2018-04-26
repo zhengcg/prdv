@@ -12,7 +12,8 @@ Page({
     //下面是城市列表信息，这里只是模拟数据
     citylist: [],
     keywords: '',
-    jz_id:''
+    jz_id:'',
+    isAddYY:true
 
   },
 
@@ -113,6 +114,15 @@ Page({
     }
 
   },
+  addYY:function(){
+
+  },
+  cancelAdd:function(){
+    this.setData({
+      isAddYY: true
+
+    })
+  },
   getList: function () {
     var self = this;
     try {
@@ -132,10 +142,20 @@ Page({
       success: function (res) {
         try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
         if (res.data.code == 200) {
-
-            self.setData({             
+          if (res.data.data.length>0){
+            self.setData({
               citylist: res.data.data
             })
+
+          }else{
+            self.setData({
+              citylist: res.data.data,
+              isAddYY:false
+            })
+            console.log(self.data.isAddYY)
+          }
+
+            
         
         } else if (res.data.code == 401) {
           wx.clearStorageSync()
@@ -176,7 +196,7 @@ Page({
       success: function (res) {
         try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
         if (res.data.code == 200) {
-          wx.navigateTo({
+          wx.redirectTo({
             url: '../uploadReport/uploadReport?jz_id=' + self.data.jz_id
           })
 

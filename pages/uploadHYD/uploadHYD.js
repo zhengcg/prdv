@@ -146,7 +146,7 @@ Page({
 
   },
   submitBtn: function () {
-    // var _this = this;
+    var _this = this;
     // try {
     //   wx.showLoading()
     // }
@@ -193,8 +193,17 @@ Page({
     //     })
     //   }
     // })
-    wx.navigateTo({
-      url: '../uploadReport/uploadReport?jz_id=' + this.data.jz_id
+    wx.showToast({
+      title: '请到我的健康档案查询上传结果',
+      icon: 'success',
+      duration: 2000,
+      success: function () {
+        wx.redirectTo({
+          url: '../uploadReport/uploadReport?jz_id=' + _this.data.jz_id
+        })
+
+      }
+
     })
 
   },
@@ -219,7 +228,7 @@ Page({
             icon: 'success',
             duration: 2000,
             success: function () {
-              wx.navigateTo({
+              wx.redirectTo({
                 url: '../distinguish/distinguish?id=' + res.data.data + '&imgs=' + (_this.data.imgs).toString() + '&jz_id='+_this.data.jz_id
               })
 

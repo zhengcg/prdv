@@ -142,61 +142,111 @@ Page({
   },
   submitData: function () {
     var self = this;
-    try {
-      wx.showLoading()
-    }
-    catch (err) {
-      console.log("当前微信版本不支持")
-    }
-    wx.request({
-      url: api + "Address/addAddress",
-      method: 'POST',
-      header: header,
-      data: { session_3rd: wx.getStorageSync('token'), consignee: self.data.name, phone: self.data.phone, address: self.data.address, is_default: self.data.isDefault, address_id: self.data.address_id, province_id: self.data.area[0], city_id: self.data.area[1], district_id:self.data.area[2]},
-      success: function (res) {
-        try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
-        if (res.data.code == 200) {
-          wx.showToast({
-            title: "保存成功",
-            duration: 2000,
-            success:function(){
-              wx.navigateTo({
-                url: '../' + self.data.path + '/' + self.data.path
-              })
+    if (self.data.name==""){
+      wx.showModal({
+        title: '提示',
+        content: '请输入收货人姓名',
+        showCancel: false
+      })
+    } else if (self.data.phone==""){
+      wx.showModal({
+        title: '提示',
+        content: '请输入手机号码',
+        showCancel: false
+      })
+    } else if (self.data.area.length==0){
+      wx.showModal({
+        title: '提示',
+        content: '请选择地区',
+        showCancel: false
+      })
+    } else if (self.data.address==""){
+      wx.showModal({
+        title: '提示',
+        content: '请选填写详细地址',
+        showCancel: false
+      })
+    }else{
+      wx.showModal({
+        title: '提示',
+        content: '确定提交吗？',
+        success: function (res) {
+          if (res.confirm) {
+            try {
+              wx.showLoading()
             }
-          })
-
-        } else if (res.data.code == 401) {
-          wx.clearStorageSync()
-          wx.showModal({
-            title: '提示',
-            content: '登录过期了，请重新登录！',
-            showCancel: false,
-            success: function (res) {
-              wx.redirectTo({
-                url: '../login/login'
-              })
+            catch (err) {
+              console.log("当前微信版本不支持")
             }
-          })
+            wx.request({
+              url: api + "Address/addAddress",
+              method: 'POST',
+              header: header,
+              data: {
+                session_3rd: wx.getStorageSync('token'),
+                consignee: self.data.name,
+                phone: self.data.phone,
+                address: self.data.address,
+                is_default: self.data.isDefault,
+                address_id: self.data.address_id,
+                province_id: self.data.area[0],
+                city_id: self.data.area[1],
+                district_id: self.data.area[2]
+              },
+              success: function (res) {
+                try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+                if (res.data.code == 200) {
+                  wx.showToast({
+                    title: "保存成功",
+                    duration: 2000,
+                    success: function () {
+                      wx.navigateTo({
+                        url: '../' + self.data.path + '/' + self.data.path
+                      })
+                    }
+                  })
 
-        }  else {
-          wx.showToast({
-            title: res.data.msg,
-            icon: 'fail',
-            duration: 2000
-          })
+                } else if (res.data.code == 401) {
+                  wx.clearStorageSync()
+                  wx.showModal({
+                    title: '提示',
+                    content: '登录过期了，请重新登录！',
+                    showCancel: false,
+                    success: function (res) {
+                      wx.redirectTo({
+                        url: '../login/login'
+                      })
+                    }
+                  })
 
+                } else {
+                  wx.showToast({
+                    title: res.data.msg,
+                    icon: 'fail',
+                    duration: 2000
+                  })
+
+                }
+              },
+              fail: function () {
+                try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+                wx.showToast({
+                  title: '接口调用失败！',
+                  icon: 'fail',
+                  duration: 2000
+                })
+              }
+            })
+            
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
         }
-      },
-      fail: function () {
-        try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
-        wx.showToast({
-          title: '接口调用失败！',
-          icon: 'fail',
-          duration: 2000
-        })
-      }
-    })
+      })
+    }
+
+    
+ 
   },
 
   /**

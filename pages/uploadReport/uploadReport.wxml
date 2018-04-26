@@ -15,16 +15,26 @@
       </navigator>
     </swiper-item>
   </block>
+   <!-- <swiper-item>
+      <navigator class='head'  url="/pages/addMembers/addMembers?path=uploadReport">
+        <view class='headImg'>
+          <image src='../../images/icon24.png'/>
+        </view>
+        <view class='nickBox'>
+          添加
+        </view> 
+      </navigator>
+    </swiper-item> -->
 </swiper> 
 
 <view class='listBox'>
   <view>
     <text>就诊时间</text>{{date}}
-    <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+    <picker mode="date" value="{{date}}"  bindchange="bindDateChange">
     <view></view>
     </picker>
   </view>
-  <navigator url='/pages/jzyy/jzyy?jz_id={{jz_id}}'><text>就诊医院</text>{{jzyy.yy_title}}</navigator>
+  <navigator url='/pages/jzyy/jzyy?jz_id={{jz_id}}' open-type='redirect'><text>就诊医院</text>{{jzyy.yy_title}}</navigator>
   <view><text>就诊科室</text>
     <picker value="{{ksIndex}}" range="{{ksList}}" range-key="{{'title'}}" bindchange="bindChangeKS">
       <view>{{ksList[ksIndex].title}}<text style='margin-right:30rpx;'></text></view>
@@ -32,12 +42,12 @@
   </view>
 </view>
 <view class='imgBox'>
-  <navigator url='/pages/uploadHYD/uploadHYD?jz_id={{jz_id}}' class='sm'>化验单<text>带参考值范围的</text></navigator>
-  <navigator url='/pages/uploadYXBG/uploadYXBG?jz_id={{jz_id}}' class='sm'>影像报告<text>带影像的，如B超</text></navigator>
-  <navigator url='/pages/uploadCFD/uploadCFD?jz_id={{jz_id}}'>处方单</navigator>
-  <navigator url='/pages/uploadBLJL/uploadBLJL?jz_id={{jz_id}}'>病例记录</navigator>
- <navigator url='/pages/medicationRecord/medicationRecord?jz_id={{jz_id}}&path=uploadReport'>用药记录</navigator>
-  <navigator url='/pages/pay/pay?jz_id={{jz_id}}'>医疗费用</navigator>
+  <navigator url='/pages/uploadHYD/uploadHYD?jz_id={{jz_id}}'  open-type='redirect' class='sm'>化验单<text>带参考值范围的</text></navigator>
+  <navigator url='/pages/uploadYXBG/uploadYXBG?jz_id={{jz_id}}'  open-type='redirect' class='sm'>影像报告<text>带影像的，如B超</text></navigator>
+  <navigator url='/pages/uploadCFD/uploadCFD?jz_id={{jz_id}}'  open-type='redirect'>处方单</navigator>
+  <navigator url='/pages/uploadBLJL/uploadBLJL?jz_id={{jz_id}}'  open-type='redirect'>病例记录</navigator>
+ <navigator url='/pages/medicationRecord/medicationRecord?jz_id={{jz_id}}&path=uploadReport'  open-type='redirect'>用药记录</navigator>
+  <navigator url='/pages/pay/pay?jz_id={{jz_id}}'  open-type='redirect'>医疗费用</navigator>
 </view>
 
 

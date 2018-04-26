@@ -48,6 +48,13 @@ Page({
   onReady: function () {
 
   },
+  previewImg: function (e) {
+    wx.previewImage({
+      current: e.currentTarget.dataset.url, // 当前显示图片的http链接
+      urls: [e.currentTarget.dataset.url] // 需要预览的图片http链接列表
+    })
+
+  },
   getList: function () {
     var self = this;
     try {

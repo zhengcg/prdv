@@ -8,9 +8,9 @@
 <view class='numBox'>
   <text>数量</text>
   <view class='num'>
-    <view class='plus' bindtap='plusNum'>+</view>
+   <view class='minus' bindtap='minusNum'>-</view>   
     <text>{{num}}</text>
-    <view class='minus' bindtap='minusNum'>-</view>
+   <view class='plus' bindtap='plusNum'>+</view>
   </view>
 </view>
 <view class='addAdr' hidden='{{isYDZ}}'><navigator url='/pages/addAddress/addAddress?path=goodsDetail'>添加收货地址</navigator></view>
@@ -31,7 +31,7 @@
 <view class='footer'>
   <view class='biNum'>
     <view><image src='../../images/icon16.png'/><text>{{conNum}}</text></view>
-    <text>剩余汪汪币{{main}}</text>
+    <text>可用汪汪币{{main}}</text>
   </view>
   <view class='duiBtn' bindtap='duiFn'>兑换</view>
 </view>

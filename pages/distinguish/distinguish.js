@@ -101,7 +101,7 @@ Page({
 
   },
   submit:function(){
-    wx.navigateTo({
+    wx.redirectTo({
       url: '../uploadHYD/uploadHYD?imgs='+this.data.imgs+'&jz_id='+this.data.jz_id
     })
 

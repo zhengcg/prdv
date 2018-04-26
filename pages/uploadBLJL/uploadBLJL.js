@@ -155,11 +155,11 @@ Page({
         try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
         if (res.data.code == 200) {
           wx.showToast({
-            title: '保存成功',
+            title: '请到我的健康档案查询上传结果',
             icon: 'success',
             duration: 2000,
             success: function () {
-              wx.navigateTo({
+              wx.redirectTo({
                 url: '../uploadReport/uploadReport?jz_id=' + _this.data.jz_id
               })
 

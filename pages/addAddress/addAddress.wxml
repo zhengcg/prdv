@@ -5,8 +5,8 @@
     <input placeholder='请输入' bindinput='changeName' value='{{name}}'/>
   </view>
   <view class='list'>
-    <text>联系方式</text>
-    <input placeholder='请输入' bindinput='changePhone' value='{{phone}}' type='number'/>
+    <text>手机号码</text>
+    <input placeholder='请输入' bindinput='changePhone' value='{{phone}}' type='number'  maxlength="11"/>
   </view>
   <view class='list right'>
     <text>所在地区</text>

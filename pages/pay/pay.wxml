@@ -1,15 +1,15 @@
 <view class='listBox'>
   <view class='clearfix'>
     <text>挂号费</text>
-    <input type='digit' bindinput='changeGHF' value='{{GHF}}'/>
+    <input type='digit' bindinput='changeGHF' />
   </view>
   <view class='clearfix'>
     <text>检测费</text>
-    <input type='digit' bindinput='changeJCF' value='{{JCF}}'/>
+    <input type='digit' bindinput='changeJCF' />
   </view>
   <view class='clearfix'>
     <text>住院费</text>
-    <input type='digit' bindinput='changeZYF' value='{{ZYF}}'/>
+    <input type='digit' bindinput='changeZYF'/>
   </view>
   <view class='clearfix'>
     <text>小记</text>

@@ -22,13 +22,15 @@
     <view>{{blood[bloodIndex]}}<text style='display:inline-block;width:30rpx;'></text></view>
     </picker>
   </view>
-  <view class='list'>
+  <view class='list' style='background:none;padding-right:0'>
     <text>身高</text>
-    <input placeholder='请输入' value='{{height}}' bindinput='changeHeight'/>
+    <text style='float:right'>cm</text>
+    <input placeholder='请输入' value='{{height}}' bindinput='changeHeight' style='margin-right:50rpx;'/>   
   </view>
-  <view class='list'>
+  <view class='list' style='background:none;padding-right:0'>
     <text>体重</text>
-    <input placeholder='请输入' value='{{weight}}' bindinput='changeWeight'/>
+    <text style='float:right'>kg</text>
+    <input placeholder='请输入' value='{{weight}}' bindinput='changeWeight' style='margin-right:50rpx;'/>    
   </view>
   <view class='list'>
     <text>职业</text>
