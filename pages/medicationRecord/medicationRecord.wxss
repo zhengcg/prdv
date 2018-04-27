@@ -1,4 +1,4 @@
-.head{
+/* .head{
   background: #EAF090;
   height: 228rpx;
   position: relative;
@@ -35,6 +35,48 @@
   text-align: center;
   font-size: 32rpx;
 color: #F39800;
+padding-top: 100rpx;
+box-sizing: border-box;
+z-index: 10;
+} */
+.head{
+   background: #EAF090; 
+  height: 228rpx;
+  position: relative;
+}
+.headImg{
+  position: absolute;
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 50%;
+  border: 4rpx solid rgba(255,255,255,0.70);
+  box-sizing: border-box;
+  left: 50%;
+  top: 50%;
+  margin-left: -70rpx;
+  margin-top: -80rpx;
+  overflow: hidden;
+  z-index: 100;
+   background: #EAF090; 
+}
+.headImg image{
+  display: block;
+  width: 136rpx;
+  height: 136rpx;
+}
+.nickBox{
+  width: 90%;
+  height: 180rpx;
+  background: #FFFFFF;
+  box-shadow: 0 0 4rpx 0 #DFEC2A;
+  position: absolute;
+  left:50%;
+  margin-left: -45%;
+  top: 70rpx;
+  text-align: center;
+  font-size: 32rpx;
+  color: #3C3C3E;
+
 padding-top: 100rpx;
 box-sizing: border-box;
 z-index: 10;
@@ -92,7 +134,7 @@ z-index: 10;
 }
 .footer button::after{border: 0;}
 .title{
-  margin-top: 100rpx;
+  margin-top: 0rpx;
   font-size: 28rpx;
   color: #666666;
   padding: 0 40rpx;

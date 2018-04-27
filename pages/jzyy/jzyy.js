@@ -115,6 +115,53 @@ Page({
 
   },
   addYY:function(){
+    var self = this;
+    try {
+      wx.showLoading({
+        title: '加载中',
+      })
+    } catch (err) {
+      console.log("当前微信版本不支持")
+    }
+    wx.request({
+      url: api + 'coreIn/addHospital', //仅为示例，并非真实的接口地址
+      data: {
+        session_3rd: wx.getStorageSync('token'),
+        title: self.data.keywords
+      },
+      method: 'POST',
+      success: function (res) {
+        try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+        if (res.data.code == 200) {
+          self.setData({
+            isAddYY: true
+          })
+          self.getList()
+
+
+
+        } else if (res.data.code == 401) {
+          wx.clearStorageSync()
+          wx.showModal({
+            title: '提示',
+            content: '登录过期了，请重新登录！',
+            showCancel: false,
+            success: function (res) {
+              wx.redirectTo({
+                url: '../login/login'
+              })
+            }
+          })
+
+        } else {
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'fail',
+            duration: 2000
+          })
+        }
+      }
+    })
 
   },
   cancelAdd:function(){

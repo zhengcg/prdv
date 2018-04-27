@@ -1,4 +1,4 @@
-<swiper style='height:310rpx;' bindchange="changeJs" current='{{index}}'>
+<!-- <swiper style='height:310rpx;' bindchange="changeJs" current='{{index}}'>
   <block wx:for="{{members}}" wx:key="{{item.id}}"  >
     <swiper-item id="{{item.id}}">
       <navigator class='head'  url="/pages/addMembers/addMembers?id={{item.id}}">
@@ -15,17 +15,27 @@
       </navigator>
     </swiper-item>
   </block>
-   <!-- <swiper-item>
-      <navigator class='head'  url="/pages/addMembers/addMembers?path=uploadReport">
+</swiper>  -->
+<view class='swiper'>
+  <view class="rongqi"  bindtouchmove='touchmove' bindtouchstart='touchstart'>
+  <navigator   url="/pages/addMembers/addMembers?id={{item.id}}" wx:for="{{members}}"  wx:key="{{item.id}}" class="item {{item.class}}" on>
         <view class='headImg'>
-          <image src='../../images/icon24.png'/>
+          <image src='{{item.img}}'/>
         </view>
         <view class='nickBox'>
-          添加
-        </view> 
+          {{item.name}}
+        </view>
       </navigator>
-    </swiper-item> -->
-</swiper> 
+     <view class="item itemright3" on catchtap='gotoAdd' hidden='{{isShowAdd}}'>
+     <view class='headImg'>
+          <image src='../../images/icon24.png'/>
+        </view>
+        <view class='nickBox' >
+          添加
+        </view>
+     </view>
+  </view>
+</view>
 
 <view class='listBox'>
   <view>

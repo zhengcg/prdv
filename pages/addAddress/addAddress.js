@@ -82,6 +82,13 @@ Page({
       })
     }
   },
+  checkPhone: function (phone) {
+    if (!(/^1[34578]\d{9}$/.test(phone))) {
+      return false;
+    } else {
+      return true
+    }
+  },
   getAddress: function (id) {
     var self = this;
     try {
@@ -166,6 +173,12 @@ Page({
         content: '请选填写详细地址',
         showCancel: false
       })
+    } else if (!self.checkPhone(self.data.phone)){
+      wx.showModal({
+        title: '提示',
+        content: '请填写正确的手机号',
+        showCancel: false
+      })
     }else{
       wx.showModal({
         title: '提示',
@@ -187,7 +200,7 @@ Page({
                 consignee: self.data.name,
                 phone: self.data.phone,
                 address: self.data.address,
-                is_default: self.data.isDefault,
+                is_default: self.data.isDefault?0:1,
                 address_id: self.data.address_id,
                 province_id: self.data.area[0],
                 city_id: self.data.area[1],
@@ -200,8 +213,8 @@ Page({
                     title: "保存成功",
                     duration: 2000,
                     success: function () {
-                      wx.navigateTo({
-                        url: '../' + self.data.path + '/' + self.data.path
+                      wx.redirectTo({
+                        url: '../receiveAd/receiveAd'
                       })
                     }
                   })

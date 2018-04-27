@@ -1,4 +1,4 @@
- <swiper style='height:310rpx;' bindchange="changeJs">
+ <!-- <swiper style='height:310rpx;' bindchange="changeJs">
   <block wx:for="{{members}}" wx:key="{{item.id}}"  >
     <swiper-item id="{{item.id}}">
       <navigator class='head'  url="/pages/addMembers/addMembers?id={{item.id}}">
@@ -11,7 +11,20 @@
       </navigator>
     </swiper-item>
   </block>
-</swiper> 
+</swiper>  -->
+<view class='swiper'>
+<view class="rongqi"  bindtouchmove='touchmove' bindtouchstart='touchstart'>
+  <navigator   url="/pages/addMembers/addMembers?id={{item.id}}" wx:for="{{members}}"  wx:key="{{item.id}}" class="item {{item.class}}" on>
+        <view class='headImg'>
+          <image src='{{item.img}}'/>
+        </view>
+        <view class='nickBox'>
+          {{item.name}}
+        </view>
+      </navigator>
+  </view>
+</view>
+  
 <view class='tabNav'>
   <view class='{{tabCur=="1"?"cur":"default"}}' bindtap='changeTab' data-index="1">
     健康档案
@@ -42,6 +55,7 @@
     <text class='{{jkTab=="2"?"cur":"default"}}' bindtap='changeJk' data-index="2">影像报告</text>
     <text class='{{jkTab=="3"?"cur":"default"}}' bindtap='changeJk' data-index="3">处方单</text>
     <text class='{{jkTab=="4"?"cur":"default"}}' bindtap='changeJk' data-index="4">病历记录</text>
+    <text class='{{jkTab=="5"?"cur":"default"}}' bindtap='changeJk' data-index="5">体检报告</text>
   </scroll-view>
    <view class='dataList'  hidden='{{jkTab!=="1"}}'>
     <navigator url='/pages/hy/hy?mid={{showMember.id}}'><text>原始数据</text></navigator>
@@ -55,6 +69,9 @@
   </view>
   <view class='dataList'  hidden='{{jkTab!=="4"}}'>
     <navigator url='/pages/bc/bc?mid={{showMember.id}}'><text>原始数据</text></navigator>
+  </view> 
+   <view class='dataList'  hidden='{{jkTab!=="5"}}'>
+    <navigator url='/pages/tj/tj?mid={{showMember.id}}'><text>原始数据</text></navigator>
   </view> 
 </view>
 <view class='commentBox' hidden='{{tabCur!=="3"}}'>

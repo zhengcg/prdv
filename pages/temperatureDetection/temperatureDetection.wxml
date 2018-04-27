@@ -1,4 +1,4 @@
-<swiper style='height:310rpx;' bindchange="changeJs" current='{{index}}'>
+<!-- <swiper style='height:310rpx;' bindchange="changeJs" current='{{index}}'>
   <block wx:for="{{members}}" wx:key="{{item.id}}"  >
     <swiper-item id="{{item.id}}">
       <navigator class='head'  url="/pages/addMembers/addMembers?id={{item.id}}">
@@ -15,9 +15,28 @@
       </navigator>
     </swiper-item>
   </block>
-</swiper> 
-
-<view class='iconBox'><image src='../../images/icon20.png'/></view>
+</swiper>  -->
+<view class='swiper'>
+<view class="rongqi"  bindtouchmove='touchmove' bindtouchstart='touchstart'>
+  <navigator   url="/pages/addMembers/addMembers?id={{item.id}}" wx:for="{{members}}"  wx:key="{{item.id}}" class="item {{item.class}}" on>
+        <view class='headImg'>
+          <image src='{{item.img}}'/>
+        </view>
+        <view class='nickBox'>
+          {{item.name}}
+        </view>
+      </navigator>
+     <view class="item itemright3" on catchtap='gotoAdd' hidden='{{isShowAdd}}'>
+     <view class='headImg'>
+          <image src='../../images/icon24.png'/>
+        </view>
+        <view class='nickBox' >
+          添加
+        </view>
+     </view>
+  </view>
+</view>
+<view class='iconBox'><image src='../../images/icon20.png' wx:if="{{temNum<=37.4}}" mode='aspectFit'/><image src='../../images/icon26.png'  wx:if="{{temNum>=37.5&&temNum<=38}}"  mode='aspectFit'/><image src='../../images/icon27.png'  mode='aspectFit'  wx:if="{{temNum>=38.1&&temNum<=39}}"/><image  wx:if="{{temNum>39}}" src='../../images/icon28.png'  mode='aspectFit'/></view>
 <view class='wdj'>
   <image src='../../images/icon23.png'></image>
   <view class='slider'>

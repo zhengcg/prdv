@@ -65,3 +65,67 @@ color: #111111;
   background-size: 56rpx 56rpx;
   border: 2rpx dotted #E5E5E5;
 }
+
+.rongqi{
+  background: #EAF090;
+  height: 228rpx;
+  position: relative;
+}
+.rongqi .item{
+  float: left;
+  /* border:2rpx solid blue; */
+  height:200rpx;
+  width:200rpx;
+  position:absolute;
+  left:-200rpx;
+  top:50rpx;
+}
+.rongqi .item.itemcenter{
+  float: left;
+  /* border:2rpx solid yellow; */
+  height:350rpx;
+  width:350rpx;
+  top:40rpx;
+}
+.rongqi .item.itemcenter .headImg{
+  margin-top: -160rpx;
+  
+}
+.rongqi .item.itemcenter .nickBox{
+  height: 200rpx;
+  padding-top: 120rpx;
+  color: #F39800;
+}
+.rongqi .item.itemleft1{
+  left:-200rpx;
+}
+.rongqi .item.itemleft2{
+   transition: all 0.5s ease-in; 
+  left:-200rpx;
+}
+.rongqi .item.itemleft3{
+  transition: all 0.5s ease-in;
+  left:0rpx;
+}
+.rongqi .item.itemcenter{
+  transition: all 0.5s ease-in;
+  left:200rpx;
+}
+.rongqi .item.itemright2{
+  transition: all 0.5s ease-in;
+  left:750rpx;
+}
+.rongqi .item.itemright3{
+  transition: all 0.5s ease-in;
+  left:550rpx;
+}
+.rongqi .item.itemright1{
+  left:750rpx;
+}
+.usermotto {
+  margin-top: 200px;
+}
+.swiper{
+  overflow: hidden;
+  height: 350rpx;
+}

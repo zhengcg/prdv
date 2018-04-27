@@ -15,7 +15,7 @@
 </view>
 <view class='addAdr' hidden='{{isYDZ}}'><navigator url='/pages/addAddress/addAddress?path=goodsDetail'>添加收货地址</navigator></view>
 
-<view class='listBox'>
+<view class='listBox' hidden='{{!isYDZ}}'>
   <view style='border-bottom:none'>
     <view class='con'>
       <view class='top'>{{isDefaultAdd.consignee}}<text>{{isDefaultAdd.phone}}</text></view>

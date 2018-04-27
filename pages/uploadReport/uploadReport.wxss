@@ -1,5 +1,5 @@
 .head{
-  background: #EAF090;
+   background: #EAF090; 
   height: 228rpx;
   position: relative;
 }
@@ -13,10 +13,10 @@
   left: 50%;
   top: 50%;
   margin-left: -70rpx;
-  margin-top: -70rpx;
+  margin-top: -80rpx;
   overflow: hidden;
   z-index: 100;
-    background: #EAF090;
+   background: #EAF090; 
 }
 .headImg image{
   display: block;
@@ -24,17 +24,18 @@
   height: 136rpx;
 }
 .nickBox{
-  width: 280rpx;
+  width: 90%;
   height: 180rpx;
   background: #FFFFFF;
   box-shadow: 0 0 4rpx 0 #DFEC2A;
   position: absolute;
-  left: 50%;
-  margin-left: -140rpx;
-  top: 120rpx;
+  left:50%;
+  margin-left: -45%;
+  top: 70rpx;
   text-align: center;
   font-size: 32rpx;
-color: #F39800;
+  color: #3C3C3E;
+
 padding-top: 100rpx;
 box-sizing: border-box;
 z-index: 10;
@@ -70,7 +71,7 @@ z-index: 10;
 }
 .listBox{
   padding: 0 40rpx;
-  margin-top: 0rpx;
+  /* margin-top:100rpx; */
 }
 .listBox>view,.listBox>navigator{
   border-bottom: 1rpx solid #E5E5E5;

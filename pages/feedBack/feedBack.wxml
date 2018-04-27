@@ -7,10 +7,10 @@
 </view>
 <view class='tit'>请留下您的手机号</view>
 <view class='content'>
-<input type='number' placeholder='选填' bindinput='changeIn' value='{{phone}}'/>
+<input type='number' placeholder='选填' bindinput='changeIn' value='{{phone}}' maxlength='13'/>
 </view>
 
 <view style='height:140rpx;'></view>
 <view class='footer' bindtap='submit'>
-  意见反馈
+  提交
 </view>

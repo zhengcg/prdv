@@ -101,27 +101,30 @@ Page({
   chooseImg: function () {
     var self = this;
     wx.chooseImage({
-      count: 1, // 默认9
+      count: 5, // 默认9
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
         var tempFilePaths = res.tempFilePaths;
 
-        wx.uploadFile({
-          url: api + 'Corein/coreUpload',
-          filePath: tempFilePaths[0],
-          name: 'imgs',
-          formData: {
-            session_3rd: wx.getStorageSync('token')
-          },
-          success: function (res) {
-            var array = [imgSrc + JSON.parse(res.data).data.img_url]
-            self.setData({
-              imgs: self.data.imgs.concat(array)
-            })
-          }
-        })
+        for (var i = 0; i < tempFilePaths.length; i++) {
+          wx.uploadFile({
+            url: api + 'Corein/coreUpload',
+            filePath: tempFilePaths[i],
+            name: 'imgs',
+            formData: {
+              session_3rd: wx.getStorageSync('token')
+            },
+            success: function (res) {
+              var array = imgSrc + JSON.parse(res.data).data.img_url
+              self.setData({
+                imgs: self.data.imgs.concat(array)
+              })
+            }
+          })
+
+        }
 
 
 
@@ -154,18 +157,28 @@ Page({
       success: function (res) {
         try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
         if (res.data.code == 200) {
-          wx.showToast({
-            title: '请到我的健康档案查询上传结果',
-            icon: 'success',
-            duration: 2000,
-            success: function () {
-              wx.redirectTo({
-                url: '../uploadReport/uploadReport?jz_id=' + _this.data.jz_id
-              })
+       
+          if (_this.data.imgs.length > 0) {
+            wx.showModal({
+              title: '提示',
+              content: '文件已保存，请到健康档案中查询上传结果',
+              showCancel: false,
+              success: function () {
+                wx.redirectTo({
+                  url: '../uploadReport/uploadReport?jz_id=' + _this.data.jz_id
+                })
+              }
 
-            }
+            })
 
-          })
+          } else {
+            wx.showModal({
+              title: '提示',
+              content: '请先上传后在保存',
+              showCancel: false,
+
+            })
+          }
 
 
         } else if (res.data.code == 401) {

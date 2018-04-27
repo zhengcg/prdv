@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    "index":0,
     "tabCur":"1",
     "jkTab":"1",
     "members":[],
@@ -22,6 +23,60 @@ Page({
     this.checkToken()
 
 
+  },
+  setClass() {
+    for (let i = 0; i < this.data.members.length; i++) {
+      let obj = this.data.members[i];
+      if (this.data.index - i == 3) {
+        obj.class = "itemleft1"
+      } else if (this.data.index - i == 2) {
+        obj.class = "itemleft2"
+      } else if (this.data.index - i == 1) {
+        obj.class = "itemleft3"
+      } else if (this.data.index - i == 0) {
+        obj.class = "itemcenter"
+      } else if (this.data.index - i == -1) {
+        obj.class = "itemright3"
+      } else if (this.data.index - i == -2) {
+        obj.class = "itemright2"
+      } else if (this.data.index - i == -3) {
+        obj.class = "itemright1"
+      } else {
+        obj.class = ""
+      }
+
+    }
+    this.setData({ members: this.data.members })
+    this.getDoc(this.data.members[parseInt(this.data.index)].id);
+    this.setData({
+      showMember: this.data.members[parseInt(this.data.index)]
+    })
+  },
+  touchstart(evt) {
+    this.data.startX = evt.touches[0].clientX;
+  },
+  touchmove(evt) {
+    if (this.data.startX > 0) {
+      if (evt.touches[0].clientX > this.data.startX) {
+        if (this.data.index > 0) {
+          this.data.index--;
+          this.setClass();
+          this.setData({
+            isShowAdd: true
+          })
+        }
+
+      } else if (evt.touches[0].clientX < this.data.startX) {
+        if (this.data.index < this.data.members.length - 1) {
+          this.data.index++;
+          this.setClass();
+        }
+
+      }
+      this.data.startX = -1
+
+
+    }
   },
 
   /**
@@ -68,6 +123,7 @@ Page({
             members:res.data.data,
             showMember: res.data.data[0]
           })
+          _this.setClass();
           _this.getDoc(res.data.data[0].id)
 
         } else if (res.data.code == 401) {
