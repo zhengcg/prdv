@@ -7,7 +7,7 @@
   <navigator url='/pages/exchangeList/exchangeList'><image src='../../images/icon18.png'/><text>汪汪币兑换</text></navigator>
 </view>
 <view class='taskList'>
-  <view class='taskHead'>每日任务</view>
+  <view class='taskHead'>赚币方式</view>
   <navigator class='task' wx:for="{{list}}" wx:key="{{item.task_id}}">
     <view class='text'>{{item.remarks}}</view>
     <view class='coinNum'><image src='../../images/icon16.png'/><text>{{item.score}}</text></view>

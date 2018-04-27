@@ -95,7 +95,6 @@ page{
 .city_name{
   display: block;
   line-height: 90rpx;
-  height: 90rpx;
   border-bottom: 1rpx solid #DFDFDF;
   font-size: 32rpx;
   color: #424242;

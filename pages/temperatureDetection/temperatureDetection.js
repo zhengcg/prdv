@@ -16,7 +16,8 @@ Page({
     "isCan":false,
     "arr":[],
     "temArr":[],
-    "isCanvas":false
+    "isCanvas":false,
+    "isShowAdd": true
 
   },
 
@@ -26,6 +27,69 @@ Page({
   onLoad: function (options) {
     this.checkToken()
 
+  },
+  setClass() {
+    for (let i = 0; i < this.data.members.length; i++) {
+      let obj = this.data.members[i];
+      if (this.data.index - i == 3) {
+        obj.class = "itemleft1"
+      } else if (this.data.index - i == 2) {
+        obj.class = "itemleft2"
+      } else if (this.data.index - i == 1) {
+        obj.class = "itemleft3"
+      } else if (this.data.index - i == 0) {
+        obj.class = "itemcenter"
+      } else if (this.data.index - i == -1) {
+        obj.class = "itemright3"
+      } else if (this.data.index - i == -2) {
+        obj.class = "itemright2"
+      } else if (this.data.index - i == -3) {
+        obj.class = "itemright1"
+      } else {
+        obj.class = ""
+      }
+
+    }
+    this.setData({ members: this.data.members })
+    this.setData({
+      temNum: 33,
+      "isCan": false,
+      "arr": [],
+      "temArr": [],
+      "isCanvas": true
+
+    })
+  },
+  touchstart(evt) {
+    this.data.startX = evt.touches[0].clientX;
+  },
+  touchmove(evt) {
+    if (this.data.startX > 0) {
+      if (evt.touches[0].clientX > this.data.startX) {
+        if (this.data.index > 0) {
+          this.data.index--;
+          this.setClass();
+          this.setData({
+            isShowAdd: true
+          })
+        }
+
+      } else if (evt.touches[0].clientX < this.data.startX) {
+        if (this.data.index < this.data.members.length - 1) {
+          this.data.index++;
+          this.setClass();
+          if (this.data.index == this.data.members.length - 1) {
+            this.setData({
+              isShowAdd: false
+            })
+          }
+        }
+
+      }
+      this.data.startX = -1
+
+
+    }
   },
   // 切换家属
   changeJs: function (e) {
@@ -81,6 +145,7 @@ Page({
           _this.setData({
             members: res.data.data
           })
+          _this.setClass();
 
         } else if (res.data.code == 401) {
           wx.clearStorageSync()
@@ -121,6 +186,15 @@ Page({
     })
 
   },
+  formatDate:function (now) { 
+    var year= now.getFullYear(); 
+    var month= now.getMonth() + 1; 
+    var date= now.getDate(); 
+    var hour= now.getHours(); 
+    var minute= now.getMinutes(); 
+    var second= now.getSeconds(); 
+    return year+ "-" + month + "-" + date + " " + hour + ":" + minute + ":" + second; 
+  },
   submit:function(){
     var _this = this;
     try {
@@ -140,7 +214,7 @@ Page({
 
           _this.setData({
             isCan: false,
-            arr: _this.data.arr.concat(_this.data.arr.length+1),
+            arr: _this.data.arr.concat(_this.formatDate(new Date())),
             temArr: _this.data.temArr.concat(_this.data.temNum),
             isCanvas:false
           })
@@ -190,7 +264,8 @@ Page({
     lineChart.scrollEnd(e);
     lineChart.showToolTip(e, {
       format: function (item, category) {
-        return category + ' ' + item.name + ':' + item.data
+        return category
+        // return category + ' ' + item.name + ':' + item.data
       }
     });
   },

@@ -19,14 +19,21 @@
   color: #666666;
   float: left;
 }
+.listBox view input{
+  height: 90rpx;
+  line-height: 90rpx;
+  font-size: 32rpx;
+  color: #111111;
+}
 .footer{
   position: fixed;
   height: 200rpx;
-  bottom: 22rpx;
+  bottom: 0rpx;
   width: 100%;
   left: 0;
   background: #fff;
   box-shadow: 0 -2rpx 4rpx 0 rgba(0,0,0,0.12);
+  z-index: 1000;
 }
 .footer button{
   width: 600rpx;

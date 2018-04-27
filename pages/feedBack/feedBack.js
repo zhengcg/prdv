@@ -59,24 +59,25 @@ Page({
   },
   submit: function () {
     var self = this;
-    try {
-      wx.showLoading({
-        title: '加载中',
-      })
-    } catch (err) {
-      console.log("当前微信版本不支持")
-    }
-    wx.request({
-      url: api + 'help/addOp', //仅为示例，并非真实的接口地址
-      data: {
-        phone: self.data.phone,
-        content: self.data.content,
-        session_3rd: wx.getStorageSync('token')
-      },
-      method: 'POST',
-      success: function (res) {
-        try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
-        if (res.data.code == 200) {
+    if (self.checkPhone(self.data.phone)){
+      try {
+        wx.showLoading({
+          title: '加载中',
+        })
+      } catch (err) {
+        console.log("当前微信版本不支持")
+      }
+      wx.request({
+        url: api + 'help/addOp', //仅为示例，并非真实的接口地址
+        data: {
+          phone: self.data.phone,
+          content: self.data.content,
+          session_3rd: wx.getStorageSync('token')
+        },
+        method: 'POST',
+        success: function (res) {
+          try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+          if (res.data.code == 200) {
             wx.showModal({
               title: '提示',
               content: '提交成功！',
@@ -85,34 +86,56 @@ Page({
                 self.setData({
                   phone: "",
                   content: "",
-                  x:0
+                  x: 0
                 })
               }
             })
-          
-        } else if (res.data.code == 401) {
-          wx.clearStorageSync()
-          wx.showModal({
-            title: '提示',
-            content: '登录过期了，请重新登录！',
-            showCancel: false,
-            success: function (res) {
-              wx.redirectTo({
-                url: '../login/login'
-              })
-            }
-          })
 
-        }  else {
-          wx.showToast({
-            title: "报错了",
-            icon: 'fail',
-            duration: 2000
-          })
+          } else if (res.data.code == 401) {
+            wx.clearStorageSync()
+            wx.showModal({
+              title: '提示',
+              content: '登录过期了，请重新登录！',
+              showCancel: false,
+              success: function (res) {
+                wx.redirectTo({
+                  url: '../login/login'
+                })
+              }
+            })
+
+          } else {
+            wx.showToast({
+              title: "报错了",
+              icon: 'fail',
+              duration: 2000
+            })
+          }
         }
-      }
-    })
+      })
+
+    }else{
+      wx.showModal({
+        title: '提示',
+        content: '请输入正确的手机号',
+        showCancel: false
+   
+      })
+    }
+    
   },
+  checkPhone:function (phone){ 
+    if(!(/^1[34578]\d{9}$/.test(phone))){ 
+      if(phone==""){
+        return true
+      }else{
+        return false;
+      }
+      
+    }else{
+      return true
+    }
+},
 
   /**
    * 生命周期函数--监听页面显示

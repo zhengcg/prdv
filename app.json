@@ -1,6 +1,6 @@
 {
   "pages":[ 
-    
+   
     "pages/login/login", 
     "pages/goodsDetail/goodsDetail",
     "pages/exchangeList/exchangeList",
@@ -28,6 +28,7 @@
     "pages/yc/yc",
     "pages/cc/cc",
     "pages/bc/bc",
+    "pages/tj/tj",
     "pages/jzyy/jzyy",
     "pages/addVaccine/addVaccine",
     "pages/vaccineRecord/vaccineRecord",

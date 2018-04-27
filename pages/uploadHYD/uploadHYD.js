@@ -193,18 +193,28 @@ Page({
     //     })
     //   }
     // })
-    wx.showToast({
-      title: '请到我的健康档案查询上传结果',
-      icon: 'success',
-      duration: 2000,
-      success: function () {
-        wx.redirectTo({
-          url: '../uploadReport/uploadReport?jz_id=' + _this.data.jz_id
-        })
+    if(this.data.imgs.length>0){
+      wx.showModal({
+        title: '提示',
+        content: '文件已保存，请到健康档案中查询上传结果',
+        showCancel: false,
+        success:function(){
+          wx.redirectTo({
+            url: '../uploadReport/uploadReport?jz_id=' + _this.data.jz_id
+          })
+        }
 
-      }
+      })
 
-    })
+    }else{
+      wx.showModal({
+        title: '提示',
+        content: '请先上传后在保存',
+        showCancel: false,
+       
+      })
+    }
+   
 
   },
   sbHYD: function (img) {

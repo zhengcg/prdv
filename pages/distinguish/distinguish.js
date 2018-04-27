@@ -8,7 +8,7 @@ Page({
    */
   data: {
     id:'',
-    info:{},
+    info:[],
     imgs:[],
     jz_id:""
 
@@ -25,6 +25,42 @@ Page({
       jz_id: options.jz_id
     })
     this.checkToken()
+
+  },
+  changeTitle:function(e){
+    var index=parseInt(e.currentTarget.dataset.index);
+    var val=e.detail.value;
+    this.data.info[index].title=val
+    this.setData({
+      info:this.data.info
+    })
+
+  },
+  changeTitleCn: function (e) {
+    var index = parseInt(e.currentTarget.dataset.index);
+    var val = e.detail.value;
+    this.data.info[index].title_cn = val
+    this.setData({
+      info: this.data.info
+    })
+
+  },
+  changeResult: function (e) {
+    var index = parseInt(e.currentTarget.dataset.index);
+    var val = e.detail.value;
+    this.data.info[index].result = val
+    this.setData({
+      info: this.data.info
+    })
+
+  },
+  changeRange: function (e) {
+    var index = parseInt(e.currentTarget.dataset.index);
+    var val = e.detail.value;
+    this.data.info[index].range = val
+    this.setData({
+      info: this.data.info
+    })
 
   },
   checkToken: function () {
@@ -47,6 +83,7 @@ Page({
       })
     }
   },
+
   getInfo: function (id) {
     var _this = this;
     try {
@@ -56,10 +93,11 @@ Page({
       console.log("当前微信版本不支持")
     }
     wx.request({
-      url: api + "coreOut/getJzHyYl",
+      url: api + "Ai/readPic",
       method: 'POST',
       header: header,
       data: { session_3rd: wx.getStorageSync('token'), id: parseInt(id) },
+      // data: { session_3rd: wx.getStorageSync('token'), id: 61 },
       success: function (res) {
         try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
         if (res.data.code == 200) {
@@ -101,9 +139,64 @@ Page({
 
   },
   submit:function(){
-    wx.redirectTo({
-      url: '../uploadHYD/uploadHYD?imgs='+this.data.imgs+'&jz_id='+this.data.jz_id
-    })
+      var _this = this;
+      try {
+        wx.showLoading()
+      }
+      catch (err) {
+        console.log("当前微信版本不支持")
+      }
+      wx.request({
+        url: api + "coreIn/saveJzHys",
+        method: 'POST',
+        header: header,
+        data: { 
+          session_3rd: wx.getStorageSync('token'),
+           id: _this.data.id,
+           data:JSON.stringify(_this.data.info) 
+           },
+        success: function (res) {
+          try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+          if (res.data.code == 200) {
+            wx.redirectTo({
+              url: '../uploadHYD/uploadHYD?imgs=' + _this.data.imgs + '&jz_id=' + _this.data.jz_id
+            })
+            
+
+          } else if (res.data.code == 401) {
+            wx.clearStorageSync()
+            wx.showModal({
+              title: '提示',
+              content: '登录过期了，请重新登录！',
+              showCancel: false,
+              success: function (res) {
+                wx.redirectTo({
+                  url: '../login/login'
+                })
+              }
+            })
+
+          } else {
+            wx.showToast({
+              title: res.data.msg,
+              icon: 'fail',
+              duration: 2000
+            })
+
+          }
+        },
+        fail: function () {
+          try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+          wx.showToast({
+            title: '接口调用失败！',
+            icon: 'fail',
+            duration: 2000
+          })
+        }
+      })
+
+
+  
 
   },
 

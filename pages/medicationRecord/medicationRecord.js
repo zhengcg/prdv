@@ -11,11 +11,12 @@ Page({
     "index": 0,
     "date": "",
     "items": [
-      { name: '药店', value: 1, checked: 'true' },
-      { name: '医院', value: 2}
+      { name: '药店', value: 1 },
+      { name: '医院', value: 2, checked: 'true'}
     ],
     path:"",
-    jz_id:""
+    mid:"",
+    "isShowAdd": true
   
   },
 
@@ -23,10 +24,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if(options.jz_id){
+    if(options.mid){
       this.setData({
         path:options.path,
-        jz_id:options.jz_id
+        mid:options.mid
 
       })
     }else{
@@ -36,18 +37,82 @@ Page({
       })
 
     }
+    if(options.path=="index"){
+      this.setData({
+        "items": [
+          { name: '药店', value: 1, checked: 'true' },
+          { name: '医院', value: 2 }
+        ]
+      })
+    }
     this.checkToken()
   
+  },
+  setClass() {
+    for (let i = 0; i < this.data.members.length; i++) {
+      let obj = this.data.members[i];
+      if (this.data.index - i == 3) {
+        obj.class = "itemleft1"
+      } else if (this.data.index - i == 2) {
+        obj.class = "itemleft2"
+      } else if (this.data.index - i == 1) {
+        obj.class = "itemleft3"
+      } else if (this.data.index - i == 0) {
+        obj.class = "itemcenter"
+      } else if (this.data.index - i == -1) {
+        obj.class = "itemright3"
+      } else if (this.data.index - i == -2) {
+        obj.class = "itemright2"
+      } else if (this.data.index - i == -3) {
+        obj.class = "itemright1"
+      } else {
+        obj.class = ""
+      }
+
+    }
+    this.setData({ members: this.data.members })
+  },
+  touchstart(evt) {
+    this.data.startX = evt.touches[0].clientX;
+  },
+  touchmove(evt) {
+    if (this.data.startX > 0) {
+      if (evt.touches[0].clientX > this.data.startX) {
+        if (this.data.index > 0) {
+          this.data.index--;
+          this.setClass();
+          this.setData({
+            isShowAdd: true
+          })
+        }
+
+      } else if (evt.touches[0].clientX < this.data.startX) {
+        if (this.data.index < this.data.members.length - 1) {
+          this.data.index++;
+          this.setClass();
+          if (this.data.index == this.data.members.length - 1) {
+            this.setData({
+              isShowAdd: false
+            })
+          }
+        }
+
+      }
+      this.data.startX = -1
+
+
+    }
   },
   radioChange: function (e) {
     console.log('radio发生change事件，携带value值为：', e.detail.value)
   },
   scanFn:function(){
+    var self=this;
     wx.scanCode({
       success: (res) => {
-        console.log(res)
+        console.log(res.result)
         wx.redirectTo({
-          url: '../drugsInfo/drugsInfo'
+          url: '../drugsInfo/drugsInfo?code='+res.result+'&mid='+self.data.members[self.data.index].id
         })
       }
     })
@@ -61,6 +126,7 @@ Page({
     })
     // this.addJz(this.data.members[parseInt(e.detail.current)].id);
   },
+  
   // 购药时间
   bindDateChange: function (e) {
     var _this = this;
@@ -108,6 +174,7 @@ Page({
           _this.setData({
             members: res.data.data
           })
+          _this.setClass()
 
         } else if (res.data.code == 401) {
           wx.clearStorageSync()

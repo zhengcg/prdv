@@ -1,20 +1,20 @@
 <view class='listBox'>
-  <view><text>名称</text>和撒谎就撒放胡椒粉</view>
-  <view><text>厂家</text>回家后发觉匡扶汉室方式</view>
-  <view><text>剂型</text>胶囊</view>
-  <view><text>规格</text>75mg</view>
+  <view><text>名称</text>{{info.title}}</view>
+  <view><text>厂家</text>{{info.vender}}</view>
+  <view><text>剂型</text>{{info.dosage}}</view>
+  <view><text>规格</text>{{info.spec}}</view>
 </view>
 <view class='formBox'>
   <view>
     <text>单价：</text>
-    <input type='digit'/>
+    <input type='digit' bindinput='changePrice'/>
   </view>
   <view>
     <text>数量：</text>
-    <input type='number'/>
+    <input type='number' bindinput='changeNum'/>
   </view>
 </view>
 <view style='height:222rpx;'></view>
 <view class='footer'>
-  <button>保存</button>
+  <button bindtap='submit'>保存</button>
 </view>

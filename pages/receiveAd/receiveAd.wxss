@@ -18,16 +18,16 @@
   border: 0
 }
 .listBox>view{
-  display: flex;
+  /* display: flex; */
   padding: 32rpx 20rpx;
-  justify-content:space-between;
+  /* justify-content:space-between; */
   align-items:center;
   border-bottom:1rpx solid #E5E5E5;
   color: #111;
 }
 .con{
-  width: 470rpx;
   font-size: 28rpx;
+  margin-bottom: 24rpx;
 }
 .con .top{
   font-size: 32rpx;
@@ -35,6 +35,13 @@
 }
 .con .top text{
   margin-left: 60rpx;
+}
+.cao{
+  text-align: right
+}
+.cao view{
+  font-size: 32rpx;
+  color: #666;
 }
 .cao navigator{
   display: inline;

@@ -1,0 +1,14 @@
+/* pages/hc/hc.wxss */
+.container{
+  padding: 20rpx 40rpx;
+}
+.title{
+  font-size: 28rpx;
+  color: #666666;
+  line-height: 80rpx;
+}
+.body image{
+  width: 180rpx;
+  height: 180rpx;
+  margin-right: 40rpx;
+}
