@@ -1,23 +1,24 @@
 <view class='listBox'>
   <view class='clearfix'>
     <text>挂号费</text>
-    <input type='digit' bindinput='changeGHF' />
+    <input type='digit' bindinput='changeGHF' value='0' />
   </view>
   <view class='clearfix'>
     <text>检测费</text>
-    <input type='digit' bindinput='changeJCF' />
+    <input type='digit' bindinput='changeJCF' value='0' />
   </view>
   <view class='clearfix'>
     <text>住院费</text>
-    <input type='digit' bindinput='changeZYF'/>
+    <input type='digit' bindinput='changeZYF' value='0'/>
   </view>
   <view class='clearfix'>
-    <text>小记</text>
+    <text>小计</text>
     <input type='digit' value='{{total}}' disabled='true'/>
   </view>
 </view>
-<view class='title'>*药品费请在“药品记录”里填写，最后的总医疗费用会在“健康档案”里自动生成图表</view>
+<view class='title'>*<text>药品费</text>请在“药品记录”里填写，最后的总医疗费用会在“健康档案”里自动生成图表</view>
 <view style='height:222rpx;'></view>
 <view class='footer'>
   <button bindtap='submitBtn'>保存</button>
+  <view bindtap='goBack' class='goBack'>返回</view> 
 </view>

@@ -15,7 +15,8 @@ Page({
     "name":"",
     "path":"",
     "id":"",
-    "isShowBtn":false
+    "isShowBtn":false,
+    "endDate": ""
   
   },
 
@@ -174,6 +175,157 @@ Page({
  
 
   },
+  editBtn:function(){
+    var self = this;
+    if (self.data.name == "") {
+      wx.showModal({
+        title: '提示',
+        content: '请填写昵称',
+        showCancel: false
+      })
+    } else if (self.data.date == "") {
+      wx.showModal({
+        title: '提示',
+        content: '请填写生日',
+        showCancel: false
+      })
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '确定提交吗？',
+        showCancel: false,
+        success: function () {
+          try {
+            wx.showLoading()
+          }
+          catch (err) {
+            console.log("当前微信版本不支持")
+          }
+          wx.request({
+            url: api + "UserMp/addMembers",
+            method: 'POST',
+            header: header,
+            data: { session_3rd: wx.getStorageSync('token'), name: self.data.name, img: self.data.img, birthday: self.data.date, relation: parseInt(self.data.index) + 1, m_id: parseInt(self.data.id) },
+            success: function (res) {
+              try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+              if (res.data.code == 200) {
+                wx.showToast({
+                  title: "保存成功",
+                  duration: 2000,
+                  success: function () {
+                    wx.navigateTo({
+                      url: '../memberOfFamily/memberOfFamily'
+                    })
+                  }
+                })
+
+              } else if (res.data.code == 401) {
+                wx.clearStorageSync()
+                wx.showModal({
+                  title: '提示',
+                  content: '登录过期了，请重新登录！',
+                  showCancel: false,
+                  success: function (res) {
+                    wx.redirectTo({
+                      url: '../login/login'
+                    })
+                  }
+                })
+
+              } else {
+                wx.showToast({
+                  title: res.data.msg,
+                  icon: 'fail',
+                  duration: 2000
+                })
+
+              }
+            },
+            fail: function () {
+              try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+              wx.showToast({
+                title: '接口调用失败！',
+                icon: 'fail',
+                duration: 2000
+              })
+            }
+          })
+
+        }
+      })
+
+    }
+
+  },
+  delBtn:function(){
+    var self = this;
+
+      wx.showModal({
+        title: '提示',
+        content: '确定删除吗？',
+        showCancel: false,
+        success: function () {
+          try {
+            wx.showLoading()
+          }
+          catch (err) {
+            console.log("当前微信版本不支持")
+          }
+          wx.request({
+            url: api + "usermp/deleteMembers",
+            method: 'POST',
+            header: header,
+            data: { session_3rd: wx.getStorageSync('token'), m_id: parseInt(self.data.id) },
+            success: function (res) {
+              try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+              if (res.data.code == 200) {
+                wx.showToast({
+                  title: "删除成功",
+                  duration: 2000,
+                  success: function () {
+                    wx.navigateTo({
+                      url: '../memberOfFamily/memberOfFamily'
+                    })
+                  }
+                })
+
+              } else if (res.data.code == 401) {
+                wx.clearStorageSync()
+                wx.showModal({
+                  title: '提示',
+                  content: '登录过期了，请重新登录！',
+                  showCancel: false,
+                  success: function (res) {
+                    wx.redirectTo({
+                      url: '../login/login'
+                    })
+                  }
+                })
+
+              } else {
+                wx.showToast({
+                  title: res.data.msg,
+                  icon: 'fail',
+                  duration: 2000
+                })
+
+              }
+            },
+            fail: function () {
+              try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+              wx.showToast({
+                title: '接口调用失败！',
+                icon: 'fail',
+                duration: 2000
+              })
+            }
+          })
+
+        }
+      })
+
+
+  },
   checkToken: function () {
     if (wx.getStorageSync('token')) {
       if(this.data.id){
@@ -266,7 +418,19 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+    this.setData({
+      endDate: this.formatDate(new Date())
+    })
   
+  },
+  formatDate: function (now) {
+    var year = now.getFullYear();
+    var month = now.getMonth() + 1;
+    var date = now.getDate();
+    var hour = now.getHours();
+    var minute = now.getMinutes();
+    var second = now.getSeconds();
+    return year + "-" + month + "-" + date;
   },
 
   /**

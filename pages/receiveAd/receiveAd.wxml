@@ -10,12 +10,12 @@
     <view class='cao'>
     <view style='float:left'>
     <radio-group class="radio-group" bindchange="setDefault">
-      <label >
+      <label>
          <radio value="{{item.address_id}}" checked="{{item.is_default}}" />设为默认地址
       </label>
     </radio-group>
     </view>     
-    <navigator url='/pages/addAddress/addAddress?address_id={{item.address_id}}'>编辑</navigator>
+    <navigator url='/pages/addAddress/addAddress?address_id={{item.address_id}}&path=receiveAd'>编辑</navigator>
     <text bindtap='removeAdd' data-id="{{item.address_id}}">删除</text></view>   
   </view>
 </view>

@@ -13,7 +13,8 @@ Page({
     "date": "",
     "imgs": [],
     "yy":"",
-    "isShowAdd": true
+    "isShowAdd": true,
+    "endDate":""
 
   },
 
@@ -222,6 +223,31 @@ Page({
   },
   submit:function(){
     var _this = this;
+    if (_this.data.imgs.length== 0) {
+      wx.showModal({
+        title: '提示',
+        content: '请先上传后在保存',
+        showCancel: false,
+
+      })
+
+    } else if (_this.data.date=="") {
+      wx.showModal({
+        title: '提示',
+        content: '请选择就诊时间',
+        showCancel: false,
+
+      })
+      
+    } else if (_this.data.yy == "") {
+      wx.showModal({
+        title: '提示',
+        content: '请填写医院或体检中心',
+        showCancel: false,
+
+      })
+
+    }else{
     try {
       wx.showLoading()
     }
@@ -242,7 +268,6 @@ Page({
       success: function (res) {
         try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
         if (res.data.code == 200) {
-          if (_this.data.imgs.length > 0) {
             wx.showModal({
               title: '提示',
               content: '文件已保存，请到健康档案中查询上传结果',
@@ -255,14 +280,7 @@ Page({
 
             })
 
-          } else {
-            wx.showModal({
-              title: '提示',
-              content: '请先上传后在保存',
-              showCancel: false,
-
-            })
-          }
+       
 
           
 
@@ -297,6 +315,7 @@ Page({
         })
       }
     })
+    }
 
   },
 
@@ -304,7 +323,19 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+    this.setData({
+      endDate: this.formatDate(new Date())
+    })
 
+  },
+  formatDate: function (now) {
+    var year = now.getFullYear();
+    var month = now.getMonth() + 1;
+    var date = now.getDate();
+    var hour = now.getHours();
+    var minute = now.getMinutes();
+    var second = now.getSeconds();
+    return year + "-" + month + "-" + date;
   },
 
   /**

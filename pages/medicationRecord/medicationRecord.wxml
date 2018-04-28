@@ -41,7 +41,7 @@
   基本信息
 </view>
 <view class='listBox'>
-  <view>
+  <view class='jjt'>
     <text>购药时间</text>{{date}}
     <picker mode="date" value="{{date}}"  bindchange="bindDateChange">
     <view></view>

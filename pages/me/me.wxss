@@ -20,20 +20,20 @@
   display: block;
   margin: 0 auto;
 }
-.nickBox{
+.nickBoxL{
   position: absolute;
   left: 204rpx;
   height: 98rpx;
   top: 51rpx;
 }
-.nickBox view{
+.nickBoxL view{
   height: 50rpx;
   line-height: 50rpx;
   color: #111;
   font-size: 36rpx;
   margin-bottom: 8rpx;
 }
-.nickBox text{
+.nickBoxL text{
   display: block;
   height: 40rpx;
   line-height: 40rpx;

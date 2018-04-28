@@ -2,7 +2,7 @@
   <view class='imgBox'>
     <image src='{{showMember.img}}'/>
   </view>
-  <navigator class='nickBox' url='/pages/myCoin/myCoin'>
+  <navigator class='nickBoxL' url='/pages/myCoin/myCoin'>
     <view>{{showMember.name}}</view>
     <text>{{main}} 汪汪币</text>
     <view id="triangle"></view>

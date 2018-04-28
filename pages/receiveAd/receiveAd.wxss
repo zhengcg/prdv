@@ -54,3 +54,7 @@
   color: red;
   margin-left: 30rpx;
 }
+.radio-group {
+  font-size: 28rpx;
+  color: #111;
+}

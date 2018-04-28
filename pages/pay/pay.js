@@ -125,6 +125,36 @@ Page({
 
   submitBtn: function () {
     var _this = this;
+    if (_this.data.GHF == ""){
+      wx.showModal({
+        title: '提示',
+        content: '请输入挂号费',
+        showCancel: false,
+      })
+
+    } else if (_this.data.JCF==""){
+      wx.showModal({
+        title: '提示',
+        content: '请输入检测费',
+        showCancel: false,
+      })
+
+    } else if (_this.data.ZYF==""){
+      wx.showModal({
+        title: '提示',
+        content: '请输入住院费',
+        showCancel: false,
+      })
+    } else if (_this.data.ZYF == 0 && _this.data.JCF == 0 && _this.data.GHF==0){
+      wx.showModal({
+        title: '提示',
+        content: '请输入费用',
+        showCancel: false,
+      })
+
+    }else{
+
+   
     try {
       wx.showLoading()
     }
@@ -132,7 +162,7 @@ Page({
       console.log("当前微信版本不支持")
     }
     wx.request({
-      url: api + "Coreout/getJzFy",
+      url: api + "coreIn/saveJzFy",
       method: 'POST',
       header: header,
       data: { 
@@ -192,6 +222,14 @@ Page({
       }
     })
 
+    }
+
+  },
+  goBack: function () {
+    var _this = this;
+    wx.redirectTo({
+      url: '../uploadReport/uploadReport?jz_id=' + _this.data.jz_id
+    })
   },
 
   /**

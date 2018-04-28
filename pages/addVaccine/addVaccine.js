@@ -65,6 +65,23 @@ Page({
   },
   submit:function(){
     var _this = this;
+    if (_this.data.date==""){
+      wx.showModal({
+        title: '提示',
+        content: '请选择注射时间',
+        showCancel: false
+    
+      })
+    } else if (_this.data.place==""){
+      wx.showModal({
+        title: '提示',
+        content: '请填写注射地点',
+        showCancel: false
+
+      })
+    }else{
+
+   
     try {
       wx.showLoading()
     }
@@ -115,6 +132,8 @@ Page({
         })
       }
     })
+
+    }
 
   },
   getDetail: function () {

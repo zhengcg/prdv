@@ -143,6 +143,8 @@ Page({
   },
   submitBtn: function () {
     var _this = this;
+    if (_this.data.imgs.length > 0) {
+     
     try {
       wx.showLoading()
     }
@@ -158,7 +160,6 @@ Page({
         try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
         if (res.data.code == 200) {
        
-          if (_this.data.imgs.length > 0) {
             wx.showModal({
               title: '提示',
               content: '文件已保存，请到健康档案中查询上传结果',
@@ -171,14 +172,7 @@ Page({
 
             })
 
-          } else {
-            wx.showModal({
-              title: '提示',
-              content: '请先上传后在保存',
-              showCancel: false,
-
-            })
-          }
+        
 
 
         } else if (res.data.code == 401) {
@@ -212,7 +206,21 @@ Page({
         })
       }
     })
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '请先上传后在保存',
+        showCancel: false,
 
+      })
+    }
+
+  },
+  goBack: function () {
+    var _this = this;
+    wx.redirectTo({
+      url: '../uploadReport/uploadReport?jz_id=' + _this.data.jz_id
+    })
   },
 
   /**

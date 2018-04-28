@@ -41,11 +41,11 @@
 <view class='listBox'>
   <view>
     <text>就诊时间</text>{{date}}
-    <picker mode="date" value="{{date}}"  bindchange="bindDateChange">
+    <picker mode="date" value="{{date}}"  bindchange="bindDateChange"  end="{{endDate}}">
     <view></view>
     </picker>
   </view>
-  <navigator url='/pages/jzyy/jzyy?jz_id={{jz_id}}' open-type='redirect'><text>就诊医院</text>{{jzyy.yy_title}}</navigator>
+  <navigator url='/pages/jzyy/jzyy?jz_id={{jz_id}}' open-type='redirect' style='overflow:hidden'><text>就诊医院</text>{{jzyy.yy_title}}</navigator>
   <view><text>就诊科室</text>
     <picker value="{{ksIndex}}" range="{{ksList}}" range-key="{{'title'}}" bindchange="bindChangeKS">
       <view>{{ksList[ksIndex].title}}<text style='margin-right:30rpx;'></text></view>

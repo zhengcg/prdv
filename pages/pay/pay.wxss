@@ -8,7 +8,7 @@
   box-shadow: 0 -2rpx 4rpx 0 rgba(0,0,0,0.12);
 }
 .footer button{
-  width: 600rpx;
+  width: 300rpx;
   height: 88rpx;
   line-height: 88rpx;
   background: #F39800;
@@ -17,7 +17,8 @@
   color: #FFFFFF;
   top: 56rpx;
   position: absolute;
-  left: 75rpx;
+  left: 65rpx;
+  display: inline-block
 }
 .footer button::after{border: 0;}
 .listBox{
@@ -42,4 +43,8 @@
   font-size: 24rpx;
   color: #AAAAAA;
   padding: 40rpx;
+}
+.title text{
+  font-weight: bold;
+  color: #000;
 }

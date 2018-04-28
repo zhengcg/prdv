@@ -37,6 +37,14 @@
   </view>
 </view>
 <view style='text-align:center;font-size:32rpx;color: #F39800;'>请滑动选择家庭成员</view>
+<view class='wt clearfix'>
+  <view class='curDate'>{{curDate}}</view>
+  <view class='btnView'>
+    <view class='min' bindtap='minTem'>-</view>
+    <view class='curNum' >{{temNum}}℃</view>
+    <view class='add' bindtap='addTem'>+</view>
+  </view>
+</view>
 <view class='iconBox'><image src='../../images/icon20.png' wx:if="{{temNum<=37.4}}" mode='aspectFit'/><image src='../../images/icon26.png'  wx:if="{{temNum>=37.5&&temNum<=38}}"  mode='aspectFit'/><image src='../../images/icon27.png'  mode='aspectFit'  wx:if="{{temNum>=38.1&&temNum<=39}}"/><image  wx:if="{{temNum>39}}" src='../../images/icon28.png'  mode='aspectFit'/></view>
 <view class='wdj'>
   <image src='../../images/icon23.png'></image>
@@ -48,6 +56,8 @@
   <text>当前体温：{{temNum}}℃</text>
   <button bindtap='submit' hidden='{{!isCan}}'>确认</button>
 </view>
+<view class='dateView' style='margin-top:30rpx;'>开始时间：{{curDate}}</view>
+<view class='dateView'>结束时间：{{curDate}}</view>
 <view class='container' hidden='{{isCanvas}}'>
 <canvas canvas-id="lineCanvas" disable-scroll="true" class="canvas" bindtouchstart="touchHandler" bindtouchmove="moveHandler" bindtouchend="touchEndHandler"></canvas>
 </view>

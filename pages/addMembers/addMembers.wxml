@@ -18,7 +18,7 @@
   </view>
   <view>
     <text>生日</text>{{date}}
-    <picker mode="date" value="{{date}}" bindchange="bindDateChange">
+    <picker mode="date" value="{{date}}" bindchange="bindDateChange" end="{{endDate}}">
     <view></view>
     </picker>
   </view>
@@ -27,4 +27,8 @@
 <view style='height:222rpx;'></view>
 <view class='footer' hidden='{{isShowBtn}}'>
   <button bindtap='submitBtn'>保存</button>
+</view>
+<view class='footer' hidden='{{!isShowBtn}}'>
+  <button bindtap='editBtn' style='width:280rpx;'>保存</button>
+  <button bindtap='delBtn'  style='width:280rpx;left:395rpx;'>删除</button>
 </view>

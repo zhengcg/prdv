@@ -3,6 +3,8 @@ var header = app.globalData.header;
 var api = app.globalData.api;
 var wxCharts = require('../../utils/wxcharts.js');
 var pieChart = null;
+var windowWidth = 320;
+
 Page({
 
   /**
@@ -25,6 +27,13 @@ Page({
         mid: options.mid,
         name: options.name
       })
+    }
+
+    try {
+      var res = wx.getSystemInfoSync();
+      windowWidth = res.windowWidth;
+    } catch (e) {
+      console.error('getSystemInfoSync failed!');
     }
 
     
@@ -67,29 +76,28 @@ Page({
         try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
         if (re.data.code == 200) {
           var flag=false
+          var arr=[]
 
           for (var i = 0; i < re.data.data.length;i++){
-            if (re.data.data[i]==null){
-              re.data.data[i]=0
+            if (re.data.data[i].data > 0) {
+              flag = true
             }
-            re.data.data[i] = parseFloat(re.data.data[i]).toFixed(2)
-            if (re.data.data[i]>0){
-              flag=true
+            var obj={
+              name: re.data.data[i].name,
+              data: parseFloat(re.data.data[i].data)
             }
+            arr.push(obj)
+            
           }
-          if(flag){
-            var windowWidth = 320;
-            try {
-              var res = wx.getSystemInfoSync();
-              windowWidth = res.windowWidth;
-            } catch (e) {
-              console.error('getSystemInfoSync failed!');
-            }
+
+          if (flag && arr.length == re.data.data.length){
+            
             pieChart = new wxCharts({
               animation: true,
               canvasId: 'pieCanvas',
               type: 'pie',
-              series: re.data.data,
+              // series: re.data.data,
+              series:arr,
               width: windowWidth,
               height: 300,
               dataLabel: true,

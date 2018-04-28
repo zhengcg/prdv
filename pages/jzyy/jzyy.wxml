@@ -1,5 +1,5 @@
 <view class='searchBox'>
-  <view><input placeholder="输入医院名称" confirm-type="search" bindconfirm="sendMsg"/></view>
+  <view><input placeholder="输入医院名称" confirm-type="search" bindconfirm="sendMsg" bindinput='sendMsg'/></view>
 </view>
 <view style='height:96rpx'></view>
 

@@ -12,7 +12,8 @@ Page({
     "jkTab":"1",
     "members":[],
     "list":[],
-    "showMember":""
+    "showMember":"",
+    "yc":[]
     
   },
 
@@ -48,6 +49,7 @@ Page({
     }
     this.setData({ members: this.data.members })
     this.getDoc(this.data.members[parseInt(this.data.index)].id);
+    this.getYc(this.data.members[parseInt(this.data.index)].id)
     this.setData({
       showMember: this.data.members[parseInt(this.data.index)]
     })
@@ -125,6 +127,7 @@ Page({
           })
           _this.setClass();
           _this.getDoc(res.data.data[0].id)
+          _this.getYc(res.data.data[0].id)
 
         } else if (res.data.code == 401) {
           wx.clearStorageSync()
@@ -191,6 +194,57 @@ Page({
           })
 
         }  else {
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'fail',
+            duration: 2000
+          })
+
+        }
+      },
+      fail: function () {
+        try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+        wx.showToast({
+          title: '接口调用失败！',
+          icon: 'fail',
+          duration: 2000
+        })
+      }
+    })
+  },
+  getYc: function (id) {
+    var self = this;
+    try {
+      wx.showLoading()
+    }
+    catch (err) {
+      console.log("当前微信版本不支持")
+    }
+    wx.request({
+      url: api + "Coreout/getHyBad",
+      method: 'GET',
+      header: header,
+      data: { session_3rd: wx.getStorageSync('token'), m_id: id },
+      success: function (res) {
+        try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+        if (res.data.code == 200) {
+          self.setData({
+            yc: res.data.data
+          })
+        } else if (res.data.code == 401) {
+          wx.clearStorageSync()
+          wx.showModal({
+            title: '提示',
+            content: '登录过期了，请重新登录！',
+            showCancel: false,
+            success: function (res) {
+              wx.redirectTo({
+                url: '../login/login'
+              })
+            }
+          })
+
+        } else {
           wx.showToast({
             title: res.data.msg,
             icon: 'fail',

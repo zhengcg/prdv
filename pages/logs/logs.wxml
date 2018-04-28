@@ -60,7 +60,7 @@
   </scroll-view>
    <view class='dataList'  hidden='{{jkTab!=="1"}}'>
     <navigator url='/pages/hy/hy?mid={{showMember.id}}'><text>原始数据</text></navigator>
-    <navigator url='/pages/hc/hc?mid={{showMember.id}}'><text>白细胞</text>三次异常</navigator>
+    <navigator url='/pages/hc/hc?mid={{showMember.id}}&title={{item.title_cn}}' wx:for="{{yc}}" wx:key="{{index}}"><text>{{item.title_cn}}</text>{{item.num}}次异常</navigator>
   </view>
   <view class='dataList'  hidden='{{jkTab!=="2"}}'>
     <navigator url='/pages/yc/yc?mid={{showMember.id}}'><text>原始数据</text></navigator>

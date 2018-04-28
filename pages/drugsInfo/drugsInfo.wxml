@@ -11,7 +11,7 @@
   </view>
   <view>
     <text>数量：</text>
-    <input type='number' bindinput='changeNum'/>
+    <input type='number' bindinput='changeNum' maxlength='3'/>
   </view>
 </view>
 <view style='height:222rpx;'></view>

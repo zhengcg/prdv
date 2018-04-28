@@ -17,7 +17,8 @@ Page({
     "arr":[],
     "temArr":[],
     "isCanvas":false,
-    "isShowAdd": true
+    "isShowAdd": true,
+    "curDate":""
 
   },
 
@@ -62,6 +63,28 @@ Page({
   },
   touchstart(evt) {
     this.data.startX = evt.touches[0].clientX;
+  },
+  minTem:function(){
+    if (this.data.temNum>33){
+      var cur = (this.data.temNum * 10 - 1) / 10;
+      this.setData({
+        temNum: cur,
+        isCan: true
+      })
+    }
+    
+
+  },
+  addTem:function(){
+    if (this.data.temNum <42){
+      var cur = (this.data.temNum * 10 + 1) / 10;
+      this.setData({
+        temNum: cur,
+        isCan: true
+      })
+    }
+    
+
   },
   touchmove(evt) {
     if (this.data.startX > 0) {
@@ -216,7 +239,8 @@ Page({
             isCan: false,
             arr: _this.data.arr.concat(_this.formatDate(new Date())),
             temArr: _this.data.temArr.concat(_this.data.temNum),
-            isCanvas:false
+            isCanvas:false,
+            curDate: _this.formatDate(new Date())
           })
           _this.drawLine()
 
@@ -317,6 +341,9 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+    this.setData({
+      curDate: this.formatDate(new Date())
+    })
 
   },
 

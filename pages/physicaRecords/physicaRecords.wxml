@@ -43,11 +43,11 @@
 <view class='listBox'>
   <view>
     <text>就诊时间</text>{{date}}
-    <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+    <picker mode="date" value="{{date}}"  end="{{endDate}}" bindchange="bindDateChange">
     <view></view>
     </picker>
   </view>
-  <view>
+  <view style='background:none;padding-right:0'>
   <text>医院或体检中心</text>
   <input type='text' placeholder='请输入' value='{{yy}}' bindinput='changeYY'/>
   </view>

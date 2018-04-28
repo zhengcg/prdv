@@ -23,7 +23,8 @@ Page({
     "ksList":[],
     "ksIndex":0,
     "isAdd":true,
-    "isShowAdd":true
+    "isShowAdd":true,
+    "endDate":""
   },
 
   /**
@@ -44,8 +45,21 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+    this.setData({
+      endDate: this.formatDate(new Date())
+    })
+
     
 
+  },
+  formatDate: function (now) {
+    var year = now.getFullYear();
+    var month = now.getMonth() + 1;
+    var date = now.getDate();
+    var hour = now.getHours();
+    var minute = now.getMinutes();
+    var second = now.getSeconds();
+    return year + "-" + month + "-" + date;
   },
   setClass() {
     for (let i = 0; i < this.data.members.length; i++) {
@@ -70,6 +84,9 @@ Page({
 
     }
     this.setData({ members: this.data.members })
+    this.setData({
+      ksList:[]
+    })
     if (this.data.isAdd) {
       this.addJz(this.data.members[this.data.index].id);
     }
@@ -232,9 +249,6 @@ Page({
     if (wx.getStorageSync('token')) {
       this.getMembers();
       // 添加就诊（一进来先掉一次，然后实际添加数据调用修改接口）
-     
-      
-
     } else {
       wx.showModal({
         title: '提示',

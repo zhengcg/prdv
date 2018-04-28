@@ -22,13 +22,15 @@ Page({
   onLoad: function (options) {
     if (options.address_id){
       this.setData({
-        address_id: options.address_id
+        address_id: options.address_id,
+        path: options.path
       })
     }else{
       this.setData({
         path: options.path
       })
     }
+    console.log()
 
     this.checkToken()
 
@@ -58,9 +60,6 @@ Page({
     })
     console.log(e.detail.value)
 
-  },
-  switchChange: function (e) {
-    console.log('switch2 发生 change 事件，携带值为', e.detail.value)
   },
   checkToken: function () {
     if (wx.getStorageSync('token')) {
@@ -214,7 +213,7 @@ Page({
                     duration: 2000,
                     success: function () {
                       wx.redirectTo({
-                        url: '../receiveAd/receiveAd'
+                        url: '../' + self.data.path + '/' + self.data.path
                       })
                     }
                   })

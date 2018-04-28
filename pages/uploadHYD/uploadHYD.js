@@ -217,6 +217,12 @@ Page({
    
 
   },
+  goBack:function(){
+    var _this=this;
+    wx.redirectTo({
+      url: '../uploadReport/uploadReport?jz_id=' + _this.data.jz_id
+    })
+  },
   sbHYD: function (img) {
     var _this = this;
     try {
