@@ -19,24 +19,26 @@
 <view class='swiper'>
 <view class="rongqi"  bindtouchmove='touchmove' bindtouchstart='touchstart'>
   <navigator   url="/pages/addMembers/addMembers?id={{item.id}}" wx:for="{{members}}"  wx:key="{{item.id}}" class="item {{item.class}}" on>
-        <view class='headImg'>
-          <image src='{{item.img}}'/>
-        </view>
+        
         <view class='nickBox'>
           {{item.name}}
         </view>
+        <view class='headImg'>
+          <image src='{{item.img}}'/>
+        </view>
       </navigator>
      <view class="item itemright3" on catchtap='gotoAdd' hidden='{{isShowAdd}}'>
-     <view class='headImg'>
-          <image src='../../images/icon24.png'/>
-        </view>
+     
         <view class='nickBox' >
           添加
+        </view>
+        <view class='headImg'>
+          <image src='../../images/icon24.png'/>
         </view>
      </view>
   </view>
   </view>
-  <view style='text-align:center;font-size:32rpx;color: #F39800;'>请滑动选择家庭成员</view>
+
 <view class='title'>
   基本信息
 </view>

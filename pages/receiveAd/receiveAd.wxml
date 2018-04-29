@@ -1,6 +1,4 @@
-<navigator class='addBtn' url='/pages/addAddress/addAddress?path=receiveAd'>
-  <button><text>+</text> 添加</button>
-</navigator>
+
 <view class='listBox'>
   <view wx:for="{{list}}" wx:key="{{item.address_id}}">
     <view class='con'>
@@ -9,13 +7,17 @@
     </view>
     <view class='cao'>
     <view style='float:left'>
-    <radio-group class="radio-group" bindchange="setDefault">
-      <label>
-         <radio value="{{item.address_id}}" checked="{{item.is_default}}" />设为默认地址
-      </label>
-    </radio-group>
+      <checkbox-group bindchange="setDefault">
+        <label>
+          <checkbox value="{{item.address_id}}" checked="{{item.is_default}}"/><text wx:if="{{item.is_default}}" style='color:#111;margin-left:0'>默认地址</text><text wx:else  style='color:#111;margin-left:0'>设为默认地址</text>
+        </label>
+      </checkbox-group>
     </view>     
     <navigator url='/pages/addAddress/addAddress?address_id={{item.address_id}}&path=receiveAd'>编辑</navigator>
     <text bindtap='removeAdd' data-id="{{item.address_id}}">删除</text></view>   
   </view>
 </view>
+<view style='height:110rpx;'></view>
+<navigator class='addBtn' url='/pages/addAddress/addAddress?path=receiveAd'>
+<text>+</text> 添加
+</navigator>

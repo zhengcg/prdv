@@ -13,7 +13,10 @@ Page({
     "members":[],
     "list":[],
     "showMember":"",
-    "yc":[]
+    "yc":[],
+    "endDate": "",
+    "dateStart":"",
+    "dateEnd":""
     
   },
 
@@ -85,7 +88,29 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    var _this=this;
+    this.setData({
+      endDate: this.formatDate(new Date()),
+      dateEnd: this.formatDate(new Date()),
+      dateStart: this.lastDate(new Date())
+    })
+  },
+  formatDate: function (now) {
+    var year = now.getFullYear();
+    var month = now.getMonth() + 1;
+    var date = now.getDate();
+    var hour = now.getHours();
+    var minute = now.getMinutes();
+    var second = now.getSeconds();
+    return year + "-" + month + "-" + date;
+  },
+  lastDate: function(now) {
+    var year = now.getFullYear();
+    var month = now.getMonth();
+    var date = now.getDate();
+    var hour = now.getHours();
+    var minute = now.getMinutes();
+    var second = now.getSeconds();
+    return year + "-" + month + "-" + date;
   },
   checkToken: function () {
     if (wx.getStorageSync('token')) {
@@ -173,7 +198,12 @@ Page({
       url: api + "Coreout/getDoc",
       method: 'GET',
       header: header,
-      data: { session_3rd: wx.getStorageSync('token'),m_id:id },
+      data: { 
+        session_3rd: wx.getStorageSync('token'),
+        m_id:id,
+        mni_time:self.data.dateStart,
+        max_time:self.data.dateEnd
+         },
       success: function (res) {
         try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
         if (res.data.code == 200) {
@@ -224,7 +254,12 @@ Page({
       url: api + "Coreout/getHyBad",
       method: 'GET',
       header: header,
-      data: { session_3rd: wx.getStorageSync('token'), m_id: id },
+      data: { 
+        session_3rd: wx.getStorageSync('token'),
+        m_id: id,
+        mni_time: self.data.dateStart,
+        max_time: self.data.dateEnd
+      },
       success: function (res) {
         try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
         if (res.data.code == 200) {
@@ -268,6 +303,23 @@ Page({
     this.setData({
       showMember: this.data.members[parseInt(e.detail.current)]
     })
+  },
+  changeStart:function(e){
+    this.setData({
+      dateStart: e.detail.value
+    })
+
+  },
+  changeEnd: function (e) {
+    this.setData({
+      dateEnd: e.detail.value
+    })
+
+  },
+  submitRange:function(){
+    this.getDoc(this.data.members[parseInt(this.data.index)].id);
+    this.getYc(this.data.members[parseInt(this.data.index)].id)
+
   },
 
 

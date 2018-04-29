@@ -15,17 +15,16 @@
 <view class='swiper'>
 <view class="rongqi"  bindtouchmove='touchmove' bindtouchstart='touchstart'>
   <navigator   url="/pages/addMembers/addMembers?id={{item.id}}" wx:for="{{members}}"  wx:key="{{item.id}}" class="item {{item.class}}" on>
-        <view class='headImg'>
-          <image src='{{item.img}}'/>
-        </view>
+        
         <view class='nickBox'>
           {{item.name}}
+        </view>
+        <view class='headImg'>
+          <image src='{{item.img}}'/>
         </view>
       </navigator>
   </view>
 </view>
-<view style='text-align:center;font-size:32rpx;color: #F39800;'>请滑动选择家庭成员</view>
-  
 <view class='tabNav'>
   <view class='{{tabCur=="1"?"cur":"default"}}' bindtap='changeTab' data-index="1">
     健康档案
@@ -40,15 +39,35 @@
     <text></text>
   </view>
 </view>
+<view class='dateRange'  hidden='{{tabCur!=="1"}}'>
+  <view class="section">
+    <picker mode="date" value="{{dateStart}}"   end="{{endDate}}"bindchange="changeStart">
+      <view class="picker">
+        {{dateStart}}
+      </view>
+    </picker>
+    <image src='../../images/icon29.png'></image>
+  </view>
+  <text>至</text>
+   <view class="section">
+    <picker mode="date" value="{{dateEnd}}"   end="{{endDate}}"bindchange="changeEnd">
+      <view class="picker">
+        {{dateEnd}}
+      </view>
+    </picker>
+    <image src='../../images/icon29.png'></image>
+  </view>
+  <button bindtap='submitRange'>查询</button>
+
+</view>
 <view class='logBox' hidden='{{tabCur!=="1"}}'>
-  <view class='time'>2017年12月{{showMember.name}}一共</view>
-  <navigator url="/pages/hospital/hospital?mid={{showMember.id}}">去过{{list[0].num}}次医院</navigator>
-  <navigator url="/pages/department/department?mid={{showMember.id}}">到过{{list[1].num}}个科室</navigator>
-  <navigator url="/pages/drugs/drugs?mid={{showMember.id}}">使用过{{list[2].num}}种药品</navigator>
-  <navigator url="/pages/temperature/temperature?mid={{showMember.id}}">测过{{list[3].num}}次体温</navigator>
-  <navigator url="/pages/vaccine/vaccine?mid={{showMember.id}}">打过{{list[5].num}}次疫苗</navigator>
-  <navigator url="/pages/physical/physical?mid={{showMember.id}}">有过{{list[4].num}}次体检</navigator>
-  <navigator url="/pages/expenditure/expenditure?mid={{showMember.id}}&name={{showMember.name}}">医疗支出共 ¥{{list[6].jz_yy_fy}}</navigator>
+  <navigator url="/pages/hospital/hospital?mid={{showMember.id}}&mni_time={{dateStart}}&max_time={{dateEnd}}">去过{{list[0].num}}次医院</navigator>
+  <navigator url="/pages/department/department?mid={{showMember.id}}&mni_time={{dateStart}}&max_time={{dateEnd}}">到过{{list[1].num}}个科室</navigator>
+  <navigator url="/pages/drugs/drugs?mid={{showMember.id}}&mni_time={{dateStart}}&max_time={{dateEnd}}">使用过{{list[2].num}}种药品</navigator>
+  <navigator url="/pages/temperature/temperature?mid={{showMember.id}}&mni_time={{dateStart}}&max_time={{dateEnd}}">测过{{list[3].num}}次体温</navigator>
+  <navigator url="/pages/vaccine/vaccine?mid={{showMember.id}}&mni_time={{dateStart}}&max_time={{dateEnd}}">打过{{list[5].num}}次疫苗</navigator>
+  <navigator url="/pages/physical/physical?mid={{showMember.id}}&mni_time={{dateStart}}&max_time={{dateEnd}}">有过{{list[4].num}}次体检</navigator>
+  <navigator url="/pages/expenditure/expenditure?mid={{showMember.id}}&name={{showMember.name}}&mni_time={{dateStart}}&max_time={{dateEnd}}">医疗支出共 ¥{{list[6].jz_yy_fy}}</navigator>
 </view>
 <view class='dataBox' hidden='{{tabCur!=="2"}}'>
   <scroll-view scroll-x="true" class='btnBox'>

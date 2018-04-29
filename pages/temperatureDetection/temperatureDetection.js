@@ -18,7 +18,13 @@ Page({
     "temArr":[],
     "isCanvas":false,
     "isShowAdd": true,
-    "curDate":""
+    "curDate":"2018-04-29",
+    "curTime":"00:00",
+    "endDate": "",
+    "dateStart": "",
+    "dateEnd": "",
+    "timeStart":"",
+    "timeEnd":""
 
   },
 
@@ -52,6 +58,7 @@ Page({
 
     }
     this.setData({ members: this.data.members })
+    this.getTW(this.data.members[this.data.index].id)
     this.setData({
       temNum: 33,
       "isCan": false,
@@ -132,6 +139,7 @@ Page({
     if (wx.getStorageSync('token')) {
       this.getMembers();
       // 添加就诊（一进来先掉一次，然后实际添加数据调用修改接口）
+      
 
 
     } else {
@@ -146,6 +154,10 @@ Page({
         }
       })
     }
+  },
+  submitRange:function(){
+    this.getTW(this.data.members[this.data.index].id)
+
   },
   // 获取家属列表
   getMembers: function () {
@@ -202,12 +214,105 @@ Page({
       }
     })
   },
+  // 查询体温
+  getTW: function (id) {
+    var _this = this;
+    try {
+      wx.showLoading()
+    }
+    catch (err) {
+      console.log("当前微信版本不支持")
+    }
+    wx.request({
+      url: api + "CoreOut/getTw",
+      method: 'GET',
+      header: header,
+      data: { 
+        session_3rd: wx.getStorageSync('token'),
+        m_id:id,
+        mni_time:_this.data.dateStart+" "+_this.data.timeStart,
+        max_time: _this.data.dateEnd + " " + _this.data.timeEnd
+
+         },
+      success: function (res) {
+        try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+        if (res.data.code == 200) {
+          var arr=[];
+          var temArr=[];
+          if (res.data.data.length>0){
+            for (var i = 0; i < res.data.data.length; i++) {
+              arr.push(res.data.data[i].do_time.slice(5, 10));
+              temArr.push(parseFloat(res.data.data[i].temperature));
+            }
+            _this.setData({
+              arr:arr,
+              temArr:temArr,
+              isCanvas:false
+            })
+            _this.drawLine()
+            
+
+          }
+          // else {
+          //   wx.showModal({
+          //     title: '提示',
+          //     content: '所选时间段没有体温监测记录',
+          //     showCancel: false
+
+          //   })
+
+          // }
+
+          
+
+        } else if (res.data.code == 401) {
+          wx.clearStorageSync()
+          wx.showModal({
+            title: '提示',
+            content: '登录过期了，请重新登录！',
+            showCancel: false,
+            success: function (res) {
+              wx.redirectTo({
+                url: '../login/login'
+              })
+            }
+          })
+
+        } else {
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'fail',
+            duration: 2000
+          })
+
+        }
+      },
+      fail: function () {
+        try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+        wx.showToast({
+          title: '接口调用失败！',
+          icon: 'fail',
+          duration: 2000
+        })
+      }
+    })
+  },
   changeTem:function(e){
     this.setData({
       temNum:parseInt(e.detail.value)/10,
       isCan:true
     })
 
+  },
+  
+  lastDate: function (now) {
+    var year = now.getFullYear();
+    var month = now.getMonth();
+    var date = now.getDate();
+    var hour = now.getHours();
+    var minute = now.getMinutes();
+    var second = now.getSeconds();
+    return year + "-" + month + "-" + date + " " + hour + ":" + minute; 
   },
   formatDate:function (now) { 
     var year= now.getFullYear(); 
@@ -216,7 +321,19 @@ Page({
     var hour= now.getHours(); 
     var minute= now.getMinutes(); 
     var second= now.getSeconds(); 
-    return year+ "-" + month + "-" + date + " " + hour + ":" + minute + ":" + second; 
+    return year+ "-" + month + "-" + date + " " + hour + ":" + minute; 
+  },
+  changeWTDate:function(e){
+    this.setData({
+      curDate: e.detail.value
+    })
+
+  },
+  changeWTTime: function (e) {
+    this.setData({
+      curTime: e.detail.value
+    })
+
   },
   submit:function(){
     var _this = this;
@@ -230,17 +347,23 @@ Page({
       url: api + "CoreIn/addTw",
       method: 'POST',
       header: header,
-      data: { session_3rd: wx.getStorageSync('token'), m_id: _this.data.members[_this.data.index].id, do_time: new Date(), temperature: _this.data.temNum },
+      data: { 
+        session_3rd: wx.getStorageSync('token'), 
+        m_id: _this.data.members[_this.data.index].id, 
+        do_time:_this.data.curDate+" "+this.data.curTime, 
+        temperature: _this.data.temNum 
+        },
       success: function (res) {
         try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
         if (res.data.code == 200) {
 
           _this.setData({
             isCan: false,
-            arr: _this.data.arr.concat(_this.formatDate(new Date())),
+            arr: _this.data.arr.concat(_this.formatDate(new Date()).slice(5,10)),
             temArr: _this.data.temArr.concat(_this.data.temNum),
             isCanvas:false,
-            curDate: _this.formatDate(new Date())
+            curDate: (_this.formatDate(new Date()).split(" "))[0],
+            curTime: (_this.formatDate(new Date()).split(" "))[1],
           })
           _this.drawLine()
 
@@ -342,7 +465,14 @@ Page({
    */
   onReady: function () {
     this.setData({
-      curDate: this.formatDate(new Date())
+      endDate: this.formatDate(new Date()),
+      curDate: (this.formatDate(new Date()).split(" "))[0],
+      curTime: (this.formatDate(new Date()).split(" "))[1],
+      dateEnd: (this.formatDate(new Date()).split(" "))[0],
+      dateStart:(this.lastDate(new Date()).split(" "))[0],
+      timeEnd: (this.formatDate(new Date()).split(" "))[1],
+      timeStart: (this.lastDate(new Date()).split(" "))[1],
+      
     })
 
   },

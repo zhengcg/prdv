@@ -13,7 +13,9 @@ Page({
   data: {
     mid: '',
     name: '',
-    list:[]
+    list: [],
+    mni_time: '',
+    max_time: ''
 
   },
 
@@ -25,6 +27,8 @@ Page({
     if (options.mid) {
       this.setData({
         mid: options.mid,
+        mni_time: options.mni_time,
+        max_time: options.max_time,
         name: options.name
       })
     }
@@ -69,7 +73,9 @@ Page({
       url: api + 'Coreout/getJzFy', //仅为示例，并非真实的接口地址
       data: {
         m_id: self.data.mid,
-        session_3rd: wx.getStorageSync('token')
+        session_3rd: wx.getStorageSync('token'),
+        mni_time: self.data.mni_time,
+        max_time: self.data.max_time
       },
       method: 'GET',
       success: function (re) {

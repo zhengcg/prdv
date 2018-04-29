@@ -13,7 +13,10 @@
    <view class='plus' bindtap='plusNum'>+</view>
   </view>
 </view>
-<view class='addAdr' hidden='{{isYDZ}}'><navigator url='/pages/addAddress/addAddress?path=goodsDetail'>添加收货地址</navigator></view>
+<view class='addAdr' hidden='{{isYDZ}}'><navigator url='/pages/addAddress/addAddress?path=goodsDetail'>
+<view>添加收货地址</view>
+<text>还没有收货地址，请点击添加</text>
+</navigator></view>
 
 <view class='listBox' hidden='{{!isYDZ}}'>
   <view style='border-bottom:none'>

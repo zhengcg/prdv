@@ -10,13 +10,20 @@ Page({
     "members": [],
     "index": 0,
     "date": "",
+    "gyyy":"",
+    "gydd":"",
     "items": [
       { name: '药店', value: 1 },
       { name: '医院', value: 2, checked: 'true'}
     ],
+    "list":[],
     path:"",
     mid:"",
-    "isShowAdd": true
+    isYS:"",
+    "isShowAdd": true,
+    "radioValue":1,
+    "code":"",
+    "endDate": ""
   
   },
 
@@ -24,27 +31,76 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if(options.mid){
-      this.setData({
-        path:options.path,
-        mid:options.mid
 
-      })
-    }else{
-      this.setData({
-        path: options.path
-
-      })
-
-    }
     if(options.path=="index"){
       this.setData({
         "items": [
           { name: '药店', value: 1, checked: 'true' },
           { name: '医院', value: 2 }
-        ]
+        ],
+        "radioValue": 1,
+        "path":options.path,
+        "isYS":1
+        
+
       })
+    } else if (options.path == "uploadReport"){
+      this.setData({
+        "items": [
+          { name: '医院', value: 2, checked: 'true' }
+        ],
+        "isShowYY": false,
+        "radioValue": 2,
+        "path":options.path,
+        "isYS": 2,
+        "date": options.date,
+        "gyyy": options.gyyy
+      })
+      
+
     }
+    if(options.paths){
+      this.setData({       
+        "path": options.paths,
+        "date":options.date,
+        "radioValue": parseInt(options.radioValue),
+        "index": options.index,
+        "gyyy":options.gyyy,
+        "gydd":options.gydd,
+        "isYS": parseInt(options.isYS)
+      })
+      if (parseInt(options.radioValue)==1){
+        if (parseInt(options.isYS)==1){
+          this.setData({
+            "items": [
+              { name: '药店', value: 1, checked: 'true' },
+              { name: '医院', value: 2 }
+            ]
+
+          })
+
+        }else{
+          this.setData({
+            "items": [
+              { name: '药店', value: 1 },
+              { name: '医院', value: 2, checked: 'true' }
+            ]
+
+          })
+
+        }
+      }else{
+        this.setData({
+          "items": [
+            { name: '医院', value: 2, checked: 'true' }
+          ]
+        })
+        
+
+      }
+
+    }
+
     this.checkToken()
   
   },
@@ -70,7 +126,14 @@ Page({
       }
 
     }
-    this.setData({ members: this.data.members })
+    this.setData({ members: this.data.members });
+    if(this.data.date){
+      this.getYYMX()
+    }else{
+      this.setData({
+        list:[]
+      })
+    }
   },
   touchstart(evt) {
     this.data.startX = evt.touches[0].clientX;
@@ -104,18 +167,38 @@ Page({
     }
   },
   radioChange: function (e) {
-    console.log('radio发生change事件，携带value值为：', e.detail.value)
+    this.setData({
+      isYS:parseInt(e.detail.value)
+    })
+
+  },
+  changeCode:function(e){
+    this.setData({
+      code: e.detail.value
+    })
+
   },
   scanFn:function(){
     var self=this;
-    wx.scanCode({
-      success: (res) => {
-        console.log(res.result)
-        wx.redirectTo({
-          url: '../drugsInfo/drugsInfo?code='+res.result+'&mid='+self.data.members[self.data.index].id
-        })
-      }
-    })
+    if(this.data.code==""){
+      wx.showModal({
+        title: '提示',
+        content: '请填写国药准字编号',
+        showCancel: false
+      })
+
+    }else if(this.data.date==""){
+      wx.showModal({
+        title: '提示',
+        content: '请填写购药时间',
+        showCancel: false
+      })
+
+    }else{
+      wx.navigateTo({
+        url: '../drugsInfo/drugsInfo?code=' + self.data.code + '&mid=' + self.data.members[self.data.index].id + '&date=' + self.data.date + '&radioValue=' + self.data.radioValue + '&index=' + self.data.index + '&path=' + self.data.path + '&gyyy=' + self.data.gyyy + '&isYS=' + self.data.isYS+ '&gydd=' + self.data.gydd 
+      })
+    }
 
   },
   // 切换家属
@@ -133,6 +216,137 @@ Page({
     this.setData({
       date: e.detail.value
     })
+    this.getYYMX()
+  },
+  removeYYMM:function(e){
+    var id=e.currentTarget.dataset.id;
+    wx.showModal({
+      title: '提示',
+      content: '确定要删除吗？',
+      success: function (res) {
+        if (res.confirm) {
+          
+    
+    var _this = this;
+    try {
+      wx.showLoading()
+    }
+    catch (err) {
+      console.log("当前微信版本不支持")
+    }
+    wx.request({
+      url: api + "CoreIn/deleteYy",
+      method: 'GET',
+      header: header,
+      data: { 
+        session_3rd: wx.getStorageSync('token'),
+        id: id,
+
+        },
+      success: function (res) {
+        try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+        if (res.data.code == 200) {
+
+          _this.getYYMX()
+
+        } else if (res.data.code == 401) {
+          wx.clearStorageSync()
+          wx.showModal({
+            title: '提示',
+            content: '登录过期了，请重新登录！',
+            showCancel: false,
+            success: function (res) {
+              wx.redirectTo({
+                url: '../login/login'
+              })
+            }
+          })
+
+        } else {
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'fail',
+            duration: 2000
+          })
+
+        }
+      },
+      fail: function () {
+        try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+        wx.showToast({
+          title: '接口调用失败！',
+          icon: 'fail',
+          duration: 2000
+        })
+      }
+    })
+
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+    
+
+  },
+  getYYMX:function(){
+    var _this = this;
+    try {
+      wx.showLoading()
+    }
+    catch (err) {
+      console.log("当前微信版本不支持")
+    }
+    wx.request({
+      url: api + "Coreout/getYy",
+      method: 'GET',
+      header: header,
+      data: { 
+        session_3rd: wx.getStorageSync('token'),
+         m_id:_this.data.members[_this.data.index].id,
+         mni_time:_this.data.date,
+         max_time: _this.data.date
+       },
+      success: function (res) {
+        try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+        if (res.data.code == 200) {
+
+          _this.setData({
+            list: res.data.data
+          })
+
+        } else if (res.data.code == 401) {
+          wx.clearStorageSync()
+          wx.showModal({
+            title: '提示',
+            content: '登录过期了，请重新登录！',
+            showCancel: false,
+            success: function (res) {
+              wx.redirectTo({
+                url: '../login/login'
+              })
+            }
+          })
+
+        } else {
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'fail',
+            duration: 2000
+          })
+
+        }
+      },
+      fail: function () {
+        try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+        wx.showToast({
+          title: '接口调用失败！',
+          icon: 'fail',
+          duration: 2000
+        })
+      }
+    })
+
   },
   checkToken: function () {
     if (wx.getStorageSync('token')) {
@@ -213,7 +427,18 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+    this.setData({
+      endDate: this.formatDate(new Date())
+    })
+  },
+  formatDate: function (now) {
+    var year = now.getFullYear();
+    var month = now.getMonth() + 1;
+    var date = now.getDate();
+    var hour = now.getHours();
+    var minute = now.getMinutes();
+    var second = now.getSeconds();
+    return year + "-" + month + "-" + date;
   },
 
   /**

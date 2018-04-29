@@ -11,7 +11,14 @@ Page({
     info:{},
     price:'',
     num:'',
-    mid:''
+    mid:'',
+    date:'',
+    radioValue:'',
+    index:'',
+    path:"",
+    gyyy:'',
+    gydd:'',
+    isYS:''
   
   },
 
@@ -22,7 +29,14 @@ Page({
     if(options.code){
       this.setData({
         code: options.code,
-        mid:options.mid
+        mid:options.mid,
+        date: options.date,
+        radioValue: options.radioValue,
+        index:options.index,
+        path:options.path,
+        gyyy:options.gyyy,
+        gydd:options.gydd,
+        isYS: options.isYS
       })
     }
 
@@ -151,7 +165,7 @@ Page({
           if (res.data.code == 200) {
 
             wx.redirectTo({
-              url: '../medicationRecord/medicationRecord?mid='+_this.data.mid+"&path=index"
+              url: '../medicationRecord/medicationRecord?mid=' + _this.data.mid + '&date=' + _this.data.date + '&radioValue=' + _this.data.radioValue + '&index=' + _this.data.index + '&paths=' + _this.data.path + '&gyyy=' + _this.data.gyyy + '&gydd=' + _this.data.gydd + '&isYS=' + _this.data.isYS
             })
 
           } else if (res.data.code == 401) {

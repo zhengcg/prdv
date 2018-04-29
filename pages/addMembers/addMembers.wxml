@@ -1,4 +1,10 @@
-<view class='headBox'>
+
+<view class='headBox y' wx:if="{{!img}}">
+  <view bindtap='chooseImg'>
+    <image src='{{img}}'/>
+  </view>
+</view>
+<view class='headBox' wx:else>
   <view bindtap='chooseImg'>
     <image src='{{img}}'/>
   </view>
@@ -29,6 +35,7 @@
   <button bindtap='submitBtn'>保存</button>
 </view>
 <view class='footer' hidden='{{!isShowBtn}}'>
-  <button bindtap='editBtn' style='width:280rpx;'>保存</button>
-  <button bindtap='delBtn'  style='width:280rpx;left:395rpx;'>删除</button>
+<button bindtap='delBtn'  style='width:280rpx;'>删除</button>
+  <button bindtap='editBtn' style='width:280rpx;left:395rpx;'>保存</button>
+  
 </view>

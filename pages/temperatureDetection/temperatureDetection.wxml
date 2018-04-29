@@ -19,26 +19,38 @@
 <view class='swiper'>
 <view class="rongqi"  bindtouchmove='touchmove' bindtouchstart='touchstart'>
   <navigator   url="/pages/addMembers/addMembers?id={{item.id}}" wx:for="{{members}}"  wx:key="{{item.id}}" class="item {{item.class}}" on>
-        <view class='headImg'>
-          <image src='{{item.img}}'/>
-        </view>
+        
         <view class='nickBox'>
           {{item.name}}
         </view>
+        <view class='headImg'>
+          <image src='{{item.img}}'/>
+        </view>
       </navigator>
      <view class="item itemright3" on catchtap='gotoAdd' hidden='{{isShowAdd}}'>
-     <view class='headImg'>
-          <image src='../../images/icon24.png'/>
-        </view>
+    
         <view class='nickBox' >
           添加
+        </view>
+         <view class='headImg'>
+          <image src='../../images/icon24.png'/>
         </view>
      </view>
   </view>
 </view>
-<view style='text-align:center;font-size:32rpx;color: #F39800;'>请滑动选择家庭成员</view>
 <view class='wt clearfix'>
-  <view class='curDate'>{{curDate}}</view>
+  <view class='curDate'>
+      <picker mode="date" value="{{curDate}}" bindchange="changeWTDate" end="{{endDate}}">
+        <view class="picker">
+           {{curDate}}
+        </view>
+      </picker>
+      <picker mode="time" value="{{curTime}}" bindchange="changeWTTime">
+        <view class="picker">
+           {{curTime}}
+        </view>
+      </picker>
+  </view>
   <view class='btnView'>
     <view class='min' bindtap='minTem'>-</view>
     <view class='curNum' >{{temNum}}℃</view>
@@ -56,8 +68,38 @@
   <text>当前体温：{{temNum}}℃</text>
   <button bindtap='submit' hidden='{{!isCan}}'>确认</button>
 </view>
-<view class='dateView' style='margin-top:30rpx;'>开始时间：{{curDate}}</view>
-<view class='dateView'>结束时间：{{curDate}}</view>
+<view style='margin-top:30rpx;height:1rpx;box-shadow: 0 -1px 2px 0 rgba(0,0,0,0.12);'></view>
+<view class='dateView clearfix' style='margin-top:30rpx;'>
+      
+      <picker mode="date" value="{{dateStart}}" bindchange="changeDateStart" end="{{endDate}}">
+      
+        <view class="picker">
+        开始时间：
+           {{dateStart}}
+        </view>
+      </picker>
+      <picker mode="time" value="{{timeStart}}" bindchange="changeTimeStart">
+        <view class="picker">
+           {{timeStart}}
+        </view>
+      </picker>
+</view>
+<view class='dateView clearfix'>
+    
+    <picker mode="date" value="{{dateEnd}}" bindchange="changeDateEnd" end="{{endDate}}">
+    
+        <view class="picker">
+        结束时间：
+           {{dateEnd}}
+        </view>
+      </picker>
+      <picker mode="time" value="{{timeEnd}}" bindchange="changeTimeEnd">
+        <view class="picker">
+           {{timeEnd}}
+        </view>
+      </picker>
+      <button bindtap='submitRange'>查询</button>
+</view>
 <view class='container' hidden='{{isCanvas}}'>
 <canvas canvas-id="lineCanvas" disable-scroll="true" class="canvas" bindtouchstart="touchHandler" bindtouchmove="moveHandler" bindtouchend="touchEndHandler"></canvas>
 </view>

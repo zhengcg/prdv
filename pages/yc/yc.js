@@ -10,7 +10,7 @@ Page({
     mid:'',
     page:1,
     number:5,
-    list:[]
+    list: []
   
   },
 
@@ -19,7 +19,7 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      mid:options.mid
+      mid: options.mid
     })
 
     this.checkToken()

@@ -1,54 +1,44 @@
-<!-- <swiper style='height:310rpx;' bindchange="changeJs" current='{{index}}'>
-  <block wx:for="{{members}}" wx:key="{{item.id}}"  >
-    <swiper-item id="{{item.id}}">
-      <navigator class='head'  url="/pages/addMembers/addMembers?id={{item.id}}">
-        <view class='headImg'>
-          <image src='{{item.img}}'/>
-        </view>
-        <view class='nickBox'>
-          {{item.name}}
-        </view>
-        <view class='addBtn' catchtap='gotoAdd' hidden='{{members.length>0}}'>+</view>
-        <view class='addBox' catchtap='gotoAdd' hidden='{{members.length>0}}'>   
-          <text>添加</text>
-        </view>
-      </navigator>
-    </swiper-item>
-  </block>
-</swiper>  -->
 <view class='swiper'>
 <view class="rongqi"  bindtouchmove='touchmove' bindtouchstart='touchstart'>
   <navigator   url="/pages/addMembers/addMembers?id={{item.id}}" wx:for="{{members}}"  wx:key="{{item.id}}" class="item {{item.class}}" on>
-        <view class='headImg'>
-          <image src='{{item.img}}'/>
-        </view>
+        
         <view class='nickBox'>
           {{item.name}}
         </view>
+        <view class='headImg'>
+          <image src='{{item.img}}'/>
+        </view>
       </navigator>
      <view class="item itemright3" on catchtap='gotoAdd' hidden='{{isShowAdd}}'>
-     <view class='headImg'>
-          <image src='../../images/icon24.png'/>
-        </view>
+     
         <view class='nickBox' >
           添加
+        </view>
+        <view class='headImg'>
+          <image src='../../images/icon24.png'/>
         </view>
      </view>
   </view>
 </view>
-<view style='text-align:center;font-size:32rpx;color: #F39800;'>请滑动选择家庭成员</view>
-<view class='title'>
-  基本信息
-</view>
 <view class='listBox'>
-  <view class='jjt'>
+  <view class='jjt'  hidden='{{isYS==2}}'>
     <text>购药时间</text>{{date}}
-    <picker mode="date" value="{{date}}"  bindchange="bindDateChange">
+    <picker mode="date" value="{{date}}"  bindchange="bindDateChange" end="{{endDate}}">
     <view></view>
     </picker>
   </view>
+  <view class='jjt' hidden='{{isYS==1}}'>
+    <text>购药时间</text>{{date}}
+  </view>
+  <navigator class='jjt' hidden='{{isYS==2}}'>
+    <text>购药医院</text>{{gyyy}}
+  </navigator>
+  <view class='jjt' hidden='{{isYS==1}}'>
+    <text>购药医院</text>{{gyyy}}
+  </view>
   <view>
   <text>购药地点</text>
+  <input type='text' hidden='{{radioValue==2}}'></input>
   <radio-group class="radio-group" bindchange="radioChange">
     <label class="radio" wx:for="{{items}}" wx:key="{{index}}">
       <radio value="{{item.value}}" checked="{{item.checked}}"/>{{item.name}}
@@ -57,23 +47,29 @@
   
   </view>
   <view>
-  <text>药品信息</text><text class='small'>扫描药盒条形码</text>
-  <image src='../../images/icon19.png' class='scan' bindtap='scanFn'/>
+  <text>药品信息</text>
+  <input type='text' style='width:450rpx;' placeholder='请输入国药准字编号'  bindinput='changeCode'></input>
+  <text style="float:right;color: #F39800;" bindtap='scanFn'>查询</text>
   </view>
- 
+</view>
+<view class='slBox'>
+<text>示例：</text>
+<image src='../../images/icon30.png'></image>
 </view>
 
 <view style='padding:40rpx;'>
   <view id="panel" class="flex-column">
     <view class="flex-row flex-cell">
-      <text class="flex-cell flex-row">阿斯匹林</text>
-      <text class="flex-cell flex-row">75mg</text>
-      <text class="flex-cell flex-row">金额200元</text>
+      <text class="flex-cell flex-row"></text>
+      <text class="flex-cell flex-row">药品名称</text>
+      <text class="flex-cell flex-row">数量</text>
+      <text class="flex-cell flex-row">单价</text>
     </view>
-   <view class="flex-row flex-cell">
-      <text class="flex-cell flex-row">阿斯匹林</text>
-      <text class="flex-cell flex-row">75mg</text>
-      <text class="flex-cell flex-row">金额200元</text>
+   <view class="flex-row flex-cell" wx:for="{{list}}" wx:key="{{index}}">
+      <text class="flex-cell flex-row trR" data-id="{{item.id}}" bindtap='removeYYMM'></text>
+      <text class="flex-cell flex-row">{{item.title}}</text>
+      <text class="flex-cell flex-row">{{item.amount}}</text>
+      <text class="flex-cell flex-row">{{item.price}}</text>
     </view>
 
   </view>

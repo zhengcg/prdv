@@ -1,6 +1,6 @@
 {
   "pages":[ 
-    
+  
     "pages/login/login", 
     "pages/goodsDetail/goodsDetail",
     "pages/exchangeList/exchangeList",
@@ -9,13 +9,14 @@
     "pages/addAddress/addAddress",
     "pages/receiveAd/receiveAd",
     "pages/me/me",
+    "pages/medicationRecord/medicationRecord",
     "pages/temperatureDetection/temperatureDetection",
+    "pages/logs/logs", 
     "pages/personalData/personalData",
     "pages/addMembers/addMembers",
     "pages/index/index",
     "pages/uploadReport/uploadReport",
     "pages/memberOfFamily/memberOfFamily",
-    "pages/logs/logs", 
     "pages/hospital/hospital",
     "pages/department/department",
     "pages/drugs/drugs",
@@ -31,8 +32,7 @@
     "pages/tj/tj",
     "pages/jzyy/jzyy",
     "pages/addVaccine/addVaccine",
-    "pages/vaccineRecord/vaccineRecord",
-    
+    "pages/vaccineRecord/vaccineRecord", 
     "pages/contactService/contactService",
     "pages/physicaRecords/physicaRecords",
     "pages/help/help",
@@ -42,8 +42,7 @@
     "pages/uploadBLJL/uploadBLJL",
     "pages/uploadCFD/uploadCFD",
     "pages/uploadHYD/uploadHYD",
-    "pages/drugsInfo/drugsInfo",
-    "pages/medicationRecord/medicationRecord",
+    "pages/drugsInfo/drugsInfo",   
     "pages/pay/pay",
     "pages/uploadYXBG/uploadYXBG"   
   ],

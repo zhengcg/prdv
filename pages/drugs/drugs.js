@@ -10,7 +10,9 @@ Page({
     mid: '',
     page: 1,
     number: 15,
-    list: []
+    list: [],
+    mni_time: '',
+    max_time: ''
 
   },
 
@@ -20,7 +22,9 @@ Page({
   onLoad: function (options) {
     if (options.mid) {
       this.setData({
-        mid: options.mid
+        mid: options.mid,
+        mni_time: options.mni_time,
+        max_time: options.max_time
       })
     }
 
@@ -65,7 +69,9 @@ Page({
         m_id: self.data.mid,
         number: self.data.number,
         page: self.data.page,
-        session_3rd: wx.getStorageSync('token')
+        session_3rd: wx.getStorageSync('token'),
+        mni_time: self.data.mni_time,
+        max_time: self.data.max_time
       },
       method: 'GET',
       success: function (res) {

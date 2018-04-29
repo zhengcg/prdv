@@ -87,46 +87,73 @@ height: 90rpx;
 }
 .rongqi .item{
   float: left;
-  /* border:2rpx solid blue; */
-  height:200rpx;
+  height:110rpx;
   width:200rpx;
   position:absolute;
   left:-200rpx;
-  top:50rpx;
+  top:148rpx;
+  text-align: center;
 }
 .rongqi .item.itemcenter{
   float: left;
-  /* border:2rpx solid yellow; */
-  height:350rpx;
+  height:160rpx;
   width:350rpx;
-  top:40rpx;
+  top:116rpx;
 }
 .rongqi .headImg{
-  width: 100rpx;
-  height: 100rpx;
-  margin-left: -50rpx;
-  margin-top: -80rpx;
+  width: 76rpx;
+  height: 76rpx;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -148rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #ccc;
+   border: 6rpx solid rgba(255,255,255,0.50);
+   opacity: 0.6;
+
 }
 .rongqi .headImg image{
-  width: 96rpx;
-  height: 96rpx;
+  width: 76rpx;
+  height: 76rpx;
+  
+ 
 }
 .rongqi .item.itemcenter .headImg{
-  margin-top: -160rpx;
-  width: 140rpx;
-  height: 140rpx;
-  margin-left: -70rpx;
+  width: 124rpx;
+  height: 124rpx;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -222rpx;
+  opacity: 1;
   
 }
 .rongqi .item.itemcenter .headImg image{
-  width: 136rpx;
-  height: 136rpx;
+    width: 124rpx;
+    height: 124rpx;
+
+}
+.rongqi .item .nickBox{
+  border-radius: 16rpx;
+  text-align: center;
+  box-sizing: border-box;
+  margin: 0 auto;
+  background: #FFFFFF;
+  box-shadow: 0 2rpx 10rpx 0 rgba(167,173,73,0.56);
+  font-size: 14px;
+  color: #111111;
+  height: 110rpx;
+  padding-top: 50rpx;
 
 }
 .rongqi .item.itemcenter .nickBox{
-  height: 200rpx;
-  padding-top: 120rpx;
+  height: 160rpx;
+  width: 300rpx;
+   padding-top: 80rpx; 
+  font-size: 32rpx;
   color: #F39800;
+  
+  
 }
 .rongqi .item.itemleft1{
   left:-200rpx;
@@ -159,16 +186,9 @@ height: 90rpx;
 }
 .swiper{
   overflow: hidden;
-  height: 350rpx;
+  height: 300rpx;
 }
-.nickBox{
-  width: 80%!important;
-  border-radius: 10rpx;
-  margin-left: -40%!important;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
+
 .goBack{
   width: 300rpx;
   height: 88rpx;
@@ -179,7 +199,7 @@ height: 90rpx;
   color: #FFFFFF;
   top: 56rpx;
   position: absolute;
-  right: 65rpx;
+  left: 65rpx;
   display: inline-block;
   text-align: center;
 }
