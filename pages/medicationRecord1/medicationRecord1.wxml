@@ -21,18 +21,15 @@
   </view>
 </view>
 <view class='listBox'>
-  <view class='jjt'>
+  <view>
     <text>购药时间</text>{{date}}
-    <picker mode="date" value="{{date}}"  bindchange="bindDateChange" end="{{endDate}}">
-    <view></view>
-    </picker>
   </view>
-  <view class='jjt'  bindtap='gotoJZYY' hidden='{{isYS==1}}'>
+  <view>
     <text>购药医院</text>{{gyyyTitle}}
   </view>
   <view>
   <text>购药地点</text>
-  <input type='text' hidden='{{isYS==2}}'></input>
+  <input type='text' hidden='{{radioValue==2}}'></input>
   <radio-group class="radio-group" bindchange="radioChange">
     <label class="radio" wx:for="{{items}}" wx:key="{{index}}">
       <radio value="{{item.value}}" checked="{{item.checked}}"/>{{item.name}}

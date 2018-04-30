@@ -176,6 +176,17 @@ Page({
       success: function (res) {
         try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
         if (res.data.code == 200) {
+          if (res.data.data.length == 1) {
+            _this.setData({
+              "isShowAdd": false
+            })
+
+          } else {
+            _this.setData({
+              "isShowAdd": true
+            })
+
+          }
 
           _this.setData({
             members: res.data.data
@@ -241,7 +252,7 @@ Page({
           var temArr=[];
           if (res.data.data.length>0){
             for (var i = 0; i < res.data.data.length; i++) {
-              arr.push(res.data.data[i].do_time.slice(5, 10));
+              arr.push(res.data.data[i].do_time);
               temArr.push(parseFloat(res.data.data[i].temperature));
             }
             _this.setData({
@@ -359,7 +370,7 @@ Page({
 
           _this.setData({
             isCan: false,
-            arr: _this.data.arr.concat(_this.formatDate(new Date()).slice(5,10)),
+            arr: _this.data.arr.concat(_this.formatDate(new Date())),
             temArr: _this.data.temArr.concat(_this.data.temNum),
             isCanvas:false,
             curDate: (_this.formatDate(new Date()).split(" "))[0],
@@ -411,8 +422,8 @@ Page({
     lineChart.scrollEnd(e);
     lineChart.showToolTip(e, {
       format: function (item, category) {
-        return category
-        // return category + ' ' + item.name + ':' + item.data
+        // return category
+        return category +  ',' + item.data
       }
     });
   },
@@ -430,7 +441,7 @@ Page({
       canvasId: 'lineCanvas',
       type: 'line',
       categories: self.data.arr,
-      animation: false,
+      animation: true,
       series: [{
         name: '体温',
         data: self.data.temArr,
@@ -450,9 +461,9 @@ Page({
       },
       width: windowWidth,
       height: 200,
-      dataLabel: true,
+      dataLabel: false,
       dataPointShape: true,
-      enableScroll: true,
+      // enableScroll: true,
       extra: {
         lineStyle: 'curve'
       }

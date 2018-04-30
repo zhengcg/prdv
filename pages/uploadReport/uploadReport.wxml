@@ -1,21 +1,4 @@
-<!-- <swiper style='height:310rpx;' bindchange="changeJs" current='{{index}}'>
-  <block wx:for="{{members}}" wx:key="{{item.id}}"  >
-    <swiper-item id="{{item.id}}">
-      <navigator class='head'  url="/pages/addMembers/addMembers?id={{item.id}}">
-        <view class='headImg'>
-          <image src='{{item.img}}'/>
-        </view>
-        <view class='nickBox'>
-          {{item.name}}
-        </view>
-        <view class='addBtn' catchtap='gotoAdd' hidden='{{members.length>0}}'>+</view>
-        <view class='addBox' catchtap='gotoAdd' hidden='{{members.length>0}}'>   
-          <text>添加</text>
-        </view>
-      </navigator>
-    </swiper-item>
-  </block>
-</swiper>  -->
+
 <view class='swiper'>
   <view class="rongqi"  bindtouchmove='touchmove' bindtouchstart='touchstart'>
   <navigator   url="/pages/addMembers/addMembers?id={{item.id}}" wx:for="{{members}}"  wx:key="{{item.id}}" class="item {{item.class}}" on>
@@ -53,12 +36,12 @@
   </view>
 </view>
 <view class='imgBox'>
-  <navigator url='/pages/uploadHYD/uploadHYD?jz_id={{jz_id}}'  open-type='redirect' class='sm'>化验单<text>带参考值范围的</text></navigator>
-  <navigator url='/pages/uploadYXBG/uploadYXBG?jz_id={{jz_id}}'  open-type='redirect' class='sm'>影像报告<text>带影像的，如B超</text></navigator>
-  <navigator url='/pages/uploadCFD/uploadCFD?jz_id={{jz_id}}'  open-type='redirect'>处方单</navigator>
-  <navigator url='/pages/uploadBLJL/uploadBLJL?jz_id={{jz_id}}'  open-type='redirect'>病例记录</navigator>
- <navigator url='/pages/medicationRecord/medicationRecord?jz_id={{jz_id}}&path=uploadReport&date={{date}}&gyyy={{jzyy.yy_title}}'  open-type='redirect'>用药记录</navigator>
-  <navigator url='/pages/pay/pay?jz_id={{jz_id}}'  open-type='redirect'>医疗费用</navigator>
+  <view class='sm' bindtap='gotoHYD'>化验单<text>带参考值范围的</text></view>
+  <view class='sm' bindtap='gotoYXBG'>影像报告<text>带影像的，如B超</text></view>
+  <view bindtap='gotoCFD'>处方单</view>
+  <view bindtap='gotoBLJL'>病例记录</view>
+ <view bindtap='gotoYYJL'>用药记录</view>
+  <view bindtap='gotoPAY'>医疗费用</view>
 </view>
 
 

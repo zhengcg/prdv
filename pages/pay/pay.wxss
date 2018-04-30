@@ -29,6 +29,7 @@
   border-bottom: 1rpx solid #E5E5E5;
   height: 90rpx;
   line-height: 90rpx;
+  position: relative;
 }
 .listBox text{
   float: left;
@@ -43,6 +44,7 @@
   font-size: 24rpx;
   color: #AAAAAA;
   padding: 40rpx;
+
 }
 .title text{
     color: #F39800;

@@ -10,20 +10,19 @@ Page({
     "members": [],
     "index": 0,
     "date": "",
-    "gyyy":"",
+    "gyyyID":"",
+    "gyyyTitle": "",
     "gydd":"",
     "items": [
-      { name: '药店', value: 1 },
-      { name: '医院', value: 2, checked: 'true'}
+      { name: '药店', value: 1, checked: 'true' },
+      { name: '医院', value: 2 }
     ],
     "list":[],
-    path:"",
-    mid:"",
-    isYS:"",
-    "isShowAdd": true,
-    "radioValue":1,
+    "mid":"",
+    "isYS":1,
     "code":"",
-    "endDate": ""
+    "endDate": "",
+    "isShowAdd":true
   
   },
 
@@ -31,71 +30,33 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
-    if(options.path=="index"){
-      this.setData({
-        "items": [
-          { name: '药店', value: 1, checked: 'true' },
-          { name: '医院', value: 2 }
-        ],
-        "radioValue": 1,
-        "path":options.path,
-        "isYS":1
-        
-
-      })
-    } else if (options.path == "uploadReport"){
-      this.setData({
-        "items": [
-          { name: '医院', value: 2, checked: 'true' }
-        ],
-        "isShowYY": false,
-        "radioValue": 2,
-        "path":options.path,
-        "isYS": 2,
-        "date": options.date,
-        "gyyy": options.gyyy
-      })
+    if(options.path){
       
-
-    }
-    if(options.paths){
-      this.setData({       
-        "path": options.paths,
-        "date":options.date,
-        "radioValue": parseInt(options.radioValue),
+      this.setData({
+        "date": options.date,
         "index": options.index,
-        "gyyy":options.gyyy,
-        "gydd":options.gydd,
-        "isYS": parseInt(options.isYS)
+        "gyyyId": options.gyyyId,
+        "gyyyTitle": options.gyyyTitle,
+        "gydd": options.gydd,
+        "isYS": parseInt(options.isYS),
       })
-      if (parseInt(options.radioValue)==1){
-        if (parseInt(options.isYS)==1){
-          this.setData({
-            "items": [
-              { name: '药店', value: 1, checked: 'true' },
-              { name: '医院', value: 2 }
-            ]
-
-          })
-
-        }else{
-          this.setData({
-            "items": [
-              { name: '药店', value: 1 },
-              { name: '医院', value: 2, checked: 'true' }
-            ]
-
-          })
-
-        }
-      }else{
+      if (parseInt(options.isYS) == 1) {
         this.setData({
           "items": [
+            { name: '药店', value: 1, checked: 'true' },
+            { name: '医院', value: 2 }
+          ]
+
+        })
+
+      } else {
+        this.setData({
+          "items": [
+            { name: '药店', value: 1 },
             { name: '医院', value: 2, checked: 'true' }
           ]
+
         })
-        
 
       }
 
@@ -194,10 +155,40 @@ Page({
         showCancel: false
       })
 
-    }else{
-      wx.navigateTo({
-        url: '../drugsInfo/drugsInfo?code=' + self.data.code + '&mid=' + self.data.members[self.data.index].id + '&date=' + self.data.date + '&radioValue=' + self.data.radioValue + '&index=' + self.data.index + '&path=' + self.data.path + '&gyyy=' + self.data.gyyy + '&isYS=' + self.data.isYS+ '&gydd=' + self.data.gydd 
-      })
+    } else{
+      if(this.data.isYS==1){
+        if(this.data.gydd==""){
+          wx.showModal({
+            title: '提示',
+            content: '请填写购药地点',
+            showCancel: false
+          })
+
+        }else{
+          wx.navigateTo({
+            url: '../drugsInfo/drugsInfo?code=' + self.data.code + '&mid=' + self.data.members[self.data.index].id + '&date=' + self.data.date + '&index=' + self.data.index + '&gyyyId=' + self.data.gyyyId + '&isYS=' + self.data.isYS + '&gydd=' + self.data.gydd + '&gyyyTitle=' + self.data.gyyyTitle
+          })
+          
+        }
+
+      }else{
+        if (self.data.gyyyTitle == "") {
+          wx.showModal({
+            title: '提示',
+            content: '请选择购药医院',
+            showCancel: false
+          })
+
+        } else {
+          wx.navigateTo({
+            url: '../drugsInfo/drugsInfo?code=' + self.data.code + '&mid=' + self.data.members[self.data.index].id + '&date=' + self.data.date + '&index=' + self.data.index + '&gyyyId=' + self.data.gyyyId + '&isYS=' + self.data.isYS + '&gydd=' + self.data.gydd + '&gyyyTitle=' + self.data.gyyyTitle
+          })
+
+        }
+
+
+      }
+   
     }
 
   },
@@ -219,6 +210,7 @@ Page({
     this.getYYMX()
   },
   removeYYMM:function(e){
+    var self = this;
     var id=e.currentTarget.dataset.id;
     wx.showModal({
       title: '提示',
@@ -227,7 +219,7 @@ Page({
         if (res.confirm) {
           
     
-    var _this = this;
+    
     try {
       wx.showLoading()
     }
@@ -247,7 +239,7 @@ Page({
         try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
         if (res.data.code == 200) {
 
-          _this.getYYMX()
+          self.getYYMX()
 
         } else if (res.data.code == 401) {
           wx.clearStorageSync()
@@ -350,10 +342,7 @@ Page({
   },
   checkToken: function () {
     if (wx.getStorageSync('token')) {
-      this.getMembers();
-      // 添加就诊（一进来先掉一次，然后实际添加数据调用修改接口）
-
-
+        this.getMembers();
     } else {
       wx.showModal({
         title: '提示',
@@ -384,10 +373,20 @@ Page({
       success: function (res) {
         try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
         if (res.data.code == 200) {
+          if (res.data.data.length == 1) {
+            _this.setData({
+              "isShowAdd": false
+            })
 
-          _this.setData({
-            members: res.data.data
-          })
+          } else {
+            _this.setData({
+              "isShowAdd": true
+            })
+
+          }
+            _this.setData({
+              members: res.data.data
+            })         
           _this.setClass()
 
         } else if (res.data.code == 401) {
@@ -483,41 +482,22 @@ Page({
   
   },
   submit:function(){
-    var self=this;
-    if(this.data.path=="index"){
-      wx.showToast({
-        title: '请到我的健康档案查询上传结果',
-        icon: 'success',
-        duration: 2000,
-        success: function () {
-          wx.switchTab({
-            url: '../index/index',
-          })
-
-        }
-
-      })
-      
-
-    }else{
-      wx.showToast({
-        title: '请到我的健康档案查询上传结果',
-        icon: 'success',
-        duration: 2000,
-        success: function () {
-          wx.redirectTo({
-            url: '../uploadReport/uploadReport?jz_id=' + self.data.jz_id
-          })
-
-        }
-
-      })
-    }
-
+    wx.switchTab({
+      url: '../index/index',
+    })
+ 
+           
   },
   gotoAdd: function () {
     wx.navigateTo({
       url: '../addMembers/addMembers?path=medicationRecord'
     })
+  },
+  gotoJZYY:function(){
+    var self=this;
+    wx.redirectTo({
+      url: '../jzyy1/jzyy1?code=' + self.data.code + '&mid=' + self.data.members[self.data.index].id + '&date=' + self.data.date + '&index=' + self.data.index +'&isYS=' + self.data.isYS + '&gydd=' + self.data.gydd
+    })
+
   }
 })

@@ -21,11 +21,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    console.log(options.index)
     if(options.id){
       this.setData({
         id: parseInt(options.id),
-        mid: parseInt(options.mid)
+        mid: parseInt(options.mid),
+        index: parseInt(options.index)
       })
     }
     this.checkToken()
@@ -98,7 +99,7 @@ Page({
         if (res.data.code == 200) {
 
           wx.navigateTo({
-            url: '../vaccineRecord/vaccineRecord'
+            url: '../vaccineRecord/vaccineRecord?index='+_this.data.index
           })
 
         } else if (res.data.code == 401) {

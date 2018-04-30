@@ -1,21 +1,4 @@
-<!-- <swiper style='height:310rpx;' bindchange="changeJs" current='{{index}}'>
-  <block wx:for="{{members}}" wx:key="{{item.id}}"  >
-    <swiper-item id="{{item.id}}">
-      <navigator class='head'  url="/pages/addMembers/addMembers?id={{item.id}}">
-        <view class='headImg'>
-          <image src='{{item.img}}'/>
-        </view>
-        <view class='nickBox'>
-          {{item.name}}
-        </view>
-        <view class='addBtn' catchtap='gotoAdd' hidden='{{members.length>0}}'>+</view>
-        <view class='addBox' catchtap='gotoAdd' hidden='{{members.length>0}}'>   
-          <text>添加</text>
-        </view>
-      </navigator>
-    </swiper-item>
-  </block>
-</swiper>   -->
+
 <view class='swiper'>
 <view class="rongqi"  bindtouchmove='touchmove' bindtouchstart='touchstart'>
   <navigator   url="/pages/addMembers/addMembers?id={{item.id}}" wx:for="{{members}}"  wx:key="{{item.id}}" class="item {{item.class}}" on>
@@ -39,26 +22,27 @@
   </view>
 </view>
 <view class='headTit'>
-  距离下次疫苗还有4天
+  距离下次疫苗还有{{n}}天
   <view class='n2'><text class='l1'></text><text>选打</text></view>
   <view class='n1'><text class='l1'></text><text>必打</text></view>
 </view>
-
 <view class='listBox'>
-<scroll-view scroll-y="true">
-  <view class='list' wx:for="{{list}}" wx:key="{{index}}">
+<scroll-view scroll-y="true" style='height:900rpx;'   scroll-into-view='{{cityListId}}' scroll-with-animation>
+<view>
+  <view class='list' wx:for="{{list}}" wx:key="{{index}}" id="n{{index}}">
     <view class='dateTime'><text>{{item.name}}</text></view>
     <view class='rigBox'>
      <scroll-view scroll-x>
-        <navigator wx:for="{{item.info}}" wx:key="{{index}}" wx:for-item='jtem' url='/pages/addVaccine/addVaccine?id={{jtem.id}}&mid={{showMember.id}}'>
-          <image src='../../images/icon21.png' wx-if='{{jtem.is_must==1}}'/>
-          <image src='../../images/icon22.png' wx-if='{{jtem.is_must==2}}'/>
-          <text>{{jtem.title}}{{jtem.is_must}}</text>
-        </navigator>
+        <view class='ss' wx:for="{{item.info}}" wx:key="{{index}}" wx:for-item='jtem'  bindtap='gotoAddV' data-id="{{jtem.id}}">
+          <image src='../../images/icon05.png' wx-if='{{jtem.is_done==1}}'/>
+          <image src='../../images/icon21.png' wx-if='{{jtem.is_must==1&&jtem.is_done==0}}'/>
+          <image src='../../images/icon22.png' wx-if='{{jtem.is_must==2&&jtem.is_done==0}}'/>
+          <text>{{jtem.title}}\n<text style='font-size:18rpx;'>{{jtem.nums}}</text></text>
+        </view>
       </scroll-view>
     </view>
    
   </view>
-
+</view>
   </scroll-view>
 </view>

@@ -289,6 +289,13 @@ Page({
                   }
                 })
 
+              } else if (res.data.code == 400){
+                wx.showToast({
+                  title: "不能删除本人",
+                  duration: 2000
+                  
+                })
+
               } else if (res.data.code == 401) {
                 wx.clearStorageSync()
                 wx.showModal({

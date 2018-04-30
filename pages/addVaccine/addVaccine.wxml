@@ -1,5 +1,5 @@
 <view class='listBox'>
-  <view>
+  <view class="twj">
     <text>注射时间</text>{{date}}
     <picker mode="date" value="{{date}}"  bindchange="bindDateChange">
     <view></view>
@@ -13,6 +13,8 @@
 
 <button bindtap='submit'>保存</button>
 <view class='sm'>
-<view class='tit'>{{detail.title}}</view>
-{{detail.content}}
+<view class='tit'>{{detail.title}} {{detail.nums}}</view>
+<view style='text-indent:70rpx;'>{{detail.reason}}</view>
+<view style='text-indent:70rpx;'>{{detail.principle}}</view>
+<view style='text-indent:70rpx;'>{{detail.method}}</view>
 </view>

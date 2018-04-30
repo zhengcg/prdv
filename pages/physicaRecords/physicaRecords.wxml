@@ -49,9 +49,9 @@
     <view></view>
     </picker>
   </view>
-  <view style='background:none;padding-right:0'>
+  <view bindtap='gotoJZYY'>
   <text>医院或体检中心</text>
-  <input type='text' placeholder='请输入' value='{{yy}}' bindinput='changeYY'/>
+  {{gyyyTitle}}
   </view>
  
 </view>

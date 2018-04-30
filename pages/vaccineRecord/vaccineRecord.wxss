@@ -79,7 +79,7 @@
   font-size: 28rpx;
   color: #111111;
   padding: 0 36rpx;
-  width: 240rpx;
+  width: 185rpx;
   box-sizing: border-box;
   vertical-align: middle;
 }
@@ -91,7 +91,7 @@
    padding: 36rpx; 
   font-size: 24rpx;
   color: #111111;
-  width: 510rpx;
+  width: 565rpx;
   box-sizing: border-box;
   overflow: hidden;
 }
@@ -106,6 +106,15 @@
   margin-right: 30rpx;
 }
 .list scroll-view navigator image{
+  display: block;
+  margin: 0 auto;
+}
+.list scroll-view view.ss{
+  display: inline-block;
+  text-align: center;
+  margin-right: 30rpx;
+}
+.list scroll-view view.ss image{
   display: block;
   margin: 0 auto;
 }

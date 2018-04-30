@@ -14,7 +14,8 @@ Page({
     "imgs": [],
     "yy":"",
     "isShowAdd": true,
-    "endDate":""
+    "endDate":"",
+    "gyyyTitle":""
 
   },
 
@@ -22,6 +23,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if(options.index){
+      console.log(options.imgs)
+      this.setData({
+        imgs: options.imgs==""?[]:options.imgs.split(","),
+        index:options.index,
+        date:options.date,
+        yy:parseInt(options.yy),
+        gyyyTitle: options.gyyyTitle
+      })
+    }
     this.checkToken()
 
   },
@@ -140,6 +151,17 @@ Page({
       success: function (res) {
         try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
         if (res.data.code == 200) {
+          if (res.data.data.length == 1) {
+            _this.setData({
+              "isShowAdd": false
+            })
+
+          } else {
+            _this.setData({
+              "isShowAdd": true
+            })
+
+          }
 
           _this.setData({
             members: res.data.data
@@ -383,5 +405,12 @@ Page({
     wx.navigateTo({
       url: '../addMembers/addMembers?path=physicaRecords'
     })
+  },
+  gotoJZYY:function(){
+    var self=this;
+    wx.redirectTo({
+      url: '../jzyy2/jzyy2?index=' + self.data.index + '&date=' + self.data.date + '&imgs=' + (self.data.imgs).toString(),
+    })
+
   }
 })

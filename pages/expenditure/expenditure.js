@@ -89,7 +89,7 @@ Page({
               flag = true
             }
             var obj={
-              name: re.data.data[i].name,
+              name: re.data.data[i].name + "¥ " + parseFloat(re.data.data[i].data),
               data: parseFloat(re.data.data[i].data)
             }
             arr.push(obj)

@@ -1,2 +1,7 @@
-<!--pages/hc/hc.wxml-->
-<text>pages/hc/hc.wxml</text>
+<view class='nameBox'>{{title}}</view>
+<view class='container' hidden='{{isCanvas}}'>
+<canvas canvas-id="lineCanvas" disable-scroll="true" class="canvas" bindtouchstart="touchHandler" bindtouchmove="moveHandler" bindtouchend="touchEndHandler"></canvas>
+</view>
+<view class='rangeBox'>
+  正常范围:{{range}}
+</view>

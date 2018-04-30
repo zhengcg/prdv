@@ -8,12 +8,14 @@ Page({
    */
   data: {
       members: [],
-      index: 0,
+      indexs: 0,
       page: 1,
       number: 20,
       list: [],
       showMember: "",
-      "isShowAdd": true
+      isShowAdd: true,
+      n:0,
+      cityListId:""
 
   },
 
@@ -21,25 +23,32 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    
+    if(options.index){
+      this.setData({
+        indexs: parseInt(options.index)
+      })
+    }
+    console.log(this.data.indexs)
     this.checkToken()
 
   },
   setClass() {
     for (let i = 0; i < this.data.members.length; i++) {
       let obj = this.data.members[i];
-      if (this.data.index - i == 3) {
+      if (this.data.indexs - i == 3) {
         obj.class = "itemleft1"
-      } else if (this.data.index - i == 2) {
+      } else if (this.data.indexs - i == 2) {
         obj.class = "itemleft2"
-      } else if (this.data.index - i == 1) {
+      } else if (this.data.indexs - i == 1) {
         obj.class = "itemleft3"
-      } else if (this.data.index - i == 0) {
+      } else if (this.data.indexs - i == 0) {
         obj.class = "itemcenter"
-      } else if (this.data.index - i == -1) {
+      } else if (this.data.indexs - i == -1) {
         obj.class = "itemright3"
-      } else if (this.data.index - i == -2) {
+      } else if (this.data.indexs - i == -2) {
         obj.class = "itemright2"
-      } else if (this.data.index - i == -3) {
+      } else if (this.data.indexs - i == -3) {
         obj.class = "itemright1"
       } else {
         obj.class = ""
@@ -48,8 +57,9 @@ Page({
     }
     this.setData({ members: this.data.members })
     this.setData({
-      showMember: this.data.members[parseInt(this.data.index)]
+      cityListId: ""
     })
+    this.getList(this.data.members[parseInt(this.data.indexs)].id);
   },
   touchstart(evt) {
     this.data.startX = evt.touches[0].clientX;
@@ -57,8 +67,8 @@ Page({
   touchmove(evt) {
     if (this.data.startX > 0) {
       if (evt.touches[0].clientX > this.data.startX) {
-        if (this.data.index > 0) {
-          this.data.index--;
+        if (this.data.indexs > 0) {
+          this.data.indexs--;
           this.setClass();
           this.setData({
             isShowAdd: true
@@ -66,10 +76,10 @@ Page({
         }
 
       } else if (evt.touches[0].clientX < this.data.startX) {
-        if (this.data.index < this.data.members.length - 1) {
-          this.data.index++;
+        if (this.data.indexs < this.data.members.length - 1) {
+          this.data.indexs++;
           this.setClass();
-          if (this.data.index == this.data.members.length - 1) {
+          if (this.data.indexs == this.data.members.length - 1) {
             this.setData({
               isShowAdd: false
             })
@@ -81,14 +91,6 @@ Page({
 
 
     }
-  },
-  // 切换家属
-  bindPickerChange: function (e) {
-    var self = this;
-    self.setData({
-      index: parseInt(e.detail.current),
-      showMember: self.data.members[parseInt(e.detail.current)]
-    })
   },
   checkToken: function () {
     if (wx.getStorageSync('token')) {
@@ -126,12 +128,22 @@ Page({
       success: function (res) {
         try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
         if (res.data.code == 200) {
+          if (res.data.data.length == 1) {
+            _this.setData({
+              "isShowAdd": false
+            })
+
+          } else {
+            _this.setData({
+              "isShowAdd": true
+            })
+
+          }
 
           _this.setData({
-            members: res.data.data,
-            showMember: res.data.data[0]
+            members: res.data.data
           })
-          _this.getList(res.data.data[0].id);
+          
           _this.setClass()
 
         } else if (res.data.code == 401) {
@@ -187,12 +199,35 @@ Page({
       success: function (res) {
         try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
         if (res.data.code == 200) {
-          if (res.data.data.length) {
-
+          if (res.data.data.info.length) {
+            
             self.setData({
               page: self.data.page + 1,
-              list: self.data.list.concat(res.data.data)
+              list: res.data.data.info,
+              n: res.data.data.distance
+              
             })
+
+            for (var i = 0; i < res.data.data.info.length; i++) {
+              var list = []
+              if (self.data.cityListId == "") {
+                for (var j = 0; j < res.data.data.info[i].info.length; j++) {
+                  if (res.data.data.info[i].info[j].is_show == 1) {
+                    self.setData({
+                      cityListId: "n" + i
+                    });
+                    break;
+                  }
+                }
+
+              } else {
+                break
+              }
+
+
+            }
+            console.log(self.data.cityListId)
+      
           } else {
             wx.showToast({
               title: '没有了！',
@@ -264,7 +299,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    this.getList(this.data.showMember.id)
+    // this.getList(this.data.showMember.id)
 
   },
 
@@ -272,6 +307,15 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+
+  },
+  gotoAddV:function(e){
+    var self=this;
+    var id=e.currentTarget.dataset.id;
+    console.log(id);
+    wx.navigateTo({
+      url: '../addVaccine/addVaccine?id=' + id + '&mid=' + self.data.members[self.data.indexs].id + '&index=' + self.data.indexs
+    })
 
   },
   gotoAdd: function () {

@@ -1,0 +1,62 @@
+.footer{
+  position: fixed;
+  height: 200rpx;
+  bottom: 22rpx;
+  width: 100%;
+  left: 0;
+  background: #fff;
+  box-shadow: 0 -2rpx 4rpx 0 rgba(0,0,0,0.12);
+}
+.footer button{
+  width: 600rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  background: #F39800;
+  border-radius: 44rpx;
+  font-size:30rpx;
+  color: #FFFFFF;
+  top: 56rpx;
+  position: absolute;
+  left: 75rpx;
+}
+.footer button::after{border: 0;}
+.listBox{
+  padding: 0 40rpx;
+}
+.listBox view{
+  font-size: 32rpx;
+  color: #111111;
+  padding: 40rpx 0;
+  border-bottom: 1rpx solid #E5E5E5;
+
+}
+.listBox view text{
+  font-size: 28rpx;
+  color: #666666;
+  display: inline-block;
+  width: 100rpx;
+}
+.formBox{
+  padding: 0 40rpx;
+}
+.formBox view{
+  padding: 30rpx 0 0 0;
+}
+.formBox view text{
+  font-size: 28rpx;
+  color: #666666;
+  display: inline-block;
+  width: 100rpx;
+  height: 84rpx;
+  line-height: 84rpx;
+}
+.formBox view input{
+  height: 84rpx;
+  line-height: 84rpx;
+  box-sizing: border-box;
+  border: 1rpx solid #EBEEF3;
+  width: 570rpx;
+  display: inline-block;
+  vertical-align: middle;
+  padding: 0 40rpx;
+}

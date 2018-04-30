@@ -279,6 +279,17 @@ Page({
       success: function (res) {
         try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
         if (res.data.code == 200) {
+          if (res.data.data.length==1){
+            _this.setData({
+              "isShowAdd": false
+            })
+            
+          }else{
+            _this.setData({
+              "isShowAdd": true
+            })
+
+          }
           
           _this.setData({
             members: res.data.data   
@@ -572,5 +583,143 @@ Page({
     wx.navigateTo({
       url: '../addMembers/addMembers?path=uploadReport',
     }) 
+  },
+  gotoHYD:function(){
+    var self=this;
+    if(this.data.date==""){
+      wx.showModal({
+        title: '提示',
+        content: '请先选择就诊时间',
+        showCancel: false
+      })
+
+    } else if (this.data.jzyy.yy_title==""){
+      wx.showModal({
+        title: '提示',
+        content: '请先选择就诊医院',
+        showCancel: false
+      })
+
+    }else{
+      wx.redirectTo({
+        url: '../uploadHYD/uploadHYD?jz_id='+self.data.jz_id,
+      })
+
+    }
+  },
+  gotoYXBG: function () {
+    var self = this;
+    if (this.data.date == "") {
+      wx.showModal({
+        title: '提示',
+        content: '请先选择就诊时间',
+        showCancel: false
+      })
+
+    } else if (this.data.jzyy.yy_title == "") {
+      wx.showModal({
+        title: '提示',
+        content: '请先选择就诊医院',
+        showCancel: false
+      })
+
+    } else {
+      wx.redirectTo({
+        url: '../uploadYXBG/uploadYXBG?jz_id=' + self.data.jz_id,
+      })
+
+    }
+  },
+  gotoCFD: function () {
+    var self = this;
+    if (this.data.date == "") {
+      wx.showModal({
+        title: '提示',
+        content: '请先选择就诊时间',
+        showCancel: false
+      })
+
+    } else if (this.data.jzyy.yy_title == "") {
+      wx.showModal({
+        title: '提示',
+        content: '请先选择就诊医院',
+        showCancel: false
+      })
+
+    } else {
+      wx.redirectTo({
+        url: '../uploadCFD/uploadCFD?jz_id=' + self.data.jz_id,
+      })
+
+    }
+  },
+  gotoBLJL: function () {
+    var self = this;
+    if (this.data.date == "") {
+      wx.showModal({
+        title: '提示',
+        content: '请先选择就诊时间',
+        showCancel: false
+      })
+
+    } else if (this.data.jzyy.yy_title == "") {
+      wx.showModal({
+        title: '提示',
+        content: '请先选择就诊医院',
+        showCancel: false
+      })
+
+    } else {
+      wx.redirectTo({
+        url: '../uploadBLJL/uploadBLJL?jz_id=' + self.data.jz_id,
+      })
+
+    }
+  },
+  gotoYYJL: function () {
+    var self = this;
+    if (this.data.date == "") {
+      wx.showModal({
+        title: '提示',
+        content: '请先选择就诊时间',
+        showCancel: false
+      })
+
+    } else if (this.data.jzyy.yy_title == "") {
+      wx.showModal({
+        title: '提示',
+        content: '请先选择就诊医院',
+        showCancel: false
+      })
+
+    } else {
+      wx.redirectTo({
+        url: '../medicationRecord1/medicationRecord1?jz_id=' + self.data.jz_id + '&date=' + self.data.date + '&gyyy=' + self.data.jzyy.yy_title,
+      })
+
+    }
+  },
+  gotoPAY: function () {
+    var self = this;
+    if (this.data.date == "") {
+      wx.showModal({
+        title: '提示',
+        content: '请先选择就诊时间',
+        showCancel: false
+      })
+
+    } else if (this.data.jzyy.yy_title == "") {
+      wx.showModal({
+        title: '提示',
+        content: '请先选择就诊医院',
+        showCancel: false
+      })
+
+    } else {
+      wx.redirectTo({
+        url: '../pay/pay?jz_id=' + self.data.jz_id,
+      })
+
+    }
   }
 })

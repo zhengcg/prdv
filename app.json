@@ -10,6 +10,7 @@
     "pages/receiveAd/receiveAd",
     "pages/me/me",
     "pages/medicationRecord/medicationRecord",
+    "pages/medicationRecord1/medicationRecord1",
     "pages/temperatureDetection/temperatureDetection",
     "pages/logs/logs", 
     "pages/personalData/personalData",
@@ -31,6 +32,8 @@
     "pages/bc/bc",
     "pages/tj/tj",
     "pages/jzyy/jzyy",
+    "pages/jzyy1/jzyy1",
+    "pages/jzyy2/jzyy2",
     "pages/addVaccine/addVaccine",
     "pages/vaccineRecord/vaccineRecord", 
     "pages/contactService/contactService",
@@ -42,7 +45,8 @@
     "pages/uploadBLJL/uploadBLJL",
     "pages/uploadCFD/uploadCFD",
     "pages/uploadHYD/uploadHYD",
-    "pages/drugsInfo/drugsInfo",   
+    "pages/drugsInfo/drugsInfo", 
+    "pages/drugsInfo1/drugsInfo1",  
     "pages/pay/pay",
     "pages/uploadYXBG/uploadYXBG"   
   ],
@@ -79,8 +83,8 @@
     ]
   },
   "networkTimeout": {
-    "request": 10000,
-    "downloadFile": 10000
+    "request": 30000,
+    "downloadFile": 30000
   },
   "debug": false
 }

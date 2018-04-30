@@ -24,7 +24,7 @@ Page({
     })
     if(options.imgs){
       this.setData({
-        imgs: options.imgs.split(",")
+        imgs: options.imgs == "" ? [] : options.imgs.split(",")
       })
     }
     this.checkToken()

@@ -39,7 +39,7 @@
     <text></text>
   </view>
 </view>
-<view class='dateRange'  hidden='{{tabCur!=="1"}}'>
+<view class='dateRange' >
   <view class="section">
     <picker mode="date" value="{{dateStart}}"   end="{{endDate}}"bindchange="changeStart">
       <view class="picker">
@@ -60,6 +60,7 @@
   <button bindtap='submitRange'>查询</button>
 
 </view>
+
 <view class='logBox' hidden='{{tabCur!=="1"}}'>
   <navigator url="/pages/hospital/hospital?mid={{showMember.id}}&mni_time={{dateStart}}&max_time={{dateEnd}}">去过{{list[0].num}}次医院</navigator>
   <navigator url="/pages/department/department?mid={{showMember.id}}&mni_time={{dateStart}}&max_time={{dateEnd}}">到过{{list[1].num}}个科室</navigator>
@@ -69,6 +70,7 @@
   <navigator url="/pages/physical/physical?mid={{showMember.id}}&mni_time={{dateStart}}&max_time={{dateEnd}}">有过{{list[4].num}}次体检</navigator>
   <navigator url="/pages/expenditure/expenditure?mid={{showMember.id}}&name={{showMember.name}}&mni_time={{dateStart}}&max_time={{dateEnd}}">医疗支出共 ¥{{list[6].jz_yy_fy}}</navigator>
 </view>
+
 <view class='dataBox' hidden='{{tabCur!=="2"}}'>
   <scroll-view scroll-x="true" class='btnBox'>
     <text class='{{jkTab=="1"?"cur":"default"}}' bindtap='changeJk' data-index="1">化验单</text>
@@ -78,20 +80,20 @@
     <text class='{{jkTab=="5"?"cur":"default"}}' bindtap='changeJk' data-index="5">体检报告</text>
   </scroll-view>
    <view class='dataList'  hidden='{{jkTab!=="1"}}'>
-    <navigator url='/pages/hy/hy?mid={{showMember.id}}'><text>原始数据</text></navigator>
-    <navigator url='/pages/hc/hc?mid={{showMember.id}}&title={{item.title_cn}}' wx:for="{{yc}}" wx:key="{{index}}"><text>{{item.title_cn}}</text>{{item.num}}次异常</navigator>
+    <navigator url='/pages/hy/hy?mid={{showMember.id}}&mni_time={{dateStart}}&max_time={{dateEnd}}'><text>原始数据</text></navigator>
+    <navigator url='/pages/hc/hc?mid={{showMember.id}}&title={{item.title_cn}}&mni_time={{dateStart}}&max_time={{dateEnd}}' wx:for="{{yc}}" wx:key="{{index}}"><text>{{item.title_cn}}</text>{{item.num}}次异常</navigator>
   </view>
   <view class='dataList'  hidden='{{jkTab!=="2"}}'>
-    <navigator url='/pages/yc/yc?mid={{showMember.id}}'><text>原始数据</text></navigator>
+    <navigator url='/pages/yc/yc?mid={{showMember.id}}&mni_time={{dateStart}}&max_time={{dateEnd}}'><text>原始数据</text></navigator>
   </view>
   <view class='dataList'  hidden='{{jkTab!=="3"}}'>
-    <navigator url='/pages/cc/cc?mid={{showMember.id}}'><text>原始数据</text></navigator>
+    <navigator url='/pages/cc/cc?mid={{showMember.id}}&mni_time={{dateStart}}&max_time={{dateEnd}}'><text>原始数据</text></navigator>
   </view>
   <view class='dataList'  hidden='{{jkTab!=="4"}}'>
-    <navigator url='/pages/bc/bc?mid={{showMember.id}}'><text>原始数据</text></navigator>
+    <navigator url='/pages/bc/bc?mid={{showMember.id}}&mni_time={{dateStart}}&max_time={{dateEnd}}'><text>原始数据</text></navigator>
   </view> 
    <view class='dataList'  hidden='{{jkTab!=="5"}}'>
-    <navigator url='/pages/tj/tj?mid={{showMember.id}}'><text>原始数据</text></navigator>
+    <navigator url='/pages/tj/tj?mid={{showMember.id}}&mni_time={{dateStart}}&max_time={{dateEnd}}'><text>原始数据</text></navigator>
   </view> 
 </view>
 <view class='commentBox' hidden='{{tabCur!=="3"}}'>
