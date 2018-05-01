@@ -47,6 +47,7 @@
   white-space: nowrap; 
   padding: 42rpx 32rpx;
   height: 80rpx;
+  width: auto;
 }
 .btnBox text{
   display: inline-block;

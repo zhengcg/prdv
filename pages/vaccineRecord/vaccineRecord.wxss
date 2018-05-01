@@ -62,6 +62,15 @@
   vertical-align: middle;
   margin: 0 10rpx;
 }
+.headTit view.n3 text.l1{
+  display: inline-block;
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 10rpx;
+  background: #ccc;
+  vertical-align: middle;
+  margin: 0 10rpx;
+}
 .list image{
   width: 84rpx;
   height: 84rpx;
