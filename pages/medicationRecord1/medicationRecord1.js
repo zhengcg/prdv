@@ -50,6 +50,12 @@ Page({
     this.checkToken()
 
   },
+  goBack: function () {
+   wx.navigateTo({
+     url: '../uploadReport/uploadReport',
+   })
+
+  },
   setClass() {
     for (let i = 0; i < this.data.members.length; i++) {
       let obj = this.data.members[i];

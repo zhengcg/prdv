@@ -97,5 +97,5 @@
   </view> 
 </view>
 <view class='commentBox' hidden='{{tabCur!=="3"}}'>
-根据您上传的报告及资料每半年对您的健康给予评估及建议，敬请期待！
+此功能尚在开发中，敬请期待!
 </view>

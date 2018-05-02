@@ -187,7 +187,12 @@ Page({
         if (res.data.code == 200) {
           wx.showToast({
             title: "修改成功",
-            duration: 2000
+            duration: 2000,
+            success:function(){
+              wx.switchTab({
+                url: '../me/me',
+              })
+            }
           })
 
         } else if (res.data.code == 401) {

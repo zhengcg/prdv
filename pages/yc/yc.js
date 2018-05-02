@@ -30,9 +30,16 @@ Page({
   
   },
   previewImg: function (e) {
+    var id = e.currentTarget.dataset.id;
+    var arr = [];
+    for (var i = 0; i < this.data.list.length; i++) {
+      if (this.data.list[i].id == id) {
+        arr = this.data.list[i].imgs
+      }
+    }
     wx.previewImage({
       current: e.currentTarget.dataset.url, // 当前显示图片的http链接
-      urls: [e.currentTarget.dataset.url] // 需要预览的图片http链接列表
+      urls: arr // 需要预览的图片http链接列表
     })
 
   },

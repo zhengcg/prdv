@@ -63,8 +63,7 @@ Page({
       temNum: 33,
       "isCan": false,
       "arr": [],
-      "temArr": [],
-      "isCanvas": true
+      "temArr": []
 
     })
   },
@@ -264,15 +263,12 @@ Page({
             
 
           }
-          // else {
-          //   wx.showModal({
-          //     title: '提示',
-          //     content: '所选时间段没有体温监测记录',
-          //     showCancel: false
+          else {
+            _this.setData({
+              isCanvas:true
+            })
 
-          //   })
-
-          // }
+          }
 
           
 
@@ -337,6 +333,19 @@ Page({
   changeWTDate:function(e){
     this.setData({
       curDate: e.detail.value
+    })
+
+  },
+  changeDateStart:function(e){
+    this.setData({
+      dateStart: e.detail.value
+    })
+
+
+  },
+  changeDateEnd:function(e){
+    this.setData({
+      dateEnd: e.detail.value
     })
 
   },
@@ -450,7 +459,11 @@ Page({
         }
       }],
       xAxis: {
-        disableGrid: false
+        disableGrid: false,
+        title: '日期',
+        format: function (val) {
+          return "";
+        }
       },
       yAxis: {
         title: '体温 (℃)',

@@ -61,6 +61,10 @@ Page({
     console.log(e.detail.value)
 
   },
+  switchChange:function(e){
+    console.log(e)
+
+  },
   checkToken: function () {
     if (wx.getStorageSync('token')) {
       if (this.data.address_id){

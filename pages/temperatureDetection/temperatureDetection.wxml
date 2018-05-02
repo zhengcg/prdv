@@ -42,12 +42,12 @@
   <view class='curDate'>
       <picker mode="date" value="{{curDate}}" bindchange="changeWTDate" end="{{endDate}}">
         <view class="picker">
-           {{curDate}}
+           {{curDate}}<image src='../../images/icon33.png'></image>
         </view>
       </picker>
       <picker mode="time" value="{{curTime}}" bindchange="changeWTTime">
         <view class="picker">
-           {{curTime}}
+           {{curTime}}<image src='../../images/icon33.png'></image>
         </view>
       </picker>
   </view>
@@ -74,30 +74,20 @@
       <picker mode="date" value="{{dateStart}}" bindchange="changeDateStart" end="{{endDate}}">
       
         <view class="picker">
-        开始时间：
-           {{dateStart}}
+        查询时间：{{dateStart}}<image src='../../images/icon33.png'></image>
+        </view>
+      </picker>    
+      <picker mode="date" value="{{dateEnd}}" bindchange="changeDateEnd" end="{{endDate}}"> 
+        <view class="picker">
+        至 {{dateEnd}}<image src='../../images/icon33.png'></image>
+           
         </view>
       </picker>
-      <picker mode="time" value="{{timeStart}}" bindchange="changeTimeStart">
+      <!-- <picker mode="time" value="{{timeStart}}" bindchange="changeTimeStart">
         <view class="picker">
            {{timeStart}}
         </view>
-      </picker>
-</view>
-<view class='dateView clearfix'>
-    
-    <picker mode="date" value="{{dateEnd}}" bindchange="changeDateEnd" end="{{endDate}}">
-    
-        <view class="picker">
-        结束时间：
-           {{dateEnd}}
-        </view>
-      </picker>
-      <picker mode="time" value="{{timeEnd}}" bindchange="changeTimeEnd">
-        <view class="picker">
-           {{timeEnd}}
-        </view>
-      </picker>
+      </picker> -->
       <button bindtap='submitRange'>查询</button>
 </view>
 <view class='container' hidden='{{isCanvas}}'>

@@ -68,5 +68,6 @@
 
 <view style='height:222rpx;'></view>
 <view class='footer'>
-  <button bindtap='submit'>提交保存</button>
+  <button bindtap='submit'>保存</button>
+  <view bindtap='goBack' class='goBack'>返回</view> 
 </view>

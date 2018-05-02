@@ -32,7 +32,7 @@
   </view>
   <view>
   <text>购药地点</text>
-  <input type='text' hidden='{{isYS==2}}'></input>
+  <input type='text' hidden='{{isYS==2}}' placeholder='请输入药店名称' bindinput='changeGGDD'></input>
   <radio-group class="radio-group" bindchange="radioChange">
     <label class="radio" wx:for="{{items}}" wx:key="{{index}}">
       <radio value="{{item.value}}" checked="{{item.checked}}"/>{{item.name}}
@@ -71,5 +71,6 @@
 
 <view style='height:222rpx;'></view>
 <view class='footer'>
-  <button bindtap='submit'>提交保存</button>
+  <button bindtap='submit'>保存</button>
+  <view bindtap='goBack' class='goBack'>返回</view> 
 </view>

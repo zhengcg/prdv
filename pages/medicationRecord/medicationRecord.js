@@ -65,6 +65,12 @@ Page({
     this.checkToken()
   
   },
+  goBack:function(){
+    wx.switchTab({
+      url: '../index/index',
+    })
+
+  },
   setClass() {
     for (let i = 0; i < this.data.members.length; i++) {
       let obj = this.data.members[i];
@@ -208,6 +214,12 @@ Page({
       date: e.detail.value
     })
     this.getYYMX()
+  },
+  changeGGDD:function(e){
+    this.setData({
+      gydd:e.detail.value
+    })
+
   },
   removeYYMM:function(e){
     var self = this;

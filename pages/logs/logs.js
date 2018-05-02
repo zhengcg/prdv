@@ -51,11 +51,14 @@ Page({
 
     }
     this.setData({ members: this.data.members })
+    this.setData({
+      showMember: this.data.members[parseInt(this.data.index)],
+      dateEnd: this.formatDate(new Date()),
+      dateStart: this.lastDate(new Date())
+    })  
     this.getDoc(this.data.members[parseInt(this.data.index)].id);
     this.getYc(this.data.members[parseInt(this.data.index)].id)
-    this.setData({
-      showMember: this.data.members[parseInt(this.data.index)]
-    })
+    
   },
   touchstart(evt) {
     this.data.startX = evt.touches[0].clientX;
@@ -104,7 +107,7 @@ Page({
     return year + "-" + month + "-" + date;
   },
   lastDate: function(now) {
-    var year = now.getFullYear()-1;
+    var year = now.getFullYear()-10;
     var month = now.getMonth()+1;
     var date = now.getDate();
     var hour = now.getHours();

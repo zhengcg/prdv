@@ -147,6 +147,13 @@ Page({
         content: '请填写价格',
         showCancel: false
       })
+    } else if (_this.data.price>=1000000){
+      wx.showModal({
+        title: '提示',
+        content: '价格不能大于1000000',
+        showCancel: false
+      })
+
     }else{
       try {
         wx.showLoading()

@@ -25,6 +25,16 @@ Page({
     this.checkToken()
 
   },
+  previewImg: function (e) {
+    var self = this;
+    var index = e.currentTarget.dataset.index;
+
+    wx.previewImage({
+      current: self.data.imgs[index], // 当前显示图片的http链接
+      urls: self.data.imgs // 需要预览的图片http链接列表
+    })
+
+  },
   checkToken: function () {
     var self = this;
     if (wx.getStorageSync('token')) {

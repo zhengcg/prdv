@@ -1,7 +1,7 @@
 <view class='imgBox'>
-  <view wx:for="{{imgs}}" wx:key="{{index}}">
+  <view wx:for="{{imgs}}" wx:key="{{index}}" bindtap='previewImg' data-index="{{index}}">
     <image src='{{item}}'/>
-    <text class='closeBtn' bindtap='removeImg' data-index="{{index}}"></text>
+    <text class='closeBtn' catchtap='removeImg' data-index="{{index}}"></text>
   </view>
   <view class='uploadBtn' bindtap='chooseImg'></view>
 </view>

@@ -160,7 +160,21 @@ if (parseFloat(_this.data.ZYF) == 0 && parseFloat(_this.data.JCF) == 0 && parseF
     showCancel: false,
   })
 
-    }else{
+} else if ( _this.data.JCF >=100000000) {
+  wx.showModal({
+    title: '提示',
+    content: '检测费不能超过100000000',
+    showCancel: false,
+  })
+
+} else if (_this.data.ZYF >= 100000000) {
+  wx.showModal({
+    title: '提示',
+    content: '住院费不能超过100000000',
+    showCancel: false,
+  })
+
+}else{
 
    
     try {
