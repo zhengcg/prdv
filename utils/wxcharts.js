@@ -1343,7 +1343,7 @@ function drawXAxis(categories, opts, config, context) {
             context.save();
             context.beginPath();
             context.setFontSize(config.fontSize);
-            context.setFillStyle(opts.xAxis.fontColor || '#666666');
+            context.setFillStyle(opts.xAxis.fontColor || '#fff');
             var textWidth = measureText(item);
             var offset = eachSpacing / 2 - textWidth;
 
