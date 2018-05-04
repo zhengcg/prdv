@@ -3,8 +3,8 @@
   <view><image src='../../images/icon16.png'/><text>{{main}}</text></view>
 </view>
 <view class='nav'>
-  <navigator url='/pages/getCoinList/getCoinList'><image src='../../images/icon17.png'/><text>汪汪币记录</text></navigator>
-  <navigator url='/pages/exchangeList/exchangeList'><image src='../../images/icon18.png'/><text>汪汪币兑换</text></navigator>
+  <navigator url='/pages/getCoinList/getCoinList' open-type='redirect'><image src='../../images/icon17.png'/><text>汪汪币记录</text></navigator>
+  <navigator url='/pages/exchangeList/exchangeList' open-type='redirect'><image src='../../images/icon18.png'/><text>汪汪币兑换</text></navigator>
 </view>
 <view class='taskList'>
   <view class='taskHead'>赚币方式</view>

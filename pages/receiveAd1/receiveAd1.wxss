@@ -1,0 +1,72 @@
+/* pages/memberOfFamily/memberOfFamily.wxss */
+.addBtn{
+  background: #F39800;
+  text-align: center;
+  font-size: 32rpx;
+  color: #FFFFFF;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  height: 108rpx;
+  line-height: 108rpx;
+}
+
+.addBtn  text{
+  font-size: 50rpx;
+}
+.addBtn button::after{
+  border: 0
+}
+.listBox>view{
+  /* display: flex; */
+  padding: 32rpx 40rpx;
+  /* justify-content:space-between; */
+  align-items:center;
+  color: #111;
+  background: #FFFFFF;
+  box-shadow: 0 0 0 0 #E5E5E5;
+  margin-bottom: 15rpx;
+}
+.con{
+  font-size: 28rpx;
+  margin-bottom: 24rpx;
+  padding-bottom: 24rpx;
+  border-bottom: 1rpx solid #E5E5E5;
+}
+.con .top{
+  font-size: 32rpx;
+  margin-bottom: 24rpx;
+}
+.con .top text{
+  float: right;
+}
+.con view:last-child{
+  font-size: 28rpx;
+  color: #aaa;
+}
+.cao{
+  text-align: right
+}
+.cao view{
+  font-size: 28rpx;
+  color: #aaa;
+}
+.cao navigator{
+  display: inline;
+  font-size: 28rpx;
+  color: #F39800;
+
+}
+.cao text{
+  font-size: 28rpx;
+  color: red;
+  margin-left: 30rpx;
+}
+.radio-group {
+  font-size: 28rpx;
+  color: #111;
+}
+
+page{
+  background: #F6F8FC;
+}

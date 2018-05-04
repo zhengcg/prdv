@@ -12,7 +12,7 @@ Page({
   data: {
     "members": [],
     "index": 0,
-    "temNum":33,
+    "temNum":35,
     "isCan":false,
     "arr":[],
     "temArr":[],
@@ -60,7 +60,7 @@ Page({
     this.setData({ members: this.data.members })
     this.getTW(this.data.members[this.data.index].id)
     this.setData({
-      temNum: 33,
+      temNum: 35,
       "isCan": false,
       "arr": [],
       "temArr": []
@@ -71,7 +71,7 @@ Page({
     this.data.startX = evt.touches[0].clientX;
   },
   minTem:function(){
-    if (this.data.temNum>33){
+    if (this.data.temNum>35){
       var cur = (this.data.temNum * 10 - 1) / 10;
       this.setData({
         temNum: cur,
@@ -125,7 +125,7 @@ Page({
     var self = this;
     self.setData({
       index: parseInt(e.detail.current),
-      temNum:33,
+      temNum:35,
       "isCan": false,
       "arr": [],
       "temArr": [],
@@ -470,7 +470,7 @@ Page({
         format: function (val) {
           return val;
         },
-        min: 33
+        min: 35
       },
       width: windowWidth,
       height: 200,

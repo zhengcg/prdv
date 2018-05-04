@@ -8,6 +8,7 @@
     "pages/myCoin/myCoin",
     "pages/addAddress/addAddress",
     "pages/receiveAd/receiveAd",
+    "pages/receiveAd1/receiveAd1",
     "pages/me/me",
     "pages/medicationRecord/medicationRecord",
     "pages/medicationRecord1/medicationRecord1",

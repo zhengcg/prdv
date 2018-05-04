@@ -56,8 +56,12 @@ Page({
     })
   },
   changeAdd:function(){
-    this.setData({
-      isShow: false
+    // this.setData({
+    //   isShow: false
+    // })
+    var self=this;
+    wx.navigateTo({
+      url: '../receiveAd1/receiveAd1?id=' + self.data.goodsId
     })
   },
   selectAdd:function(e){
@@ -297,7 +301,7 @@ Page({
               content: '兑换成功',
               showCancel: false,
               success:function(){
-                wx.navigateTo({
+                wx.redirectTo({
                   url: '../myCoin/myCoin'
                 })
               }
