@@ -1,23 +1,27 @@
 <view class='swiper'>
 <view class="rongqi"  bindtouchmove='touchmove' bindtouchstart='touchstart'>
-  <navigator   url="/pages/addMembers/addMembers?id={{item.id}}" wx:for="{{members}}"  wx:key="{{item.id}}" class="item {{item.class}}" on>
-        
+  <view wx:for="{{members}}"  wx:key="{{item.id}}" class="item {{item.class}}" bindtap='changeJs' data-index="{{index}}">
+        <view wx-if="{{item.img}}">
         <view class='nickBox'>
           {{item.name}}
         </view>
         <view class='headImg'>
           <image src='{{item.img}}'/>
         </view>
-      </navigator>
-     <view class="item itemright3" on catchtap='gotoAdd' hidden='{{isShowAdd}}'>
-     
-        <view class='nickBox' >
+        </view>
+        <view wx-if="{{!item.img}}">
+        <view class='nickBox' catchtap='gotoAdd'>
           添加
         </view>
-        <view class='headImg'>
+         <view class='headImg' catchtap='gotoAdd'>
           <image src='../../images/icon24.png'/>
         </view>
-     </view>
+        </view>
+      </view>
+     <!-- <view class="item itemright3" on  hidden='{{isShowAdd}}'>
+    
+        
+     </view> -->
   </view>
 </view>
 <view class='listBox'>
@@ -32,7 +36,7 @@
   </view>
   <view>
   <text>购药地点</text>
-  <input type='text' hidden='{{isYS==2}}' placeholder='请输入药店名称' bindinput='changeGGDD'></input>
+  <input type='text' hidden='{{isYS==2}}' placeholder='请输入药店名称' bindinput='changeGGDD' value='{{gydd}}'></input>
   <radio-group class="radio-group" bindchange="radioChange">
     <label class="radio" wx:for="{{items}}" wx:key="{{index}}">
       <radio value="{{item.value}}" checked="{{item.checked}}"/>{{item.name}}
@@ -54,16 +58,18 @@
 <view style='padding:40rpx;'>
   <view id="panel" class="flex-column">
     <view class="flex-row flex-cell">
-      <text class="flex-cell flex-row"></text>
-      <text class="flex-cell flex-row">药品名称</text>
-      <text class="flex-cell flex-row">数量</text>
-      <text class="flex-cell flex-row">单价</text>
+      
+      <text class="flex-cell flex-row" style='flex: 3!important'>药品名称</text>
+      <text class="flex-cell flex-row" style='flex: 1!important'>数量</text>
+      <text class="flex-cell flex-row" style='flex: 1!important'>单价</text>
+      <text class="flex-cell flex-row" style='flex: 1!important'></text>
     </view>
    <view class="flex-row flex-cell" wx:for="{{list}}" wx:key="{{index}}">
-      <text class="flex-cell flex-row trR" data-id="{{item.id}}" bindtap='removeYYMM'></text>
-      <text class="flex-cell flex-row">{{item.title}}</text>
-      <text class="flex-cell flex-row">{{item.amount}}</text>
-      <text class="flex-cell flex-row">{{item.price}}</text>
+      
+      <text class="flex-cell flex-row"  style='flex: 3!important'>{{item.title}}</text>
+      <text class="flex-cell flex-row" style='flex: 1!important'>{{item.amount}}</text>
+      <text class="flex-cell flex-row" style='flex: 1!important'>{{item.price}}</text>
+      <text class="flex-cell flex-row trR" data-id="{{item.id}}" bindtap='removeYYMM' style='flex: 1!important'></text>
     </view>
 
   </view>

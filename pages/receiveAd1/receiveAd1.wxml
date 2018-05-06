@@ -7,17 +7,18 @@
     </view>
     <view class='cao'>
     <view style='float:left'>
-      <checkbox-group bindchange="setDefault">
+      <radio-group  bindchange="setDefault">
+      <!-- <checkbox-group bindchange="setDefault"> -->
         <label>
-          <checkbox value="{{item.address_id}}" checked="{{item.is_default}}"/><text wx:if="{{item.is_default}}" style='color:#111;margin-left:0'>默认地址</text><text wx:else  style='color:#111;margin-left:0'>设为默认地址</text>
+          <radio value="{{item.address_id}}" checked="{{item.is_default}}"/><text wx:if="{{item.is_default}}" style='color:#111;margin-left:0'>默认地址</text><text wx:else  style='color:#111;margin-left:0'>设为默认地址</text>
         </label>
-      </checkbox-group>
+      </radio-group>
     </view>     
-    <navigator url='/pages/addAddress/addAddress?address_id={{item.address_id}}&path=receiveAd'>编辑</navigator>
+    <navigator url='/pages/addAddress/addAddress?address_id={{item.address_id}}&path=receiveAd1&id={{id}}'  open-type='redirect'>编辑</navigator>
     <text bindtap='removeAdd' data-id="{{item.address_id}}">删除</text></view>   
   </view>
 </view>
 <view style='height:110rpx;'></view>
-<navigator class='addBtn' url='/pages/addAddress/addAddress?path=receiveAd'>
+<navigator class='addBtn' open-type='redirect' url='/pages/addAddress/addAddress?path=receiveAd1&id={{id}}'>
 <text>+</text> 添加
 </navigator>

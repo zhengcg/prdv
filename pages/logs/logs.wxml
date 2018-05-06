@@ -1,20 +1,6 @@
- <!-- <swiper style='height:310rpx;' bindchange="changeJs">
-  <block wx:for="{{members}}" wx:key="{{item.id}}"  >
-    <swiper-item id="{{item.id}}">
-      <navigator class='head'  url="/pages/addMembers/addMembers?id={{item.id}}">
-        <view class='headImg'>
-          <image src='{{item.img}}'/>
-        </view>
-        <view class='nickBox'>
-          {{item.name}}
-        </view>
-      </navigator>
-    </swiper-item>
-  </block>
-</swiper>  -->
 <view class='swiper'>
 <view class="rongqi"  bindtouchmove='touchmove' bindtouchstart='touchstart'>
-  <navigator   url="/pages/addMembers/addMembers?id={{item.id}}" wx:for="{{members}}"  wx:key="{{item.id}}" class="item {{item.class}}" on>
+  <view wx:for="{{members}}"  wx:key="{{item.id}}" class="item {{item.class}}" bindtap='changeJs' data-index="{{index}}">
         
         <view class='nickBox'>
           {{item.name}}
@@ -22,7 +8,7 @@
         <view class='headImg'>
           <image src='{{item.img}}'/>
         </view>
-      </navigator>
+      </view>
   </view>
 </view>
 <view class='tabNav'>

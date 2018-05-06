@@ -13,7 +13,8 @@ Page({
     "address":"",
     "isDefault":false,
     "address_id":"",
-    "path":""
+    "path":"",
+    id:""
   },
 
   /**
@@ -30,7 +31,14 @@ Page({
         path: options.path
       })
     }
-    console.log()
+
+    if(options.id){
+      this.setData({
+        id: options.id
+      })
+
+    }
+    
 
     this.checkToken()
 
@@ -62,7 +70,10 @@ Page({
 
   },
   switchChange:function(e){
-    console.log(e)
+    this.setData({
+      isDefault:e.detail.value
+    })
+    console.log(this.data.isDefault)
 
   },
   checkToken: function () {
@@ -203,7 +214,7 @@ Page({
                 consignee: self.data.name,
                 phone: self.data.phone,
                 address: self.data.address,
-                is_default: self.data.isDefault?0:1,
+                is_default: self.data.isDefault?1:0,
                 address_id: self.data.address_id,
                 province_id: self.data.area[0],
                 city_id: self.data.area[1],
@@ -216,9 +227,27 @@ Page({
                     title: "保存成功",
                     duration: 2000,
                     success: function () {
-                      wx.redirectTo({
-                        url: '../' + self.data.path + '/' + self.data.path
-                      })
+                      if (self.data.path=="receiveAd1"){
+                        if (self.data.isDefault){
+                          wx.redirectTo({
+                            url: '../goodsDetail/goodsDetail?id=' + self.data.id
+                          })
+
+                        }else{
+                          wx.redirectTo({
+                            url: '../' + self.data.path + '/' + self.data.path + '?id='+ self.data.id
+                          })
+
+                        }
+                        
+
+                      }else{
+                        wx.redirectTo({
+                          url: '../' + self.data.path + '/' + self.data.path
+                        })
+
+                      }
+                      
                     }
                   })
 

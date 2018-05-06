@@ -2,19 +2,19 @@
   <view class='clearfix'>
     <text>挂号费</text>
     <text style='float:right'>元</text>
-    <input type='digit' bindinput='changeGHF' value=''  style='margin-right:50rpx;' />
+    <input type='digit' bindinput='changeGHF' value='' maxlength='6'  style='margin-right:50rpx;' />
     
   </view>
   <view class='clearfix'>
     <text>检测费</text>
     <text style='float:right'>元</text>
-    <input type='digit' bindinput='changeJCF' value='' style='margin-right:50rpx;'/>
+    <input type='digit' bindinput='changeJCF' value='' style='margin-right:50rpx;'  maxlength='12'/>
     
   </view>
   <view class='clearfix'>
     <text>住院费</text>
     <text style='float:right'>元</text>
-    <input type='digit' bindinput='changeZYF' value=''style='margin-right:50rpx;'/>
+    <input type='digit' bindinput='changeZYF' value=''style='margin-right:50rpx;'maxlength='12'/>
     
   </view>
   <view class='clearfix'>

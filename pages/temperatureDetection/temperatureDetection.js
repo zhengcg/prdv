@@ -17,7 +17,6 @@ Page({
     "arr":[],
     "temArr":[],
     "isCanvas":false,
-    "isShowAdd": true,
     "curDate":"2018-04-29",
     "curTime":"00:00",
     "endDate": "",
@@ -98,20 +97,12 @@ Page({
         if (this.data.index > 0) {
           this.data.index--;
           this.setClass();
-          this.setData({
-            isShowAdd: true
-          })
         }
 
       } else if (evt.touches[0].clientX < this.data.startX) {
-        if (this.data.index < this.data.members.length - 1) {
+        if (this.data.index < this.data.members.length - 2) {
           this.data.index++;
           this.setClass();
-          if (this.data.index == this.data.members.length - 1) {
-            this.setData({
-              isShowAdd: false
-            })
-          }
         }
 
       }
@@ -123,16 +114,15 @@ Page({
   // 切换家属
   changeJs: function (e) {
     var self = this;
-    self.setData({
-      index: parseInt(e.detail.current),
-      temNum:35,
-      "isCan": false,
-      "arr": [],
-      "temArr": [],
-      "isCanvas":true
-
+    console.log(e)
+    var index=e.currentTarget.dataset.index;
+    this.setData({
+      index:index
     })
-    // this.addJz(this.data.members[parseInt(e.detail.current)].id);
+    this.setClass();
+    
+
+
   },
   checkToken: function () {
     if (wx.getStorageSync('token')) {
@@ -175,20 +165,12 @@ Page({
       success: function (res) {
         try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
         if (res.data.code == 200) {
-          if (res.data.data.length == 1) {
-            _this.setData({
-              "isShowAdd": false
-            })
-
-          } else {
-            _this.setData({
-              "isShowAdd": true
-            })
-
-          }
+ 
+          var arr = res.data.data;
+          arr.push({})
 
           _this.setData({
-            members: res.data.data
+            members: arr
           })
           _this.setClass();
 
@@ -543,7 +525,7 @@ Page({
 
   },
   gotoAdd: function () {
-    wx.navigateTo({
+    wx.redirectTo({
       url: '../addMembers/addMembers?path=temperatureDetection'
     })
   }

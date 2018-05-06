@@ -3,9 +3,10 @@
   <block wx:for="{{list}}" wx:key="{{item.id}}">
     <view class='title'>{{item.do_time}}</view> 
     <view class='body'>
-       <block wx:for="{{item.imgs}}" wx:key="{{index}}" wx:for-item="itemName">
-        <image src='{{itemName}}' bindtap='previewImg' data-url='{{itemName}}' data-id="{{item.id}}"/>
-      </block> 
+       <view wx:for="{{item.imgs}}" wx:key="{{index}}" wx:for-item="itemName" class='imgBoxYY'>
+        <image src='{{itemName}}' bindtap='previewImg' data-url='{{itemName}}'/>
+        <text class='closeBtn' catchtap='removeFn' data-id="{{item.jz_id}}" data-imgs="{{item.imgs}}" data-index="{{index}}"></text>
+      </view> 
     </view>
    </block>
   </scroll-view>

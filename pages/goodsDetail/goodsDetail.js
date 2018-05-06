@@ -60,7 +60,7 @@ Page({
     //   isShow: false
     // })
     var self=this;
-    wx.navigateTo({
+    wx.redirectTo({
       url: '../receiveAd1/receiveAd1?id=' + self.data.goodsId
     })
   },

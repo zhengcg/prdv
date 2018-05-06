@@ -13,7 +13,9 @@ Page({
     "place":"",
     "detail":{
       
-    }
+    },
+    "done":"",
+    "yid":""
 
   },
 
@@ -21,14 +23,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options.index)
+    
     if(options.id){
       this.setData({
         id: parseInt(options.id),
         mid: parseInt(options.mid),
-        index: parseInt(options.index)
+        index: parseInt(options.index),
+        done: parseInt(options.done),
+        yid: parseInt(options.yid) > 0 ? parseInt(options.yid):""
       })
     }
+    console.log(this.data.yid)
+    console.log(options.yid)
+
     this.checkToken()
 
   },
@@ -48,7 +55,13 @@ Page({
   },
   checkToken: function () {
     if (wx.getStorageSync('token')) {
-      this.getDetail()
+      this.getDetail();
+      if(this.data.done==1){
+        this.getInfo()
+
+      }
+      
+
 
 
     } else {
@@ -93,7 +106,7 @@ Page({
       url: api + "Corein/addYm",
       method: 'POST',
       header: header,
-      data: { session_3rd: wx.getStorageSync('token'), place: _this.data.place, m_id: _this.data.mid, vaccine_id: _this.data.id, do_time:_this.data.date },
+      data: { session_3rd: wx.getStorageSync('token'), place: _this.data.place, m_id: _this.data.mid, vaccine_id: _this.data.id, do_time:_this.data.date,id:_this.data.yid },
       success: function (res) {
         try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
         if (res.data.code == 200) {
@@ -173,6 +186,62 @@ Page({
           })
 
         }  else {
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'fail',
+            duration: 2000
+          })
+
+        }
+      },
+      fail: function () {
+        try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+        wx.showToast({
+          title: '接口调用失败！',
+          icon: 'fail',
+          duration: 2000
+        })
+      }
+    })
+
+  },
+  // 获取信息
+  getInfo: function () {
+    var _this = this;
+    try {
+      wx.showLoading()
+    }
+    catch (err) {
+      console.log("当前微信版本不支持")
+    }
+    wx.request({
+      url: api + "CoreOut/getYmDetail",
+      method: 'GET',
+      header: header,
+      data: { session_3rd: wx.getStorageSync('token'), id: parseInt(_this.data.yid) },
+      success: function (res) {
+        try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+        if (res.data.code == 200) {
+          _this.setData({
+            date: res.data.data.do_time.slice(0,10),
+            place:res.data.data.place,
+            yid: res.data.data.id
+          })
+
+        } else if (res.data.code == 401) {
+          wx.clearStorageSync()
+          wx.showModal({
+            title: '提示',
+            content: '登录过期了，请重新登录！',
+            showCancel: false,
+            success: function (res) {
+              wx.redirectTo({
+                url: '../login/login'
+              })
+            }
+          })
+
+        } else {
           wx.showToast({
             title: res.data.msg,
             icon: 'fail',

@@ -16,7 +16,8 @@ Page({
     "path":"",
     "id":"",
     "isShowBtn":false,
-    "endDate": ""
+    "endDate": "",
+    "indexs":""
   
   },
 
@@ -32,8 +33,21 @@ Page({
     }else{
       this.setData({
         id: options.id,
-        isShowBtn:true
+        isShowBtn:true,
+        indexs:options.index
       })
+    }
+    if (this.data.indexs!=="0"){
+      this.setData({
+        "membersArray": [ "儿子", "女儿", "父亲", "母亲", "配偶", "其他"],
+
+      })
+    }else{
+      this.setData({
+        "membersArray": ["本人"]
+
+      })
+
     }
    
     this.checkToken()
@@ -94,6 +108,12 @@ Page({
   },
   submitBtn:function(){
     var self = this;
+    var relation;
+    if(self.indexs==0){
+      relation=parseInt(self.data.index) + 1
+    }else{
+      relation = parseInt(self.data.index) + 2
+    }
     if (self.data.name==""){
       wx.showModal({
         title: '提示',
@@ -122,7 +142,7 @@ Page({
             url: api + "UserMp/addMembers",
             method: 'POST',
             header: header,
-            data: { session_3rd: wx.getStorageSync('token'), name: self.data.name, img: self.data.img, birthday: self.data.date, relation: parseInt(self.data.index) + 1 },
+            data: { session_3rd: wx.getStorageSync('token'), name: self.data.name, img: self.data.img, birthday: self.data.date, relation: relation },
             success: function (res) {
               try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
               if (res.data.code == 200) {
@@ -130,7 +150,7 @@ Page({
                   title: "添加成功",
                   duration: 2000,
                   success: function () {
-                    wx.navigateTo({
+                    wx.redirectTo({
                       url: '../' + self.data.path + '/' + self.data.path
                     })
                   }
@@ -177,6 +197,12 @@ Page({
   },
   editBtn:function(){
     var self = this;
+    var relation;
+    if (self.indexs == 0) {
+      relation = parseInt(self.data.index) + 1
+    } else {
+      relation = parseInt(self.data.index) + 2
+    }
     if (self.data.name == "") {
       wx.showModal({
         title: '提示',
@@ -205,7 +231,7 @@ Page({
             url: api + "UserMp/addMembers",
             method: 'POST',
             header: header,
-            data: { session_3rd: wx.getStorageSync('token'), name: self.data.name, img: self.data.img, birthday: self.data.date, relation: parseInt(self.data.index) + 1, m_id: parseInt(self.data.id) },
+            data: { session_3rd: wx.getStorageSync('token'), name: self.data.name, img: self.data.img, birthday: self.data.date, relation: relation , m_id: parseInt(self.data.id) },
             success: function (res) {
               try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
               if (res.data.code == 200) {
@@ -213,7 +239,7 @@ Page({
                   title: "保存成功",
                   duration: 2000,
                   success: function () {
-                    wx.navigateTo({
+                    wx.redirectTo({
                       url: '../memberOfFamily/memberOfFamily'
                     })
                   }
@@ -369,13 +395,20 @@ Page({
       success: function (res) {
         try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
         if (res.data.code == 200) {
+          var relation;
+          if(self.data.indexs!=="0"){
+            relation = res.data.data.relation - 2
+          }else{
+            relation = res.data.data.relation - 1
+          }
           self.setData({
             "img": res.data.data.img,
             "date": self.timestampToTime(res.data.data.birthday),
-            "index": res.data.data.relation-1,
+            "index": relation,
             "name": res.data.data.name
 
           })
+          console.log(self.data.index)
 
         } else if (res.data.code == 401) {
           wx.clearStorageSync()

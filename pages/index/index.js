@@ -73,11 +73,12 @@ Page({
       success: function (res) {
         try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
         if (res.data.code == 200) {
+          // if (res.data.data.length>0){
+          //   _this.setData({
+          //     imgUrls: res.data.data
+          //   })
 
-          // _this.setData({
-          //   imgUrls:res.data.data
-          // })
-
+          // }
 
         } else if (res.data.code == 401) {
           wx.clearStorageSync()

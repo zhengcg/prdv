@@ -29,6 +29,82 @@ Page({
     this.checkToken()
 
   },
+  removeFn: function (e) {
+    var self = this;
+    var id = e.currentTarget.dataset.id;
+    var index = e.currentTarget.dataset.index;
+    wx.showModal({
+      title: '提示',
+      content: '确定要删除吗？',
+      success: function (res) {
+        if (res.confirm) {
+
+
+
+          try {
+            wx.showLoading()
+          }
+          catch (err) {
+            console.log("当前微信版本不支持")
+          }
+          wx.request({
+            url: api + "CoreIn/deleteJzHy",
+            method: 'GET',
+            header: header,
+            data: {
+              session_3rd: wx.getStorageSync('token'),
+              id: id,
+
+            },
+            success: function (res) {
+              try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+              if (res.data.code == 200) {
+
+                self.data.list.splice(index, 1);
+                self.setData({
+                  list: self.data.list
+                })
+
+              } else if (res.data.code == 401) {
+                wx.clearStorageSync()
+                wx.showModal({
+                  title: '提示',
+                  content: '登录过期了，请重新登录！',
+                  showCancel: false,
+                  success: function (res) {
+                    wx.redirectTo({
+                      url: '../login/login'
+                    })
+                  }
+                })
+
+              } else {
+                wx.showToast({
+                  title: res.data.msg,
+                  icon: 'fail',
+                  duration: 2000
+                })
+
+              }
+            },
+            fail: function () {
+              try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+              wx.showToast({
+                title: '接口调用失败！',
+                icon: 'fail',
+                duration: 2000
+              })
+            }
+          })
+
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+
+
+  },
   checkToken: function () {
     if (wx.getStorageSync('token')) {
       this.getList()

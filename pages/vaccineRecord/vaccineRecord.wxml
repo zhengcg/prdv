@@ -1,24 +1,27 @@
-
 <view class='swiper'>
 <view class="rongqi"  bindtouchmove='touchmove' bindtouchstart='touchstart'>
-  <navigator   url="/pages/addMembers/addMembers?id={{item.id}}" wx:for="{{members}}"  wx:key="{{item.id}}" class="item {{item.class}}" on>
-        
+  <view wx:for="{{members}}"  wx:key="{{item.id}}" class="item {{item.class}}" bindtap='changeJs' data-index="{{index}}">
+        <view wx-if="{{item.img}}">
         <view class='nickBox'>
           {{item.name}}
         </view>
         <view class='headImg'>
           <image src='{{item.img}}'/>
         </view>
-      </navigator>
-     <view class="item itemright3" on catchtap='gotoAdd' hidden='{{isShowAdd}}'>
-     
-        <view class='nickBox' >
+        </view>
+        <view wx-if="{{!item.img}}">
+        <view class='nickBox' catchtap='gotoAdd'>
           添加
         </view>
-        <view class='headImg'>
+         <view class='headImg' catchtap='gotoAdd'>
           <image src='../../images/icon24.png'/>
         </view>
-     </view>
+        </view>
+      </view>
+     <!-- <view class="item itemright3" on  hidden='{{isShowAdd}}'>
+    
+        
+     </view> -->
   </view>
 </view>
 <view class='headTit'>
@@ -34,7 +37,7 @@
     <view class='dateTime'><text>{{item.name}}</text></view>
     <view class='rigBox'>
      <scroll-view scroll-x>
-        <view class='ss' wx:for="{{item.info}}" wx:key="{{index}}" wx:for-item='jtem'  bindtap='gotoAddV' data-id="{{jtem.id}}">
+        <view class='ss' wx:for="{{item.info}}" wx:key="{{index}}" wx:for-item='jtem'  bindtap='gotoAddV' data-id="{{jtem.id}}" data-yid="{{jtem.ym_id}}" data-done="{{jtem.is_done}}">
           <image src='../../images/icon32.png' wx-if='{{jtem.is_done==1}}'/>
           <image src='../../images/icon21.png' wx-if='{{jtem.is_must==1&&jtem.is_done==0}}'/>
           <image src='../../images/icon22.png' wx-if='{{jtem.is_must==2&&jtem.is_done==0}}'/>

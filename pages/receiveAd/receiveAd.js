@@ -20,55 +20,58 @@ Page({
   },
   setDefault:function(e){
     var id=parseInt(e.detail.value);
-    console.log(id)
-    var self = this;
-    try {
-      wx.showLoading()
-    }
-    catch (err) {
-      console.log("当前微信版本不支持")
-    }
-    wx.request({
-      url: api + "Address/setDefault",
-      method: 'POST',
-      header: header,
-      data: { session_3rd: wx.getStorageSync('token'), address_id:id },
-      success: function (res) {
-        try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
-        if (res.data.code == 200) {
-          
-          self.getList()
-        } else if (res.data.code == 401) {
-          wx.clearStorageSync()
-          wx.showModal({
-            title: '提示',
-            content: '登录过期了，请重新登录！',
-            showCancel: false,
-            success: function (res) {
-              wx.redirectTo({
-                url: '../login/login'
-              })
-            }
-          })
+    if(id){
+      var self = this;
+      try {
+        wx.showLoading()
+      }
+      catch (err) {
+        console.log("当前微信版本不支持")
+      }
+      wx.request({
+        url: api + "Address/setDefault",
+        method: 'POST',
+        header: header,
+        data: { session_3rd: wx.getStorageSync('token'), address_id: id },
+        success: function (res) {
+          try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+          if (res.data.code == 200) {
 
-        } else {
+            self.getList()
+          } else if (res.data.code == 401) {
+            wx.clearStorageSync()
+            wx.showModal({
+              title: '提示',
+              content: '登录过期了，请重新登录！',
+              showCancel: false,
+              success: function (res) {
+                wx.redirectTo({
+                  url: '../login/login'
+                })
+              }
+            })
+
+          } else {
+            wx.showToast({
+              title: res.data.msg,
+              icon: 'fail',
+              duration: 2000
+            })
+
+          }
+        },
+        fail: function () {
+          try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
           wx.showToast({
-            title: res.data.msg,
+            title: '接口调用失败！',
             icon: 'fail',
             duration: 2000
           })
-
         }
-      },
-      fail: function () {
-        try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
-        wx.showToast({
-          title: '接口调用失败！',
-          icon: 'fail',
-          duration: 2000
-        })
-      }
-    })
+      })
+
+    }
+   
 
 
 

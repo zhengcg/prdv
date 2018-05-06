@@ -2,12 +2,15 @@
 <scroll-view scroll-y="true">
   <view id="panel" class="flex-column">
     <view class="flex-cell flex-row">
-      <text class="flex-cell flex-row" style='font-size:24rpx;'>时间</text>
-      <text class="flex-cell flex-row" style='font-size:24rpx;'>体温</text>
+      <text class="flex-cell flex-row" style='font-size:24rpx;flex: 3!important'>时间</text>
+      <text class="flex-cell flex-row" style='font-size:24rpx;flex: 1!important'>体温</text>
+            <text class="flex-cell flex-row" style='font-size:24rpx;flex: 1!important'></text>
+
     </view>
     <view class="flex-row flex-cell" wx:for="{{list}}" wx:key="{{item.id}}">
-      <text class="flex-cell flex-row">{{item.do_time}}</text>
-      <text class="flex-cell flex-row">{{item.temperature}}</text>
+      <text class="flex-cell flex-row" style='flex: 3!important'>{{item.do_time}}</text>
+      <text class="flex-cell flex-row" style='flex: 1!important'>{{item.temperature}}</text>
+      <text class="flex-cell flex-row trR" data-id="{{item.id}}" data-index="{{index}}" bindtap='removeFn' style='flex: 1!important'></text>
     </view>
 
   </view>

@@ -1,43 +1,29 @@
-<!-- <swiper style='height:310rpx;' bindchange="changeJs" current='{{index}}'>
-  <block wx:for="{{members}}" wx:key="{{item.id}}"  >
-    <swiper-item id="{{item.id}}">
-      <navigator class='head'  url="/pages/addMembers/addMembers?id={{item.id}}">
-        <view class='headImg'>
-          <image src='{{item.img}}'/>
-        </view>
-        <view class='nickBox'>
-          {{item.name}}
-        </view>
-        <view class='addBtn' catchtap='gotoAdd' hidden='{{members.length>0}}'>+</view>
-        <view class='addBox' catchtap='gotoAdd' hidden='{{members.length>0}}'>   
-          <text>添加</text>
-        </view>
-      </navigator>
-    </swiper-item>
-  </block>
-</swiper>   -->
 <view class='swiper'>
 <view class="rongqi"  bindtouchmove='touchmove' bindtouchstart='touchstart'>
-  <navigator   url="/pages/addMembers/addMembers?id={{item.id}}" wx:for="{{members}}"  wx:key="{{item.id}}" class="item {{item.class}}" on>
-        
+  <view wx:for="{{members}}"  wx:key="{{item.id}}" class="item {{item.class}}" bindtap='changeJs' data-index="{{index}}">
+        <view wx-if="{{item.img}}">
         <view class='nickBox'>
           {{item.name}}
         </view>
         <view class='headImg'>
           <image src='{{item.img}}'/>
         </view>
-      </navigator>
-     <view class="item itemright3" on catchtap='gotoAdd' hidden='{{isShowAdd}}'>
-     
-        <view class='nickBox' >
+        </view>
+        <view wx-if="{{!item.img}}">
+        <view class='nickBox' catchtap='gotoAdd'>
           添加
         </view>
-        <view class='headImg'>
+         <view class='headImg' catchtap='gotoAdd'>
           <image src='../../images/icon24.png'/>
         </view>
-     </view>
+        </view>
+      </view>
+     <!-- <view class="item itemright3" on  hidden='{{isShowAdd}}'>
+    
+        
+     </view> -->
   </view>
-  </view>
+</view>
 
 <view class='title'>
   基本信息

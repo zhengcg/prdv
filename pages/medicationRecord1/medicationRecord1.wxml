@@ -1,6 +1,6 @@
 <view class='swiper'>
 <view class="rongqi"  bindtouchmove='touchmove' bindtouchstart='touchstart'>
-  <navigator   url="/pages/addMembers/addMembers?id={{item.id}}" wx:for="{{members}}"  wx:key="{{item.id}}" class="item {{item.class}}" on>
+  <view wx:for="{{members}}"  wx:key="{{item.id}}" class="item {{item.class}}" bindtap='changeJs' data-index="{{index}}">
         
         <view class='nickBox'>
           {{item.name}}
@@ -8,7 +8,7 @@
         <view class='headImg'>
           <image src='{{item.img}}'/>
         </view>
-      </navigator>
+      </view>
      <view class="item itemright3" on catchtap='gotoAdd' hidden='{{isShowAdd}}'>
      
         <view class='nickBox' >
@@ -24,7 +24,7 @@
   <view>
     <text>购药时间</text>{{date}}
   </view>
-  <view>
+  <view class='jjt'>
     <text>购药医院</text>{{gyyyTitle}}
   </view>
   <view>
@@ -51,16 +51,18 @@
 <view style='padding:40rpx;'>
   <view id="panel" class="flex-column">
     <view class="flex-row flex-cell">
-      <text class="flex-cell flex-row"></text>
-      <text class="flex-cell flex-row">药品名称</text>
-      <text class="flex-cell flex-row">数量</text>
-      <text class="flex-cell flex-row">单价</text>
+      
+      <text class="flex-cell flex-row" style='flex: 3'>药品名称</text>
+      <text class="flex-cell flex-row" style='flex: 1'>数量</text>
+      <text class="flex-cell flex-row" style='flex: 1'>单价</text>
+      <text class="flex-cell flex-row" style='flex: 1'></text>
     </view>
    <view class="flex-row flex-cell" wx:for="{{list}}" wx:key="{{index}}">
-      <text class="flex-cell flex-row trR" data-id="{{item.id}}" bindtap='removeYYMM'></text>
-      <text class="flex-cell flex-row">{{item.title}}</text>
-      <text class="flex-cell flex-row">{{item.amount}}</text>
-      <text class="flex-cell flex-row">{{item.price}}</text>
+      
+      <text class="flex-cell flex-row"  style='flex: 3'>{{item.title}}</text>
+      <text class="flex-cell flex-row" style='flex: 1'>{{item.amount}}</text>
+      <text class="flex-cell flex-row" style='flex: 1'>{{item.price}}</text>
+      <text class="flex-cell flex-row trR" data-id="{{item.id}}" bindtap='removeYYMM' style='flex: 1'></text>
     </view>
 
   </view>

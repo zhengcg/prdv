@@ -84,10 +84,25 @@ Page({
       success: function (res) {
         try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
         if (res.data.code == 200) {
+          if(res.data.data.id){
+            _this.setData({
+              info: res.data.data
+            })
 
-          _this.setData({
-            info: res.data.data
-          })
+          }else{
+            wx.showModal({
+              title: '提示',
+              content: '未查到该药品信息！',
+              showCancel: false,
+              success: function (res) {
+                wx.redirectTo({
+                  url: '../medicationRecord1/medicationRecord1?mid=' + _this.data.mid + '&date=' + _this.data.date + '&index=' + _this.data.index + '&path=index' + '&isYS=' + _this.data.isYS + '&gyyyTitle=' + _this.data.gyyyTitle + '&jz_id=' + _this.data.jz_id
+                })
+              }
+            })
+          }
+
+         
 
         } else if (res.data.code == 401) {
           wx.clearStorageSync()
@@ -136,7 +151,7 @@ Page({
         content: '请填写价格',
         showCancel: false
       })
-    } else {
+    }else {
       try {
         wx.showLoading()
       }

@@ -301,11 +301,27 @@ Page({
       }
     })
   },
-  changeJs:function(e){
-    this.getDoc(this.data.members[parseInt(e.detail.current)].id);
+  // 切换家属
+  changeJs: function (e) {
+    var self = this;
+    console.log(e)
+    var index = e.currentTarget.dataset.index;
     this.setData({
-      showMember: this.data.members[parseInt(e.detail.current)]
+      index: index
     })
+    this.setClass();
+    if (this.data.index == this.data.members.length - 1) {
+      this.setData({
+        isShowAdd: false
+      })
+    } else {
+      this.setData({
+        isShowAdd: true
+      })
+
+    }
+
+
   },
   changeStart:function(e){
     this.setData({

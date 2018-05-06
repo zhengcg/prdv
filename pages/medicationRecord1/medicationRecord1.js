@@ -51,8 +51,9 @@ Page({
 
   },
   goBack: function () {
+    var _this=this;
    wx.navigateTo({
-     url: '../uploadReport/uploadReport',
+     url: '../uploadReport/uploadReport?jz_id=' + _this.data.jz_id
    })
 
   },
@@ -279,6 +280,28 @@ Page({
     })
 
   },
+  // 切换家属
+  changeJs: function (e) {
+    var self = this;
+    console.log(e)
+    var index = e.currentTarget.dataset.index;
+    this.setData({
+      index: index
+    })
+    this.setClass();
+    if (this.data.index == this.data.members.length - 1) {
+      this.setData({
+        isShowAdd: false
+      })
+    } else {
+      this.setData({
+        isShowAdd: true
+      })
+
+    }
+
+
+  },
   checkToken: function () {
     if (wx.getStorageSync('token')) {
       this.getJz(this.data.jz_id);
@@ -468,10 +491,17 @@ Page({
   },
   submit: function () {
     var _this=this;
-    wx.redirectTo({
-      url: '../uploadReport/uploadReport?jz_id=' + _this.data.jz_id
-    })
+    wx.showModal({
+      title: '提示',
+      content: '文件已保存，请到健康档案中查询上传结果',
+      showCancel: false,
+      success: function () {
+        wx.redirectTo({
+          url: '../uploadReport/uploadReport?jz_id=' + _this.data.jz_id
+        })
+      }
 
+    })
 
   },
   gotoAdd: function () {
