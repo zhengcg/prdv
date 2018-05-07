@@ -164,7 +164,7 @@ Page({
           })
 
         }else{
-          wx.navigateTo({
+          wx.redirectTo({
             url: '../drugsInfo/drugsInfo?code=' + self.data.code + '&mid=' + self.data.members[self.data.index].id + '&date=' + self.data.date + '&index=' + self.data.index + '&gyyyId=' + self.data.gyyyId + '&isYS=' + self.data.isYS + '&gydd=' + self.data.gydd + '&gyyyTitle=' + self.data.gyyyTitle
           })
           

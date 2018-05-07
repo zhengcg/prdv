@@ -141,7 +141,7 @@ Page({
       })
 
     }else {
-      wx.navigateTo({
+      wx.redirectTo({
         url: '../drugsInfo1/drugsInfo1?code=' + self.data.code + '&mid=' + self.data.members[self.data.index].id + '&date=' + self.data.date + '&index=' + self.data.index + '&isYS=' + self.data.isYS + '&gyyyTitle=' + self.data.gyyyTitle+'&jz_id='+self.data.jz_id
       })
 

@@ -24,7 +24,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.checkToken()
+   
 
 
   },
@@ -91,6 +91,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+   
     this.setData({
       endDate: this.formatDate(new Date()),
       dateEnd: this.formatDate(new Date()),
@@ -346,6 +347,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.checkToken()
     
   },
 

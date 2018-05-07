@@ -10,8 +10,11 @@
     <input type='text' bindinput='changePlace' value='{{place}}'></input>
   </view>
 </view>
-
+<view style='position:relative;height:208rpx;'>
 <button bindtap='submit'>保存</button>
+<view bindtap='goBack' class='goBack'>返回</view> 
+</view>
+
 <view class='sm'>
 <view class='tit'>{{detail.title}} {{detail.nums}}</view>
 <view style='text-indent:70rpx;'>{{detail.reason}}</view>

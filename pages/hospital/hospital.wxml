@@ -2,14 +2,14 @@
 <scroll-view scroll-y="true">
    <view id="panel" class="flex-column">
     <view class="flex-cell flex-row">
-      <text class="flex-cell flex-row" style='font-size:24rpx;flex: 2!important'>时间</text>
-      <text class="flex-cell flex-row" style='font-size:24rpx;flex: 3!important'>就诊医院</text>
-      <text class="flex-cell flex-row" style='font-size:24rpx;flex: 1!important'></text>
+      <text class="flex-cell flex-row" style='font-size:24rpx;-moz-flex-grow: 2;-webkit-flex-grow: 2;flex-grow: 2;'>时间</text>
+      <text class="flex-cell flex-row" style='font-size:24rpx;-moz-flex-grow: 3;-webkit-flex-grow: 3;flex-grow: 3;'>就诊医院</text>
+      <text class="flex-cell flex-row" style='font-size:24rpx;-moz-flex-grow: 1;-webkit-flex-grow: 1;flex-grow: 1;'></text>
     </view>
     <view class="flex-row flex-cell" wx:for="{{list}}" wx:key="{{item.id}}">
-      <text class="flex-cell flex-row" style='flex: 2!important'>{{item.do_time}}</text>
-      <text class="flex-cell flex-row" style='flex: 3!important'>{{item.title}}</text>
-      <text class="flex-cell flex-row trR" data-id="{{item.id}}" data-index="{{index}}" data-hid="{{item.h_id}}" bindtap='removeFn' style='flex: 1!important'></text>
+      <text class="flex-cell flex-row" style='-moz-flex-grow: 2;-webkit-flex-grow: 2;flex-grow: 2;'>{{item.do_time}}</text>
+      <text class="flex-cell flex-row" style='-moz-flex-grow: 3;-webkit-flex-grow: 3;flex-grow: 3;'>{{item.title}}</text>
+      <text class="flex-cell flex-row trR" data-id="{{item.id}}" data-index="{{index}}" data-hid="{{item.h_id}}" bindtap='removeFn' style='-moz-flex-grow: 1;-webkit-flex-grow: 1;flex-grow: 1;'></text>
     </view>
   </view> 
   </scroll-view>

@@ -198,7 +198,7 @@ Page({
   editBtn:function(){
     var self = this;
     var relation;
-    if (self.indexs == 0) {
+    if (self.data.indexs == 0) {
       relation = parseInt(self.data.index) + 1
     } else {
       relation = parseInt(self.data.index) + 2

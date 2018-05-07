@@ -39,14 +39,17 @@
   line-height: 90rpx;
 }
 button{
-  width: 600rpx;
+  width: 300rpx;
   height: 88rpx;
   line-height: 88rpx;
-  border-radius: 44rpx;
-  margin: 60rpx auto;
   background: #F39800;
-  font-size: 30rpx;
+  border-radius: 44rpx;
+  font-size:30rpx;
   color: #FFFFFF;
+  top: 56rpx;
+  position: absolute;
+  right: 65rpx;
+  display: inline-block
 }
 button::after{
   border: 0;

@@ -309,5 +309,11 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  goBack:function(){
+    var _this=this;
+    wx.redirectTo({
+      url: '../vaccineRecord/vaccineRecord?index=' + _this.data.index
+    })
   }
 })

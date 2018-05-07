@@ -227,6 +227,13 @@ Page({
       }
     })
   },
+  goBack:function(){
+    var self=this;
+    wx.redirectTo({
+      url: '../uploadReport/uploadReport?jz_id=' + self.data.jz_id
+
+  })
+  },
   selectHos:function(e){
     var self=this;
     try {
