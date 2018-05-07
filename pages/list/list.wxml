@@ -1,0 +1,7 @@
+<view class='dataList' wx-if="{{yc.length>0}}">
+    <navigator url='/pages/hc/hc?mid={{mid}}&title={{item.title_cn}}&mni_time={{dateStart}}&max_time={{dateEnd}}' wx:for="{{yc}}" wx:key="{{index}}"><text>{{item.title_cn}}</text>{{item.num}}</navigator>
+  </view>
+  <view class='dataList' wx-if="{{yc.length==0}}" style='text-align:center;padding-top:30rpx;'>
+   没有数据
+  </view>
+

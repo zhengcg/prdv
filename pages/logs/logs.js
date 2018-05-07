@@ -16,7 +16,10 @@ Page({
     "yc":[],
     "endDate": "",
     "dateStart":"",
-    "dateEnd":""
+    "dateEnd":"",
+    "lnum":0,
+    "dnum":0,
+    "znum":0
     
   },
 
@@ -255,7 +258,7 @@ Page({
       console.log("当前微信版本不支持")
     }
     wx.request({
-      url: api + "Coreout/getHyBad",
+      url: api + "Coreout/getHyCounts",
       method: 'GET',
       header: header,
       data: { 
@@ -268,7 +271,9 @@ Page({
         try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
         if (res.data.code == 200) {
           self.setData({
-            yc: res.data.data
+            znum: res.data.data.normal,
+            lnum: res.data.data.unnormal,
+            dnum: res.data.data.current_unnormal
           })
         } else if (res.data.code == 401) {
           wx.clearStorageSync()

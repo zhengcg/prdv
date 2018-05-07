@@ -237,8 +237,8 @@ Page({
               temArr.push(parseFloat(res.data.data[i].temperature));
             }
             _this.setData({
-              arr:arr,
-              temArr:temArr,
+              arr: arr.reverse(),
+              temArr: temArr.reverse(),
               isCanvas:false
             })
             _this.drawLine()

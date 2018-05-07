@@ -1,6 +1,6 @@
 {
   "pages":[ 
-   
+    
     "pages/login/login", 
     "pages/goodsDetail/goodsDetail",
     "pages/exchangeList/exchangeList",
@@ -49,7 +49,8 @@
     "pages/drugsInfo/drugsInfo", 
     "pages/drugsInfo1/drugsInfo1",  
     "pages/pay/pay",
-    "pages/uploadYXBG/uploadYXBG"   
+    "pages/uploadYXBG/uploadYXBG",
+    "pages/list/list" 
   ],
   "window":{
     "backgroundTextStyle":"light",
