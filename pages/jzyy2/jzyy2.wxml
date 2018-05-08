@@ -7,9 +7,29 @@
       <view class='city_left'>
           <scroll-view scroll-y="true" style='width:100%;height:100%;'  scroll-into-view='{{cityListId}}' scroll-with-animation>
               <view class='city_list_box'>
-                <block wx:for='{{citylist}}' wx:key='this' wx:for-item='letterItem' wx:for-index='letterIndex'>
+                <block wx:for='{{citylist1}}' wx:key='this' wx:for-item='letterItem' wx:for-index='letterIndex'>
                   <view class='city_first_letter' id='{{letterItem.letter}}'>{{letterItem.letter}}</view>
-                  <text class='city_name' wx:for='{{letterItem.data}}' wx:key='this' data-types='list'  data-index='{{index}}' data-val='{{item}}' bindtap='selectHos' data-id="{{item.id}}" data-title="{{item.title}}">{{item.title}}</text>
+                  <text class='city_name' wx:for='{{letterItem.data}}' wx:key='this' data-types='list'  data-index='{{index}}' data-val='{{item}}' bindtap='selectHos' data-id="{{item.id}}">{{item.title}}</text>
+                </block>
+                <block wx:for='{{citylist2}}' wx:key='this' wx:for-item='letterItem' wx:for-index='letterIndex'>
+                  <view class='city_first_letter' id='{{letterItem.letter}}'>{{letterItem.letter}}</view>
+                  <text class='city_name' wx:for='{{letterItem.data}}' wx:key='this' data-types='list'  data-index='{{index}}' data-val='{{item}}' bindtap='selectHos' data-id="{{item.id}}">{{item.title}}</text>
+                </block>
+                <block wx:for='{{citylist3}}' wx:key='this' wx:for-item='letterItem' wx:for-index='letterIndex'>
+                  <view class='city_first_letter' id='{{letterItem.letter}}'>{{letterItem.letter}}</view>
+                  <text class='city_name' wx:for='{{letterItem.data}}' wx:key='this' data-types='list'  data-index='{{index}}' data-val='{{item}}' bindtap='selectHos' data-id="{{item.id}}">{{item.title}}</text>
+                </block>
+                <block wx:for='{{citylist4}}' wx:key='this' wx:for-item='letterItem' wx:for-index='letterIndex'>
+                  <view class='city_first_letter' id='{{letterItem.letter}}'>{{letterItem.letter}}</view>
+                  <text class='city_name' wx:for='{{letterItem.data}}' wx:key='this' data-types='list'  data-index='{{index}}' data-val='{{item}}' bindtap='selectHos' data-id="{{item.id}}">{{item.title}}</text>
+                </block>
+                <block wx:for='{{citylist5}}' wx:key='this' wx:for-item='letterItem' wx:for-index='letterIndex'>
+                  <view class='city_first_letter' id='{{letterItem.letter}}'>{{letterItem.letter}}</view>
+                  <text class='city_name' wx:for='{{letterItem.data}}' wx:key='this' data-types='list'  data-index='{{index}}' data-val='{{item}}' bindtap='selectHos' data-id="{{item.id}}">{{item.title}}</text>
+                </block>
+                <block wx:for='{{citylist6}}' wx:key='this' wx:for-item='letterItem' wx:for-index='letterIndex'>
+                  <view class='city_first_letter' id='{{letterItem.letter}}'>{{letterItem.letter}}</view>
+                  <text class='city_name' wx:for='{{letterItem.data}}' wx:key='this' data-types='list'  data-index='{{index}}' data-val='{{item}}' bindtap='selectHos' data-id="{{item.id}}">{{item.title}}</text>
                 </block>
               </view>
           </scroll-view>
@@ -24,3 +44,7 @@
     <view class='top'>没查询到您输入的医院，是否添加该医院？</view>
     <view class='bot'><text bindtap='addYY'>是</text><text bindtap='cancelAdd'>否</text></view>
   </view>
+  <view style='height:220rpx;'></view>
+<view class='footer'>
+  <button bindtap='goBack'>返回</button>
+</view>
