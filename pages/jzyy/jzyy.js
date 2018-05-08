@@ -200,6 +200,7 @@ Page({
           try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
           if (res.data.code == 200) {
             if (res.data.data.length > 0) {
+              console.log(i)
               if(i==1){
                 self.setData({
                   citylist1: res.data.data
@@ -209,6 +210,7 @@ Page({
                 self.setData({
                   citylist2: res.data.data
                 })
+               
 
               }else if(i==3){
                 self.setData({
@@ -232,7 +234,7 @@ Page({
 
               }
               
-              iterator(i + 1)
+             
 
 
             } else {
@@ -240,9 +242,10 @@ Page({
                 citylist: res.data.data,
                 isAddYY: false
               })
-              iterator(i + 1)
+             
 
             }
+            iterator(i + 1)
 
 
 
