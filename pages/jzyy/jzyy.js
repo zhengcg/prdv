@@ -181,14 +181,26 @@ Page({
     } catch (err) {
       console.log("当前微信版本不支持")
     }
+    var data={};
+    if(i){
+      data={
+        session_3rd: wx.getStorageSync('token'),
+        keywords: self.data.keywords,
+        storg: i
+
+      }
+    }else{
+      data = {
+        session_3rd: wx.getStorageSync('token'),
+        keywords: self.data.keywords
+
+      }
+
+    }
 
       wx.request({
         url: api + 'Coreout/getHospital', //仅为示例，并非真实的接口地址
-        data: {
-          session_3rd: wx.getStorageSync('token'),
-          keywords: self.data.keywords,
-          storg:i
-        },
+        data: data,
         method: 'GET',
         success: function (res) {
           try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
