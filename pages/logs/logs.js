@@ -29,7 +29,6 @@ Page({
   onLoad: function (options) {
    
 
-
   },
   setClass() {
     for (let i = 0; i < this.data.members.length; i++) {
@@ -96,6 +95,7 @@ Page({
   onReady: function () {
    
     this.setData({
+      
       endDate: this.formatDate(new Date()),
       dateEnd: this.formatDate(new Date()),
       dateStart: this.lastDate(new Date())
@@ -353,6 +353,9 @@ Page({
    */
   onShow: function () {
     this.checkToken()
+    this.setData({
+      "tabCur": "1"
+    })
     
   },
 

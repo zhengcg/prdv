@@ -7,15 +7,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    letter: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"],
+    letter: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z","#"],
     cityListId: '',
     //下面是城市列表信息，这里只是模拟数据
-    citylist1: [],
-    citylist2: [],
-    citylist3: [],
-    citylist4: [],
-    citylist5: [],
-    citylist6: [],
+    citylist:[],
     keywords: '',
     jz_id:'',
     isAddYY:true
@@ -35,7 +30,7 @@ Page({
   },
   checkToken: function () {
     if (wx.getStorageSync('token')) {
-      this.getList()
+      this.getList("A")
 
 
     } else {
@@ -99,9 +94,11 @@ Page({
   //点击城市字母
   letterTap(e) {
     const Item = e.currentTarget.dataset.item;
+    console.log(Item)
     this.setData({
       cityListId: Item
     });
+    this.getList(Item)
   },
   sendMsg: function (e) {
     if (e.detail.value) {
@@ -175,7 +172,7 @@ Page({
 
     })
   },
-  getList: function () {
+  getList: function (i) {
     var self = this;
     try {
       wx.showLoading({
@@ -184,10 +181,7 @@ Page({
     } catch (err) {
       console.log("当前微信版本不支持")
     }
-    (function iterator(i) {
-      if (i == 7) {      
-        return;
-      }
+
       wx.request({
         url: api + 'Coreout/getHospital', //仅为示例，并非真实的接口地址
         data: {
@@ -200,50 +194,16 @@ Page({
           try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
           if (res.data.code == 200) {
             if (res.data.data.length > 0) {
-              if(i==1){
                 self.setData({
-                  citylist1: res.data.data
+                  citylist: res.data.data
                 })
-
-              }else if(i==2){
-                self.setData({
-                  citylist2: res.data.data
-                })
-               
-
-              }else if(i==3){
-                self.setData({
-                  citylist3: res.data.data
-                })
-
-              } else if (i == 4) {
-                self.setData({
-                  citylist4: res.data.data
-                })
-
-              } else if (i == 5) {
-                self.setData({
-                  citylist5: res.data.data
-                })
-
-              } else if (i ==6 ) {
-                self.setData({
-                  citylist6: res.data.data
-                })
-
-              }
-              
-             
-
 
             } else {
               self.setData({
                 isAddYY: false
               })
              
-
             }
-            iterator(i + 1)
 
 
 
@@ -269,8 +229,6 @@ Page({
           }
         }
       })
-     
-    })(1)
    
   },
   goBack:function(){

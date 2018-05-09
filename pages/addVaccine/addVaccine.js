@@ -110,10 +110,11 @@ Page({
       success: function (res) {
         try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
         if (res.data.code == 200) {
-
-          wx.navigateTo({
-            url: '../vaccineRecord/vaccineRecord?index='+_this.data.index
+          wx.redirectTo({
+            url: '../vaccineRecord/vaccineRecord?index=' + _this.data.index
           })
+
+         
 
         } else if (res.data.code == 401) {
           wx.clearStorageSync()

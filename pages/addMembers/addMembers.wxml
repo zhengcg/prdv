@@ -20,7 +20,7 @@
   </view>
   <view>
     <text>昵称</text>
-    <input placeholder='请输入' value='{{name}}' bindinput="changeName"/>
+    <input placeholder='请输入' value='{{name}}' bindinput="changeName" maxlength='5'/>
   </view>
   <view>
     <text>生日</text>{{date}}

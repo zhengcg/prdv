@@ -40,8 +40,7 @@ Page({
   },
   checkToken: function () {
     if (wx.getStorageSync('token')) {
-      this.getList()
-
+      this.getList("A")
 
     } else {
       wx.showModal({
@@ -107,6 +106,7 @@ Page({
     this.setData({
       cityListId: Item
     });
+    this.getList(Item)
   },
   sendMsg: function (e) {
     if (e.detail.value) {
@@ -180,7 +180,7 @@ Page({
 
     })
   },
-  getList: function () {
+  getList: function (i) {
     var self = this;
     try {
       wx.showLoading({
@@ -189,92 +189,54 @@ Page({
     } catch (err) {
       console.log("当前微信版本不支持")
     }
-    (function iterator(i) {
-      if (i == 7) {
-        return;
-      }
-      wx.request({
-        url: api + 'Coreout/getHospital', //仅为示例，并非真实的接口地址
-        data: {
-          session_3rd: wx.getStorageSync('token'),
-          keywords: self.data.keywords,
-          storg: i
-        },
-        method: 'GET',
-        success: function (res) {
-          try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
-          if (res.data.code == 200) {
-            if (res.data.data.length > 0) {
-              if (i == 1) {
-                self.setData({
-                  citylist1: res.data.data
-                })
 
-              } else if (i == 2) {
-                self.setData({
-                  citylist2: res.data.data
-                })
-
-              } else if (i == 3) {
-                self.setData({
-                  citylist3: res.data.data
-                })
-
-              } else if (i == 4) {
-                self.setData({
-                  citylist4: res.data.data
-                })
-
-              } else if (i == 5) {
-                self.setData({
-                  citylist5: res.data.data
-                })
-
-              } else if (i == 6) {
-                self.setData({
-                  citylist6: res.data.data
-                })
-
-              }
-
-              iterator(i + 1)
-
-
-            } else {
-              self.setData({
-                citylist: res.data.data,
-                isAddYY: false
-              })
-              iterator(i + 1)
-
-            }
-
-
-
-          } else if (res.data.code == 401) {
-            wx.clearStorageSync()
-            wx.showModal({
-              title: '提示',
-              content: '登录过期了，请重新登录！',
-              showCancel: false,
-              success: function (res) {
-                wx.redirectTo({
-                  url: '../login/login'
-                })
-              }
+    wx.request({
+      url: api + 'Coreout/getHospital', //仅为示例，并非真实的接口地址
+      data: {
+        session_3rd: wx.getStorageSync('token'),
+        keywords: self.data.keywords,
+        storg: i
+      },
+      method: 'GET',
+      success: function (res) {
+        try { wx.hideLoading() } catch (err) { console.log("当前微信版本不支持") }
+        if (res.data.code == 200) {
+          if (res.data.data.length > 0) {
+            self.setData({
+              citylist: res.data.data
             })
 
           } else {
-            wx.showToast({
-              title: "系统错误",
-              icon: 'fail',
-              duration: 2000
+            self.setData({
+              isAddYY: false
             })
-          }
-        }
-      })
 
-    })(1)
+          }
+
+
+
+        } else if (res.data.code == 401) {
+          wx.clearStorageSync()
+          wx.showModal({
+            title: '提示',
+            content: '登录过期了，请重新登录！',
+            showCancel: false,
+            success: function (res) {
+              wx.redirectTo({
+                url: '../login/login'
+              })
+            }
+          })
+
+        } else {
+          wx.showToast({
+            title: "系统错误",
+            icon: 'fail',
+            duration: 2000
+          })
+        }
+      }
+    })
 
   },
   selectHos: function (e) {

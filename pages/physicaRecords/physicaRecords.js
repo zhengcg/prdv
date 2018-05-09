@@ -23,7 +23,7 @@ Page({
    */
   onLoad: function (options) {
     if(options.index){
-      console.log(options.imgs)
+      console.log(options.gyyyTitle)
       this.setData({
         imgs: options.imgs==""?[]:options.imgs.split(","),
         index:options.index,
