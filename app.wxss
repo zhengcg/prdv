@@ -9,11 +9,12 @@
   border-top: 1rpx solid #EAEDF3;
 }
 #panel text{
-  line-height: 90rpx;
+  line-height:50rpx;
   border-right: 1rpx solid  #EAEDF3;
   border-bottom: 1rpx solid  #EAEDF3;
   font-size: 28rpx;
 color: #111111;
+padding: 10rpx;
 
 }
 #panel input{

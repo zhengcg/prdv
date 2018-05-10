@@ -18,7 +18,8 @@ Page({
     date: '',
     index: '',
     gydd: '',
-    isYS: ''
+    isYS: '',
+    imgs:''
 
   },
 
@@ -27,12 +28,9 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      code: options.code,
-      mid: options.mid,
-      date: options.date,
-      index: options.index,
-      gydd: options.gydd,
-      isYS: options.isYS,
+      index:options.index,
+      date:options.date,
+      imgs:options.imgs
     })
 
     this.checkToken()

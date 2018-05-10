@@ -12,15 +12,15 @@
 <view id="panel" class="flex-column">
     <view class="flex-cell flex-row">
       <text class="flex-cell flex-row" style='font-size:24rpx;'>项目</text>
-      <text class="flex-cell flex-row" style='font-size:24rpx;'>中文名称</text>
+      <text class="flex-cell flex-row" style='font-size:24rpx;'>代码</text>
       <text class="flex-cell flex-row" style='font-size:24rpx;'>结果</text>
       <text class="flex-cell flex-row" style='font-size:24rpx;'>参考范围</text>
     </view>
     <view class="flex-row flex-cell" wx:for="{{info}}" wx:key="{{index}}">
-       <input class="flex-cell flex-row" type='text' value='{{item.title}}' data-index="{{index}}" bindinput='changeTitle'></input>
-     <input class="flex-cell flex-row" type='text' value='{{item.title_cn}}'  data-index="{{index}}"  bindinput='changeTitleCn'></input>
-      <input class="flex-cell flex-row" type='text' value='{{item.result}}'  data-index="{{index}}" bindinput='changeResult'></input>
-      <input class="flex-cell flex-row" type='text' value='{{item.range}}'  data-index="{{index}}" bindinput='changeRange'></input>
+       <input class="flex-cell flex-row" type='text' value='{{item.title}}' data-index="{{index}}" bindinput='changeTitle' style='-moz-flex-grow: 1;-webkit-flex-grow: 1;flex-grow: 1;'></input>
+     <input class="flex-cell flex-row" type='text' value='{{item.title_cn}}'  data-index="{{index}}"  bindinput='changeTitleCn' style='-moz-flex-grow: 3;-webkit-flex-grow: 3;flex-grow: 3;'></input>
+      <input class="flex-cell flex-row" type='text' value='{{item.result}}'  data-index="{{index}}" bindinput='changeResult' style='-moz-flex-grow: 1;-webkit-flex-grow: 1;flex-grow: 1;'></input>
+      <input class="flex-cell flex-row" type='text' value='{{item.range}}'  data-index="{{index}}" bindinput='changeRange' style='-moz-flex-grow: 1;-webkit-flex-grow: 1;flex-grow: 1;'></input>
     </view>
     
   </view>

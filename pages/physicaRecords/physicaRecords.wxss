@@ -73,6 +73,9 @@
   background-size: 24rpx 24rpx;
   padding-right: 30rpx;
   position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .listBox>view>text,.listBox>navigator>text{
   float: left;
