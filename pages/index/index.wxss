@@ -1,9 +1,9 @@
 swiper{
-  height: 380rpx;
+  height: 300rpx;
 }
 .slide-image{
   width: 750rpx;
-  height: 380rpx;
+  height: 300rpx;
 }
 .nav{
   margin-top: 24rpx;
