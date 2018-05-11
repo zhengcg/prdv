@@ -176,6 +176,7 @@ Page({
           if (res.data.data.length) {
             for (var i = 0; i < res.data.data.length; i++) {
               res.data.data[i].imgs = (res.data.data[i].imgs).split(",")
+              res.data.data[i].do_time = res.data.data[i].do_time.slice(0, 10)
             }
             self.setData({
               page: self.data.page + 1,

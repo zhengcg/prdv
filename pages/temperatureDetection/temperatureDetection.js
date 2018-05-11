@@ -296,19 +296,19 @@ Page({
   
   lastDate: function (now) {
     var year = now.getFullYear();
-    var month = now.getMonth();
+    var month = now.getMonth() > 10 ? now.getMonth() : "0" + now.getMonth();
     var date = now.getDate();
-    var hour = now.getHours();
-    var minute = now.getMinutes();
+    var hour = now.getHours() > 10 ? now.getHours() : "0" + now.getHours(); 
+    var minute = now.getMinutes() > 10 ? now.getMinutes() : "0" + now.getMinutes();
     var second = now.getSeconds();
     return year + "-" + month + "-" + date + " " + hour + ":" + minute; 
   },
   formatDate:function (now) { 
     var year= now.getFullYear(); 
-    var month= now.getMonth() + 1; 
+    var month = (now.getMonth() + 1) > 10 ? now.getMonth()+1 : "0" + (now.getMonth()+1); 
     var date= now.getDate(); 
-    var hour= now.getHours(); 
-    var minute= now.getMinutes(); 
+    var hour = now.getHours() > 10 ? now.getHours() : "0" + now.getHours(); 
+    var minute = now.getMinutes() > 10 ? now.getMinutes() : "0" + now.getMinutes();
     var second= now.getSeconds(); 
     return year+ "-" + month + "-" + date + " " + hour + ":" + minute; 
   },

@@ -27,6 +27,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      endDate: this.formatDate(new Date()),
+      dateEnd: this.formatDate(new Date()),
+      dateStart: this.lastDate(new Date())
+    })
    
 
   },
@@ -94,12 +99,7 @@ Page({
    */
   onReady: function () {
    
-    this.setData({
-      
-      endDate: this.formatDate(new Date()),
-      dateEnd: this.formatDate(new Date()),
-      dateStart: this.lastDate(new Date())
-    })
+    
   },
   formatDate: function (now) {
     var year = now.getFullYear();
